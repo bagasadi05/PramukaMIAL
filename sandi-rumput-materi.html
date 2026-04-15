@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi Sandi Rumput | Pramuka Kelas 5</title>
+    <meta name="description" content="Materi sandi rumput pramuka kelas 5 dengan video penjelasan dan generator interaktif.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased pb-12">
+    <header class="bg-green-700 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <h1 class="text-2xl font-bold">Materi Sandi Rumput</h1>
+            </div>
+            <nav class="flex flex-wrap justify-center gap-3 text-sm font-bold">
+                <a href="./sandi-rumput.html" class="hover:text-green-200 transition">Awal</a>
+                <a href="#video" class="hover:text-green-200 transition">Video</a>
+                <a href="#materi" class="hover:text-green-200 transition">Materi</a>
+                <a href="./sandi-rumput-kuis.html" class="bg-green-800 px-3 py-1 rounded-full hover:bg-green-900 transition">Kuis</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 mt-8 space-y-10">
+        <section id="video" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-green-600 px-6 py-4">
+                <h2 class="text-xl font-bold text-white">1. Video Penjelasan Sandi Rumput</h2>
+            </div>
+            <div class="p-6">
+                <p class="mb-4 text-slate-600">Simak video berikut ini untuk memahami dasar-dasar sandi rumput sebelum membaca materi lebih lanjut.</p>
+                <div class="relative w-full overflow-hidden rounded-xl bg-slate-100" style="padding-top: 56.25%;">
+                    <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/jO72lBuc1pE" title="Video Sandi Rumput" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section id="materi" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-amber-600 px-6 py-4">
+                <h2 class="text-xl font-bold text-white">2. Materi Sandi Rumput</h2>
+            </div>
+            <div class="p-6 space-y-6">
+                <div class="prose max-w-none text-slate-700">
+                    <p><strong>Sandi Rumput</strong> adalah salah satu jenis sandi Pramuka yang bentuknya menyerupai rumput. Sandi ini sebenarnya merupakan modifikasi visual dari <strong>Sandi Morse</strong>.</p>
+                    <h3 class="text-lg font-bold mt-4 text-slate-800">Kunci Utama Sandi Rumput:</h3>
+                    <ul class="list-disc list-inside space-y-2 mt-2 bg-amber-50 p-4 rounded-lg border border-amber-200">
+                        <li>Titik ( <strong class="text-xl">.</strong> ) pada sandi morse digambarkan dengan <strong class="text-red-600">Rumput Pendek</strong>.</li>
+                        <li>Garis/Strip ( <strong class="text-xl">-</strong> ) pada sandi morse digambarkan dengan <strong class="text-blue-600">Rumput Tinggi</strong>.</li>
+                        <li>Rumput-rumput tersebut dihubungkan oleh sebuah garis lurus di bagian bawah yang melambangkan tanah.</li>
+                    </ul>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <h4 class="font-bold text-center mb-4">Contoh Pembentukan Huruf</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between bg-white p-3 rounded shadow-sm">
+                                <span class="font-bold text-lg w-8">A</span>
+                                <span class="text-slate-500 font-mono tracking-widest w-12">.-</span>
+                                <div id="demo-A" class="flex-1 text-right"></div>
+                            </div>
+                            <div class="flex items-center justify-between bg-white p-3 rounded shadow-sm">
+                                <span class="font-bold text-lg w-8">B</span>
+                                <span class="text-slate-500 font-mono tracking-widest w-12">-...</span>
+                                <div id="demo-B" class="flex-1 text-right"></div>
+                            </div>
+                            <div class="flex items-center justify-between bg-white p-3 rounded shadow-sm">
+                                <span class="font-bold text-lg w-8">C</span>
+                                <span class="text-slate-500 font-mono tracking-widest w-12">-.-.</span>
+                                <div id="demo-C" class="flex-1 text-right"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-green-50 p-4 rounded-xl border border-green-200 flex flex-col justify-center">
+                        <h4 class="font-bold text-green-800 text-center mb-2">Cobalah Sendiri!</h4>
+                        <p class="text-sm text-green-700 text-center mb-4">Ketik kata di bawah ini untuk melihat bentuk sandi rumputnya.</p>
+                        <input type="text" id="liveInput" placeholder="Ketik PRAMUKA..." class="w-full px-4 py-2 rounded border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-500 uppercase font-bold text-center mb-4">
+                        <div class="w-full overflow-x-auto min-h-[80px] bg-white rounded-lg border border-green-200 p-4 flex items-center justify-center">
+                            <div id="liveOutput" class="text-slate-400 text-sm">Hasil akan muncul di sini</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center pt-4">
+                    <a href="./sandi-rumput-kuis.html" class="inline-flex rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 shadow-lg transition">Lanjut ke Kuis</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const morseDict = {
+            A: '.-', B: '-...', C: '-.-.', D: '-..', E: '.', F: '..-.',
+            G: '--.', H: '....', I: '..', J: '.---', K: '-.-', L: '.-..',
+            M: '--', N: '-.', O: '---', P: '.--.', Q: '--.-', R: '.-.',
+            S: '...', T: '-', U: '..-', V: '...-', W: '.--', X: '-..-',
+            Y: '-.--', Z: '--..',
+            1: '.----', 2: '..---', 3: '...--', 4: '....-', 5: '.....',
+            6: '-....', 7: '--...', 8: '---..', 9: '----.', 0: '-----'
+        };
+
+        function generateSandiRumputSVG(text, size = 1) {
+            if (!text) return '';
+            text = String(text).toUpperCase();
+            let svgContent = '';
+            const startX = 10;
+            let currentX = startX;
+            const baseY = 50 * size;
+            const shortW = 6 * size;
+            const shortH = 25 * size;
+            const tallW = 8 * size;
+            const tallH = 45 * size;
+            const letterSpace = 15 * size;
+            const wordSpace = 30 * size;
+
+            for (const char of text) {
+                if (char === ' ') {
+                    currentX += wordSpace;
+                    continue;
+                }
+
+                const morse = morseDict[char];
+                if (morse) {
+                    for (const symbol of morse) {
+                        if (symbol === '.') {
+                            svgContent += `<path d="M ${currentX},${baseY} L ${currentX + (shortW / 2)},${baseY - shortH} L ${currentX + shortW},${baseY}" stroke="#dc2626" fill="none" stroke-width="${2 * size}" stroke-linejoin="round"/>`;
+                            currentX += shortW + (2 * size);
+                        } else {
+                            svgContent += `<path d="M ${currentX},${baseY} L ${currentX + (tallW / 2)},${baseY - tallH} L ${currentX + tallW},${baseY}" stroke="#2563eb" fill="none" stroke-width="${2 * size}" stroke-linejoin="round"/>`;
+                            currentX += tallW + (2 * size);
+                        }
+                    }
+                    currentX += letterSpace;
+                }
+            }
+
+            const totalWidth = currentX + startX;
+            svgContent += `<line x1="0" y1="${baseY}" x2="${totalWidth}" y2="${baseY}" stroke="#64748b" stroke-width="${2 * size}"/>`;
+            return `<svg height="${(50 * size) + 5}" width="${totalWidth}" xmlns="http://www.w3.org/2000/svg" class="inline-block max-w-full h-auto drop-shadow-sm">${svgContent}</svg>`;
+        }
+
+        document.getElementById('demo-A').innerHTML = generateSandiRumputSVG('A');
+        document.getElementById('demo-B').innerHTML = generateSandiRumputSVG('B');
+        document.getElementById('demo-C').innerHTML = generateSandiRumputSVG('C');
+
+        const liveInput = document.getElementById('liveInput');
+        const liveOutput = document.getElementById('liveOutput');
+        liveInput.addEventListener('input', (event) => {
+            const value = event.target.value.trim();
+            liveOutput.innerHTML = value ? generateSandiRumputSVG(value, 1.2) : '<span class="text-slate-400 text-sm">Hasil akan muncul di sini</span>';
+        });
+    </script>
+</body>
+</html>

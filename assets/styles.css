@@ -1,0 +1,266 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #e2e8f0;
+    background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.flip-card {
+    background-color: transparent;
+    width: 70px;
+    height: 70px;
+    perspective: 1000px;
+    cursor: pointer;
+    margin: 4px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.flip-card:hover:not(.flipped) .flip-card-inner {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.25rem;
+    font-weight: 800;
+}
+
+.flip-card-front {
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    color: #fbbf24;
+    border: 2px solid #334155;
+}
+
+.flip-card-back {
+    background: #ffffff;
+    color: #047857;
+    border: 3px solid #10b981;
+    transform: rotateY(180deg);
+}
+
+.screen {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    min-height: 75vh;
+}
+
+.screen.active {
+    display: flex;
+    opacity: 1;
+    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.glass-modal {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.grade-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.grade-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 30px -18px rgba(15, 23, 42, 0.35);
+}
+
+.grade-card.active {
+    border-color: #10b981;
+    background: linear-gradient(180deg, #ecfdf5, #ffffff);
+    box-shadow: 0 18px 34px -20px rgba(16, 185, 129, 0.6);
+}
+
+.grade-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem 0.8rem;
+    border-radius: 9999px;
+    background: #ecfdf5;
+    color: #047857;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.guide-banner {
+    background: linear-gradient(135deg, #faf5ff, #ffffff);
+    border: 1px solid #ddd6fe;
+    border-radius: 1.25rem;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 12px 30px -24px rgba(109, 40, 217, 0.45);
+}
+
+.guide-banner-title {
+    margin: 0 0 0.35rem;
+    color: #6d28d9;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.guide-banner-text {
+    margin: 0;
+    color: #475569;
+    font-size: 0.98rem;
+    line-height: 1.55;
+}
+
+.guide-card-shell {
+    background: #ffffff;
+    border: 1px solid #e9d5ff;
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 24px 44px -34px rgba(91, 33, 182, 0.45);
+}
+
+.guide-title {
+    margin: 0 0 1.5rem;
+    text-align: center;
+    color: #8b5cf6;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.guide-grid {
+    display: grid;
+    gap: 1.75rem;
+}
+
+.guide-row {
+    display: grid;
+    gap: 0;
+}
+
+.guide-row.ten {
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+}
+
+.guide-row.six {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    max-width: 60%;
+}
+
+.guide-cell {
+    border-top: 2px solid #334155;
+    border-bottom: 2px solid #334155;
+    border-right: 2px solid #334155;
+    min-height: 5.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+}
+
+.guide-cell:first-child {
+    border-left: 2px solid #334155;
+}
+
+.guide-letter {
+    color: #111827;
+    font-size: clamp(1.4rem, 3vw, 2.1rem);
+    font-weight: 800;
+    line-height: 1;
+}
+
+.guide-number {
+    color: #8b5cf6;
+    font-size: clamp(1.2rem, 2.8vw, 1.9rem);
+    font-weight: 800;
+    margin-top: 0.7rem;
+    line-height: 1;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+@media (max-width: 768px) {
+    .flip-card {
+        width: 58px;
+        height: 58px;
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+        font-size: 1.8rem;
+    }
+
+    .guide-card-shell {
+        padding: 1rem;
+    }
+
+    .guide-grid {
+        gap: 1rem;
+    }
+
+    .guide-row.ten {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .guide-row.six {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        max-width: 100%;
+    }
+
+    .guide-cell {
+        min-height: 4.6rem;
+    }
+}

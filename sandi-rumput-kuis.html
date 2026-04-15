@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Sandi Rumput | Pramuka Kelas 5</title>
+    <meta name="description" content="Kuis sandi rumput pramuka kelas 5 berisi 20 soal pilihan ganda.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+        .quiz-radio:checked + label { background-color: #dcfce7; border-color: #22c55e; }
+        .correct-answer { background-color: #bbf7d0 !important; border-color: #16a34a !important; }
+        .wrong-answer { background-color: #fecaca !important; border-color: #dc2626 !important; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased pb-12">
+    <header class="bg-blue-700 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <h1 class="text-2xl font-bold">Kuis Sandi Rumput</h1>
+            <nav class="flex flex-wrap justify-center gap-3 text-sm font-bold">
+                <a href="./sandi-rumput.html" class="hover:text-blue-200 transition">Awal</a>
+                <a href="./sandi-rumput-materi.html" class="hover:text-blue-200 transition">Materi</a>
+                <a href="./index.html" class="bg-blue-800 px-3 py-1 rounded-full hover:bg-blue-900 transition">Beranda Portal</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 mt-8">
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-blue-600 px-6 py-4 flex justify-between items-center">
+                <h2 class="text-xl font-bold text-white">Kuis Uji Pemahaman</h2>
+                <span class="bg-white text-blue-600 text-xs font-bold px-2 py-1 rounded">20 Soal</span>
+            </div>
+
+            <div class="p-6">
+                <div id="quiz-container" class="space-y-8"></div>
+                <div class="mt-8 pt-6 border-t border-slate-200 text-center">
+                    <button id="submitQuizBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:-translate-y-1">Cek Hasil Kuis</button>
+                </div>
+
+                <div id="quiz-result" class="hidden mt-6 p-6 rounded-xl border-2 text-center">
+                    <h3 class="text-2xl font-bold mb-2" id="score-title">Skor Anda: <span id="score-number"></span>/100</h3>
+                    <p id="score-message" class="text-lg"></p>
+                    <div class="flex flex-col sm:flex-row gap-3 justify-center mt-4">
+                        <button onclick="location.reload()" class="text-blue-600 font-medium hover:underline">Ulangi Kuis</button>
+                        <a href="./sandi-rumput-materi.html" class="text-green-700 font-medium hover:underline">Kembali ke Materi</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const morseDict = {
+            A: '.-', B: '-...', C: '-.-.', D: '-..', E: '.', F: '..-.',
+            G: '--.', H: '....', I: '..', J: '.---', K: '-.-', L: '.-..',
+            M: '--', N: '-.', O: '---', P: '.--.', Q: '--.-', R: '.-.',
+            S: '...', T: '-', U: '..-', V: '...-', W: '.--', X: '-..-',
+            Y: '-.--', Z: '--..',
+            1: '.----', 2: '..---', 3: '...--', 4: '....-', 5: '.....',
+            6: '-....', 7: '--...', 8: '---..', 9: '----.', 0: '-----'
+        };
+
+        function generateSandiRumputSVG(text, size = 1) {
+            if (!text) return '';
+            text = String(text).toUpperCase();
+            let svgContent = '';
+            const startX = 10;
+            let currentX = startX;
+            const baseY = 50 * size;
+            const shortW = 6 * size;
+            const shortH = 25 * size;
+            const tallW = 8 * size;
+            const tallH = 45 * size;
+            const letterSpace = 15 * size;
+            const wordSpace = 30 * size;
+
+            for (const char of text) {
+                if (char === ' ') {
+                    currentX += wordSpace;
+                    continue;
+                }
+
+                const morse = morseDict[char];
+                if (morse) {
+                    for (const symbol of morse) {
+                        if (symbol === '.') {
+                            svgContent += `<path d="M ${currentX},${baseY} L ${currentX + (shortW / 2)},${baseY - shortH} L ${currentX + shortW},${baseY}" stroke="#dc2626" fill="none" stroke-width="${2 * size}" stroke-linejoin="round"/>`;
+                            currentX += shortW + (2 * size);
+                        } else {
+                            svgContent += `<path d="M ${currentX},${baseY} L ${currentX + (tallW / 2)},${baseY - tallH} L ${currentX + tallW},${baseY}" stroke="#2563eb" fill="none" stroke-width="${2 * size}" stroke-linejoin="round"/>`;
+                            currentX += tallW + (2 * size);
+                        }
+                    }
+                    currentX += letterSpace;
+                }
+            }
+
+            const totalWidth = currentX + startX;
+            svgContent += `<line x1="0" y1="${baseY}" x2="${totalWidth}" y2="${baseY}" stroke="#64748b" stroke-width="${2 * size}"/>`;
+            return `<svg height="${(50 * size) + 5}" width="${totalWidth}" xmlns="http://www.w3.org/2000/svg" class="inline-block max-w-full h-auto drop-shadow-sm">${svgContent}</svg>`;
+        }
+
+        const questions = [
+            { q: "Apa dasar sandi yang digunakan untuk membuat Sandi Rumput?", options: ["Sandi Kotak", "Sandi Morse", "Sandi Angka", "Sandi Semaphore"], answer: 1 },
+            { q: "Pada Sandi Rumput, rumput yang digambar <strong>pendek</strong> melambangkan apa pada Sandi Morse?", options: ["Garis / Strip (-)", "Titik (.)", "Spasi", "Huruf Kapital"], answer: 1 },
+            { q: "Sedangkan rumput yang digambar <strong>tinggi</strong> melambangkan apa?", options: ["Garis / Strip (-)", "Titik (.)", "Spasi", "Akhir Kalimat"], answer: 0 },
+            { q: "Pilihlah bentuk Sandi Rumput yang benar untuk huruf <strong>E</strong> (Morse: <strong>.</strong>)", options: [generateSandiRumputSVG('E'), generateSandiRumputSVG('T'), generateSandiRumputSVG('I'), generateSandiRumputSVG('M')], answer: 0, isVisualOption: true },
+            { q: "Manakah Sandi Rumput untuk huruf <strong>A</strong> (Morse: <strong>.-</strong>)?", options: [generateSandiRumputSVG('N'), generateSandiRumputSVG('I'), generateSandiRumputSVG('A'), generateSandiRumputSVG('M')], answer: 2, isVisualOption: true },
+            { q: `Apa arti dari sandi rumput di bawah ini?<br><div class="mt-4 p-4 bg-slate-50 border rounded-lg text-center overflow-x-auto">${generateSandiRumputSVG('PRAMUKA', 1.5)}</div>`, options: ["PANDU", "PRAMUKA", "PEMBINA", "PENGGALANG"], answer: 1 },
+            { q: `Baca sandi rumput berikut ini:<br><div class="mt-4 p-4 bg-slate-50 border rounded-lg text-center overflow-x-auto">${generateSandiRumputSVG('KEMAH', 1.5)}</div>`, options: ["KEMAH", "KASIH", "KEMAS", "KAPAL"], answer: 0 },
+            { q: "Sandi Rumput sering ditulis dengan menggabungkan dua warna. Warna apa yang sering digunakan untuk membedakan rumput pendek dan tinggi?", options: ["Kuning dan Hijau", "Hitam dan Putih", "Merah (Pendek) dan Biru (Tinggi)", "Hijau (Pendek) dan Coklat (Tinggi)"], answer: 2 },
+            { q: `Perhatikan bentuk sandi ini:<br><div class="mt-4 p-4 bg-slate-50 border rounded-lg text-center overflow-x-auto">${generateSandiRumputSVG('API', 1.5)}</div>Dibaca apakah sandi di atas?`, options: ["AIR", "API", "ABU", "AKU"], answer: 1 },
+            { q: "Huruf S pada kode morse adalah (...). Bagaimana bentuknya dalam sandi rumput?", options: ["3 rumput tinggi berjejer", "2 rumput pendek dan 1 tinggi", "3 rumput pendek berjejer", "1 rumput pendek dan 2 tinggi"], answer: 2 },
+            { q: "Huruf T pada sandi morse adalah (-). Bagaimana bentuk sandi rumputnya?", options: ["1 rumput pendek", "1 rumput tinggi", "2 rumput pendek", "2 rumput tinggi"], answer: 1 },
+            { q: "Huruf I pada sandi morse adalah (..). Bagaimana bentuk sandi rumputnya?", options: ["2 rumput pendek", "2 rumput tinggi", "1 pendek 1 tinggi", "1 tinggi 1 pendek"], answer: 0 },
+            { q: "Huruf M pada sandi morse adalah (--). Bagaimana bentuk sandi rumputnya?", options: ["2 rumput pendek", "2 rumput tinggi", "3 rumput pendek", "1 rumput tinggi"], answer: 1 },
+            { q: `Manakah bacaan dari sandi rumput berikut?<br><div class="mt-4 p-4 bg-slate-50 border rounded-lg text-center overflow-x-auto">${generateSandiRumputSVG('TALI', 1.5)}</div>`, options: ["TALI", "TANI", "TAPI", "TARI"], answer: 0 },
+            { q: `Perhatikan sandi rumput ini:<br><div class="mt-4 p-4 bg-slate-50 border rounded-lg text-center overflow-x-auto">${generateSandiRumputSVG('REGU', 1.5)}</div>Apa jawabannya?`, options: ["RAGU", "REGU", "RUGI", "RAPI"], answer: 1 },
+            { q: `Apa arti sandi rumput berikut?<br><div class="mt-4 p-4 bg-slate-50 border rounded-lg text-center overflow-x-auto">${generateSandiRumputSVG('PETA', 1.5)}</div>`, options: ["PETA", "PITA", "PENA", "PADI"], answer: 0 },
+            { q: "Jika sebuah huruf morse memiliki pola (-..), maka sandi rumputnya adalah ....", options: ["1 rumput tinggi lalu 2 rumput pendek", "2 rumput pendek lalu 1 rumput tinggi", "3 rumput tinggi", "3 rumput pendek"], answer: 0 },
+            { q: "Dalam sandi rumput, garis lurus di bagian bawah biasanya melambangkan ....", options: ["Air sungai", "Tanah penghubung rumput", "Arah utara", "Batas jawaban"], answer: 1 },
+            { q: `Bacalah sandi rumput berikut:<br><div class="mt-4 p-4 bg-slate-50 border rounded-lg text-center overflow-x-auto">${generateSandiRumputSVG('SKU', 1.5)}</div>`, options: ["SKU", "SKA", "SUKU", "SAKU"], answer: 0 },
+            { q: `Sandi rumput berikut membentuk kata ....<br><div class="mt-4 p-4 bg-slate-50 border rounded-lg text-center overflow-x-auto">${generateSandiRumputSVG('PANDU', 1.5)}</div>`, options: ["PANDU", "PANTU", "PADU", "PANDA"], answer: 0 }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+
+        questions.forEach((item, qIndex) => {
+            const qDiv = document.createElement('div');
+            qDiv.className = 'p-6 bg-slate-50 border border-slate-200 rounded-xl';
+            let optionsHTML = '';
+            item.options.forEach((opt, oIndex) => {
+                const optId = `q${qIndex}_o${oIndex}`;
+                const labelClass = item.isVisualOption
+                    ? "flex items-center justify-center p-4 border-2 border-slate-200 rounded-lg cursor-pointer hover:bg-slate-100 transition h-full"
+                    : "flex items-center p-4 border-2 border-slate-200 rounded-lg cursor-pointer hover:bg-slate-100 transition";
+                optionsHTML += `
+                    <div class="relative">
+                        <input type="radio" name="q${qIndex}" id="${optId}" value="${oIndex}" class="quiz-radio absolute opacity-0 w-0 h-0">
+                        <label for="${optId}" class="${labelClass}" id="label_${optId}">
+                            ${item.isVisualOption ? opt : `<span class="w-6 h-6 rounded-full border-2 border-slate-300 flex-shrink-0 mr-3 flex items-center justify-center text-transparent bg-white text-xs">✓</span><span class="text-slate-700">${opt}</span>`}
+                        </label>
+                    </div>
+                `;
+            });
+
+            qDiv.innerHTML = `
+                <p class="font-bold text-lg text-slate-800 mb-4"><span class="text-blue-600 mr-2">${qIndex + 1}.</span> ${item.q}</p>
+                <div class="grid grid-cols-1 ${item.isVisualOption ? 'md:grid-cols-2 gap-4' : 'gap-3'}">${optionsHTML}</div>
+                <div id="feedback_q${qIndex}" class="mt-4 hidden text-sm font-bold px-4 py-3 rounded-lg"></div>
+            `;
+            quizContainer.appendChild(qDiv);
+        });
+
+        document.getElementById('submitQuizBtn').addEventListener('click', () => {
+            let score = 0;
+            questions.forEach((item, qIndex) => {
+                const selected = document.querySelector(`input[name="q${qIndex}"]:checked`);
+                const feedbackDiv = document.getElementById(`feedback_q${qIndex}`);
+
+                item.options.forEach((_, oIndex) => {
+                    const label = document.getElementById(`label_q${qIndex}_o${oIndex}`);
+                    label.classList.remove('correct-answer', 'wrong-answer');
+                    label.style.pointerEvents = 'none';
+                });
+
+                if (!selected) {
+                    feedbackDiv.innerHTML = "Anda belum menjawab soal ini.";
+                    feedbackDiv.className = "mt-4 text-sm font-bold px-4 py-3 rounded-lg bg-yellow-100 text-yellow-800 block";
+                    return;
+                }
+
+                const selectedVal = parseInt(selected.value, 10);
+                const selectedLabel = document.getElementById(`label_q${qIndex}_o${selectedVal}`);
+                const correctLabel = document.getElementById(`label_q${qIndex}_o${item.answer}`);
+
+                if (selectedVal === item.answer) {
+                    score += 10;
+                    selectedLabel.classList.add('correct-answer');
+                    feedbackDiv.innerHTML = "Benar!";
+                    feedbackDiv.className = "mt-4 text-sm font-bold px-4 py-3 rounded-lg bg-green-100 text-green-800 block";
+                } else {
+                    selectedLabel.classList.add('wrong-answer');
+                    correctLabel.classList.add('correct-answer');
+                    feedbackDiv.innerHTML = "Salah. Jawaban yang benar telah ditandai hijau.";
+                    feedbackDiv.className = "mt-4 text-sm font-bold px-4 py-3 rounded-lg bg-red-100 text-red-800 block";
+                }
+            });
+
+            const resultDiv = document.getElementById('quiz-result');
+            const scoreNumber = document.getElementById('score-number');
+            const scoreMessage = document.getElementById('score-message');
+
+            resultDiv.classList.remove('hidden');
+            scoreNumber.innerText = score;
+            document.getElementById('submitQuizBtn').style.display = 'none';
+
+            if (score === 100) {
+                resultDiv.className = "mt-6 p-6 rounded-xl border-2 bg-green-50 border-green-400 text-center text-green-800";
+                scoreMessage.innerText = "Luar biasa! Anda sudah menguasai Sandi Rumput dengan sempurna.";
+            } else if (score >= 70) {
+                resultDiv.className = "mt-6 p-6 rounded-xl border-2 bg-blue-50 border-blue-400 text-center text-blue-800";
+                scoreMessage.innerText = "Bagus sekali! Pemahaman Anda sudah sangat baik.";
+            } else {
+                resultDiv.className = "mt-6 p-6 rounded-xl border-2 bg-amber-50 border-amber-400 text-center text-amber-800";
+                scoreMessage.innerText = "Terus semangat belajar! Coba ulangi materi dan kerjakan lagi.";
+            }
+
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    </script>
+</body>
+</html>

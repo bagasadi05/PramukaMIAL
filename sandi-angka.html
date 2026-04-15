@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandi Angka | Materi Pramuka MI Al Irsyad Al Islamiyyah Kota Madiun</title>
+    <meta name="description" content="Game sandi angka interaktif untuk materi pramuka yang siap diunggah ke Netlify.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body class="min-h-screen flex items-center justify-center p-6">
+
+    <div class="max-w-6xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden ring-1 ring-gray-900/5">
+        <div class="bg-emerald-800 text-white px-8 py-5 flex justify-between items-center relative overflow-hidden">
+            <div class="absolute right-0 top-0 opacity-10 transform translate-x-1/4 -translate-y-1/4">
+                <svg width="200" height="200" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99z"/></svg>
+            </div>
+
+            <div class="flex items-center gap-6 relative z-10">
+                <div class="bg-emerald-700 p-2 rounded-lg ring-1 ring-emerald-600 shadow-inner">
+                    <span class="text-3xl">🔍</span>
+                </div>
+                <div>
+                    <h1 class="text-3xl font-extrabold tracking-tight">Pramuka Sandi Center</h1>
+                    <p class="text-emerald-300 text-sm font-medium tracking-wider uppercase mt-1">Sistem Pemecahan Kode Interaktif</p>
+                </div>
+            </div>
+            <div class="flex gap-3 relative z-10">
+                <a href="./index.html" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-5 py-2.5 rounded-xl font-semibold transition-all flex items-center gap-2">
+                    <span>←</span> Beranda
+                </a>
+                <button id="btn-audio" onclick="toggleAudio()" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2.5 rounded-xl font-semibold transition-all flex items-center gap-2 shadow-inner border border-slate-600" title="Nyalakan/Matikan Suara">
+                    <span id="audio-icon">🔇</span>
+                </button>
+                <span id="level-badge" class="hidden items-center bg-emerald-900 text-emerald-100 font-bold px-4 py-2 rounded-lg text-lg ring-1 ring-emerald-700 shadow-inner mr-4">
+                    Misi 1/5
+                </span>
+                <button onclick="showInstruction()" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-5 py-2.5 rounded-xl font-semibold transition-all flex items-center gap-2">
+                    <span>📖</span> Panduan
+                </button>
+                <button onclick="toggleKey()" class="bg-amber-400 hover:bg-amber-300 text-amber-900 px-5 py-2.5 rounded-xl font-bold transition-all shadow-lg shadow-amber-500/30 flex items-center gap-2">
+                    <span>🔑</span> Referensi Sandi
+                </button>
+            </div>
+        </div>
+
+        <div id="screen-start" class="screen active flex-col items-center justify-center p-12 text-center bg-slate-50">
+            <div class="bg-emerald-100 text-emerald-600 p-6 rounded-3xl mb-8 shadow-inner inline-block">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
+                </svg>
+            </div>
+            <h2 class="text-5xl font-extrabold text-slate-800 mb-6 tracking-tight">Otentikasi Barung Dibutuhkan</h2>
+            <p class="text-slate-500 mb-10 text-xl max-w-3xl leading-relaxed">
+                Pusat komando memiliki beberapa pesan terenkripsi. Setiap Barung diminta untuk menganalisis kode dan memecahkan sandi angka. Angkat tangan Anda jika Barung Anda telah menemukan jawabannya.
+            </p>
+
+            <div class="w-full max-w-5xl mb-10">
+                <p class="text-sm font-bold tracking-[0.2em] uppercase text-emerald-700 mb-4">Pilih Tingkat Kelas</p>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <button type="button" class="grade-card text-left rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" data-grade="1" onclick="selectGrade('1')">
+                        <span class="grade-badge">Kelas 1 SD</span>
+                        <h3 class="text-2xl font-extrabold text-slate-800 mt-4 mb-2">Pemula</h3>
+                        <p class="text-slate-500 leading-relaxed">Soal berupa kata-kata sangat pendek dan akrab untuk latihan mengenal sandi angka.</p>
+                    </button>
+                    <button type="button" class="grade-card text-left rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" data-grade="2" onclick="selectGrade('2')">
+                        <span class="grade-badge">Kelas 2 SD</span>
+                        <h3 class="text-2xl font-extrabold text-slate-800 mt-4 mb-2">Menengah</h3>
+                        <p class="text-slate-500 leading-relaxed">Soal mulai memakai kata pramuka sederhana agar anak berlatih lebih percaya diri.</p>
+                    </button>
+                    <button type="button" class="grade-card text-left rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" data-grade="3" onclick="selectGrade('3')">
+                        <span class="grade-badge">Kelas 3 SD</span>
+                        <h3 class="text-2xl font-extrabold text-slate-800 mt-4 mb-2">Lanjutan</h3>
+                        <p class="text-slate-500 leading-relaxed">Soal berisi frasa pramuka yang lebih panjang sehingga cocok untuk tantangan lanjutan.</p>
+                    </button>
+                </div>
+                <p id="selected-grade-text" class="mt-5 text-emerald-700 font-semibold min-h-6">Pilih kelas terlebih dahulu untuk memulai.</p>
+            </div>
+
+            <button id="btn-start-game" onclick="startGame()" disabled class="bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed text-white font-bold py-4 px-12 rounded-2xl shadow-xl shadow-emerald-500/20 transform transition-all hover:-translate-y-1 text-2xl flex items-center gap-3">
+                Mulai Inisialisasi Misi
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+            </button>
+        </div>
+
+        <div id="screen-video" class="screen flex-col items-center justify-center p-12 text-center bg-slate-800 text-white relative">
+            <div class="absolute inset-0 bg-slate-900 opacity-90 z-0"></div>
+            <div class="relative z-10 w-full flex flex-col items-center">
+                <span class="text-amber-400 font-bold tracking-widest uppercase text-sm mb-2 block">Materi Pembekalan</span>
+                <h2 class="text-4xl font-extrabold text-white mb-4 tracking-tight">Briefing dari Markas Pusat</h2>
+                <p class="text-slate-300 mb-8 text-lg max-w-3xl">
+                    Sebelum menjalankan misi, perhatikan baik-baik instruksi dari video berikut ini agar kalian paham cara membaca sandi angka!
+                </p>
+                <div id="video-grade-note" class="mb-8 rounded-full border border-amber-300/40 bg-white/10 px-5 py-2 text-sm font-semibold text-amber-100">
+                    Mode belajar belum dipilih
+                </div>
+
+                <div class="w-full max-w-4xl bg-slate-950 p-2 rounded-2xl shadow-2xl border border-slate-700 mb-4 aspect-video">
+                    <iframe id="youtube-video" class="w-full h-full rounded-xl" src="https://www.youtube-nocookie.com/embed/cMvxjYZ0hvs?rel=0" title="Materi Sandi Angka" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+
+                <a href="https://www.youtube.com/watch?v=cMvxjYZ0hvs" target="_blank" rel="noopener noreferrer" class="text-amber-400 hover:text-amber-300 underline mb-8 block text-sm font-medium transition-colors flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>
+                    Video error atau tidak muncul? Klik di sini untuk menonton langsung di YouTube.
+                </a>
+
+                <button onclick="proceedToGame()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 px-12 rounded-2xl shadow-xl shadow-emerald-500/20 transform transition-all hover:-translate-y-1 text-2xl flex items-center gap-3">
+                    Mengerti, Lanjut ke Papan Dekripsi!
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                </button>
+            </div>
+        </div>
+
+        <div id="screen-grade-guide" class="screen flex-col items-center justify-center p-12 text-center bg-violet-50 relative">
+            <div class="w-full max-w-5xl">
+                <span class="text-violet-600 font-bold tracking-widest uppercase text-sm mb-3 block">Catat Dulu</span>
+                <h2 class="text-4xl font-extrabold text-slate-800 mb-4 tracking-tight">Petunjuk Sandi Angka untuk Kelas 3</h2>
+                <p class="text-slate-600 mb-8 text-lg max-w-3xl mx-auto leading-relaxed">
+                    Perhatikan tabel ini, lalu catat di buku atau kertas kelompok. Setelah itu barulah lanjut ke soal tanpa petunjuk di setiap putaran.
+                </p>
+                <div id="grade-guide-chart" class="guide-card-shell mb-8"></div>
+                <button onclick="continueToQuestions()" class="bg-violet-600 hover:bg-violet-500 text-white font-bold py-4 px-12 rounded-2xl shadow-xl shadow-violet-500/20 transform transition-all hover:-translate-y-1 text-2xl inline-flex items-center gap-3">
+                    Saya Sudah Mencatat
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                </button>
+            </div>
+        </div>
+
+        <div id="screen-game" class="screen flex-col items-center justify-center p-10 relative bg-slate-50">
+            <div class="mb-10 text-center">
+                <span class="text-emerald-600 font-bold tracking-widest uppercase text-sm mb-2 block">Dekripsi Aktif</span>
+                <h2 class="text-4xl font-extrabold text-slate-800" id="game-title">
+                    Pesan Sandi #1
+                </h2>
+                <p id="current-grade-label" class="text-slate-500 font-semibold mt-3"></p>
+            </div>
+
+            <div id="inline-guide-wrapper" class="hidden w-full max-w-5xl mb-10">
+                <div class="guide-banner">
+                    <p class="guide-banner-title">Petunjuk Sandi Angka</p>
+                    <p class="guide-banner-text">Gunakan tabel ini untuk membantu kelas 1 dan 2 membaca sandi pada setiap soal.</p>
+                </div>
+                <div id="inline-guide-chart" class="guide-card-shell mt-4"></div>
+            </div>
+
+            <div id="board-container" class="space-y-10 w-full flex flex-col items-center">
+            </div>
+
+            <div class="flex gap-4 mt-16">
+                <button onclick="revealAll()" class="bg-white hover:bg-slate-100 text-slate-600 border border-slate-300 font-bold py-3 px-8 rounded-xl shadow-sm transition-all text-lg flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z" /><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" /></svg>
+                    Buka Paksa Panel
+                </button>
+                <button id="btn-finish" onclick="finishLevel()" class="hidden bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-10 rounded-xl shadow-lg shadow-emerald-500/30 transition-all text-lg flex items-center gap-2 animate-bounce">
+                    Verifikasi Lanjut
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                </button>
+            </div>
+        </div>
+
+        <div id="screen-intermission" class="screen flex-col items-center justify-center p-12 text-center bg-slate-800 text-white relative overflow-hidden">
+            <div class="absolute -top-24 -right-24 w-64 h-64 bg-emerald-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+            <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-amber-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+
+            <div class="relative z-10">
+                <span class="text-emerald-400 font-bold tracking-widest uppercase text-sm mb-4 block">Tahap Selesai</span>
+                <h2 class="text-5xl font-extrabold mb-8">Pesan Berhasil Diurai</h2>
+
+                <div class="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl shadow-2xl mb-10 inline-block w-full max-w-3xl">
+                    <p id="level-message" class="text-5xl font-black text-amber-400 uppercase tracking-widest text-center"></p>
+                </div>
+
+                <p class="text-slate-300 font-medium text-xl mb-10">
+                    Sistem mendeteksi adanya sandi lanjutan. Bersiap...
+                </p>
+
+                <button onclick="nextLevel()" class="bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold py-4 px-12 rounded-2xl shadow-xl shadow-amber-500/20 transform transition-all hover:-translate-y-1 text-2xl">
+                    Lanjutkan Misi Berikutnya
+                </button>
+            </div>
+        </div>
+
+        <div id="screen-success" class="screen flex-col items-center justify-center p-12 text-center bg-emerald-50 relative">
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiMxMGY5ODEiIGZpbGwtb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg==')] opacity-50"></div>
+
+            <div class="relative z-10">
+                <div class="inline-flex items-center justify-center w-24 h-24 bg-emerald-100 text-emerald-600 rounded-full mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                </div>
+                <h2 class="text-5xl font-extrabold text-emerald-800 mb-4">MISI UTAMA SELESAI</h2>
+                <p class="text-slate-600 text-2xl mb-10 font-medium">
+                    Semua kode sandi telah berhasil dipecahkan oleh Barung Detektif!
+                </p>
+
+                <div class="bg-white p-8 rounded-2xl border border-emerald-100 shadow-xl mb-10 inline-block w-full max-w-2xl">
+                    <p class="text-4xl font-black text-slate-800 uppercase tracking-widest text-center">
+                        SALAM PRAMUKA!
+                    </p>
+                </div>
+
+                <div>
+                    <button onclick="resetGame()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 px-8 rounded-xl transition-all text-xl shadow-lg">
+                        Mulai Sesi Baru
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="key-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="glass-modal rounded-3xl p-10 max-w-5xl w-full relative">
+            <button onclick="toggleKey()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-800 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+
+            <div class="text-center mb-8">
+                <h3 class="font-extrabold text-3xl text-slate-800 tracking-tight">Tabel Referensi Sandi Angka</h3>
+                <p class="text-slate-500 font-medium mt-2">Salin pedoman ini untuk memecahkan sandi di layar utama.</p>
+            </div>
+
+            <div class="grid grid-cols-7 gap-3 text-center font-bold text-slate-700">
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">1</span>A</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">2</span>B</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">3</span>C</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">4</span>D</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">5</span>E</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">6</span>F</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">7</span>G</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">8</span>H</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">9</span>I</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">10</span>J</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">11</span>K</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">12</span>L</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">13</span>M</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">14</span>N</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">15</span>O</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">16</span>P</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">17</span>Q</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">18</span>R</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">19</span>S</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">20</span>T</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">21</span>U</div>
+                <div class="col-span-1"></div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">22</span>V</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">23</span>W</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">24</span>X</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">25</span>Y</div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl shadow-sm"><span class="text-slate-400 text-sm block">26</span>Z</div>
+                <div class="col-span-1"></div>
+            </div>
+
+            <div class="mt-10 text-center">
+                <button onclick="toggleKey()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 px-12 rounded-xl text-lg shadow-md transition-all">
+                    Tutup Referensi
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="instruction-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="glass-modal rounded-3xl p-10 max-w-2xl w-full relative">
+            <button onclick="hideInstruction()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-800 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <h3 class="font-extrabold text-2xl mb-6 text-emerald-800 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                Panduan Operasional Sistem
+            </h3>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-6">
+                <ul class="list-disc pl-5 space-y-3 text-slate-600 font-medium">
+                    <li>Sistem ini dirancang khusus untuk ditayangkan melalui proyektor.</li>
+                    <li>Pilih kelas 1, 2, atau 3 SD terlebih dahulu agar soal sesuai tingkat kesulitannya.</li>
+                    <li>Sediakan kertas buram atau papan tulis kecil untuk setiap Barung.</li>
+                    <li>Gunakan menu <b>Referensi Sandi</b> untuk memberikan panduan awal kepada siswa.</li>
+                    <li>Tugaskan Barung untuk menerjemahkan angka rahasia secara kolaboratif.</li>
+                    <li>Klik pada blok kartu misteri untuk memvalidasi dan memutar kartu jika jawaban Barung benar.</li>
+                    <li>Terdapat 5 tahapan level misi yang akan berlanjut secara berurutan.</li>
+                </ul>
+            </div>
+            <div class="mt-8 text-right">
+                <button onclick="hideInstruction()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-8 rounded-xl text-lg shadow-md transition-all">
+                    Sistem Dipahami
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="bgm" loop preload="auto">
+        <source src="https://upload.wikimedia.org/wikipedia/commons/e/ea/The_Washington_Post_March.ogg" type="audio/ogg">
+    </audio>
+
+    <script src="./assets/script.js"></script>
+</body>
+</html>

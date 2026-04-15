@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Awal Sandi Rumput | Pramuka Kelas 5</title>
+    <meta name="description" content="Halaman awal materi sandi rumput pramuka kelas 5.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+        .grass-blade-short {
+            display: inline-block;
+            width: 8px;
+            height: 28px;
+            border-left: 3px solid #dc2626;
+            transform: skewX(-18deg);
+            transform-origin: bottom;
+        }
+        .grass-blade-tall {
+            display: inline-block;
+            width: 10px;
+            height: 52px;
+            border-left: 3px solid #2563eb;
+            transform: skewX(18deg);
+            transform-origin: bottom;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800 antialiased">
+    <header class="bg-green-700 text-white shadow-md">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <a href="./index.html" class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 font-bold hover:bg-white/20 transition">
+                <span>←</span> Beranda Portal
+            </a>
+            <nav class="flex gap-3 text-sm font-bold">
+                <a href="./sandi-rumput-materi.html" class="hover:text-green-200 transition">Materi</a>
+                <a href="./sandi-rumput-kuis.html" class="bg-green-800 px-3 py-1 rounded-full hover:bg-green-900 transition">Kuis</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-10">
+        <section class="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 items-center">
+            <div class="bg-white rounded-[2rem] shadow-sm border border-slate-200 p-8 md:p-12">
+                <span class="inline-flex rounded-full bg-green-100 text-green-800 px-4 py-2 text-xs font-black uppercase tracking-widest">Materi Pramuka Kelas 5</span>
+                <h1 class="text-4xl md:text-6xl font-black text-green-900 mt-6 leading-tight">Pembelajaran Sandi Rumput Pramuka</h1>
+                <p class="text-lg text-slate-600 leading-relaxed mt-6">
+                    Belajar sandi rumput dengan alur sederhana: mulai dari pengantar, lanjut video dan materi, lalu kerjakan kuis 10 soal untuk menguji pemahaman.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 mt-8">
+                    <a href="./sandi-rumput-materi.html" class="inline-flex justify-center rounded-full bg-green-700 px-8 py-4 font-black text-white shadow-lg hover:bg-green-800 transition">Mulai Belajar</a>
+                    <a href="./sandi-rumput-kuis.html" class="inline-flex justify-center rounded-full bg-amber-400 px-8 py-4 font-black text-amber-950 shadow-lg hover:bg-amber-300 transition">Langsung Kuis</a>
+                </div>
+            </div>
+
+            <aside class="bg-green-900 text-white rounded-[2rem] p-8 md:p-10 shadow-2xl overflow-hidden relative">
+                <div class="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-amber-400/20"></div>
+                <h2 class="text-2xl font-black relative">Konsep Utama</h2>
+                <p class="text-green-100 leading-relaxed mt-4 relative">
+                    Sandi rumput adalah modifikasi visual dari sandi morse. Titik digambar sebagai rumput pendek, sedangkan garis digambar sebagai rumput tinggi.
+                </p>
+                <div class="grid gap-4 mt-8 relative">
+                    <div class="bg-white/10 rounded-2xl p-5">
+                        <p class="text-sm uppercase tracking-widest text-green-200 font-bold">Titik Morse</p>
+                        <div class="mt-4 flex items-end gap-2 border-b border-white/40 pb-1">
+                            <span class="grass-blade-short"></span>
+                            <span class="text-white font-bold ml-3">Rumput pendek</span>
+                        </div>
+                    </div>
+                    <div class="bg-white/10 rounded-2xl p-5">
+                        <p class="text-sm uppercase tracking-widest text-green-200 font-bold">Garis Morse</p>
+                        <div class="mt-4 flex items-end gap-2 border-b border-white/40 pb-1">
+                            <span class="grass-blade-tall"></span>
+                            <span class="text-white font-bold ml-3">Rumput tinggi</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </section>
+
+        <section class="grid md:grid-cols-3 gap-5 mt-8">
+            <article class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="text-3xl font-black text-green-700">1</div>
+                <h3 class="text-xl font-black mt-3">Halaman Awal</h3>
+                <p class="text-slate-600 mt-2 leading-relaxed">Pengantar singkat tentang tujuan belajar sandi rumput.</p>
+            </article>
+            <article class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="text-3xl font-black text-amber-600">2</div>
+                <h3 class="text-xl font-black mt-3">Materi + Video</h3>
+                <p class="text-slate-600 mt-2 leading-relaxed">Video penjelasan, materi utama, contoh huruf, dan generator sandi.</p>
+            </article>
+            <article class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                <div class="text-3xl font-black text-blue-700">3</div>
+                <h3 class="text-xl font-black mt-3">Kuis 10 Soal</h3>
+                <p class="text-slate-600 mt-2 leading-relaxed">Kuis pilihan ganda untuk menguji pemahaman siswa kelas 5.</p>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

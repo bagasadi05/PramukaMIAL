@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandi A-Z | Materi Pramuka MI Al Irsyad Al Islamiyyah Kota Madiun</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .shake { animation: shake 0.5s; }
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+        .pop-in { animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-[#f4ebd0] min-h-screen text-[#4a3b32]">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // Kosakata Pramuka untuk Kelas 5 SD
+        const wordsList = [
+            "PRAMUKA", "KEMAH", "TENDA", "TUNAS", 
+            "TALI", "API", "ALAM", "PANDU", 
+            "SIAGA", "SANDI", "MORSE", "KOMPAS",
+            "PENGGALANG", "SEMAPHORE", "PIONERING", "REGU",
+            "BENDERA", "PELUIT", "TONGKAT", "KACU",
+            "BARIS", "SIMPUL", "DASADARMA", "TRISATYA",
+            "MANDIRI", "BERANI", "DISIPLIN", "IKATAN",
+            "KEMAH", "PETA", "SURAT", "JEJAK"
+        ];
+
+        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+        const reversed = "ZYXWVUTSRQPONMLKJIHGFEDCBA".split('');
+
+        const row1 = "ABCDEFGHIJKLM".split('');
+        const row2 = "ZYXWVUTSRQPON".split('');
+
+        // Fungsi untuk mengenkripsi kata ke Sandi A-Z
+        const encryptWord = (word) => {
+            return word.toUpperCase().split('').map(char => {
+                const index = alphabet.indexOf(char);
+                return index !== -1 ? reversed[index] : char;
+            }).join('');
+        };
+
+        // Icon Components
+        const TentIcon = () => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3.5 21 14 3"/><path d="M20.5 21 10 3"/><path d="M15.5 21 12 15l-3.5 6"/><path d="M2 21h20"/>
+            </svg>
+        );
+
+        const FireIcon = () => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+            </svg>
+        );
+
+        const VideoIcon = () => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line>
+            </svg>
+        );
+
+        // --- Sistem Suara (Web Audio API) ---
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const audioCtx = new AudioContext();
+
+        const playTone = (freq, type, duration, vol=0.1) => {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            oscillator.type = type;
+            oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            gainNode.gain.setValueAtTime(vol, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + duration);
+        };
+
+        const playSuccessSound = () => {
+            playTone(523.25, 'sine', 0.1, 0.2); // C5
+            setTimeout(() => playTone(659.25, 'sine', 0.1, 0.2), 100); // E5
+            setTimeout(() => playTone(783.99, 'sine', 0.3, 0.2), 200); // G5
+        };
+
+        const playErrorSound = () => {
+            playTone(200, 'triangle', 0.2, 0.3);
+            setTimeout(() => playTone(150, 'triangle', 0.3, 0.3), 150);
+        };
+
+        const playNextSound = () => {
+            playTone(880, 'sine', 0.1, 0.1);
+        };
+
+        const playRevealSound = () => {
+            playTone(400, 'square', 0.2, 0.05);
+            setTimeout(() => playTone(300, 'square', 0.3, 0.05), 150);
+        };
+
+        const playGameOverSound = () => {
+            playTone(523.25, 'triangle', 0.2, 0.2);
+            setTimeout(() => playTone(659.25, 'triangle', 0.2, 0.2), 200);
+            setTimeout(() => playTone(783.99, 'triangle', 0.2, 0.2), 400);
+            setTimeout(() => playTone(1046.50, 'triangle', 0.6, 0.2), 600); // C6
+        };
+        // ------------------------------------
+
+        const App = () => {
+            const [gameState, setGameState] = useState('start'); // start, materi, playing, gameover
+            const [questions, setQuestions] = useState([]);
+            const [currentIndex, setCurrentIndex] = useState(0);
+            const [userInput, setUserInput] = useState('');
+            const [score, setScore] = useState(0);
+            const [feedback, setFeedback] = useState(null); // { type: 'success' | 'error', text: string }
+            const [isShaking, setIsShaking] = useState(false);
+            const [showNext, setShowNext] = useState(false);
+            const inputRef = useRef(null);
+
+            // Buka Layar Materi
+            const showMateri = () => {
+                if (audioCtx.state === 'suspended') audioCtx.resume(); // Izin audio
+                setGameState('materi');
+            };
+
+            // Mulai sesi soal
+            const startGame = () => {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                
+                // Acak urutan kata
+                const shuffled = [...wordsList].sort(() => 0.5 - Math.random()).slice(0, 20);
+                const gameQuestions = shuffled.map(word => ({
+                    plaintext: word,
+                    ciphertext: encryptWord(word)
+                }));
+                setQuestions(gameQuestions);
+                setCurrentIndex(0);
+                setScore(0);
+                setUserInput('');
+                setFeedback(null);
+                setShowNext(false);
+                setGameState('playing');
+            };
+
+            const handleReveal = () => {
+                if (showNext) return;
+                playRevealSound();
+                const currentAnswer = questions[currentIndex].plaintext;
+                setFeedback({ type: 'error', text: `Jawabannya adalah: ${currentAnswer}` });
+                setUserInput(currentAnswer);
+                setShowNext(true);
+            };
+
+            const handleNextQuestion = () => {
+                if (currentIndex + 1 < questions.length) {
+                    playNextSound();
+                    setCurrentIndex(prev => prev + 1);
+                    setUserInput('');
+                    setFeedback(null);
+                    setShowNext(false);
+                    if(inputRef.current) setTimeout(() => inputRef.current.focus(), 100);
+                } else {
+                    playGameOverSound();
+                    setGameState('gameover');
+                }
+            };
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                
+                if (showNext) {
+                    handleNextQuestion();
+                    return;
+                }
+
+                if (!userInput.trim()) return;
+
+                const currentAnswer = questions[currentIndex].plaintext;
+                
+                if (userInput.toUpperCase() === currentAnswer) {
+                    playSuccessSound();
+                    setFeedback({ type: 'success', text: 'TEPAT SEKALI! KELAS HEBAT!' });
+                    setScore(prev => prev + 10);
+                    setShowNext(true);
+                } else {
+                    playErrorSound();
+                    setFeedback({ type: 'error', text: 'Yahh, masih kurang tepat! Coba lagi!' });
+                    setIsShaking(true);
+                    setTimeout(() => setIsShaking(false), 500);
+                }
+            };
+
+            // Tampilan 1: Awal (Start Screen)
+            if (gameState === 'start') {
+                return (
+                    <div className="flex flex-col items-center justify-center min-h-screen p-8 text-center">
+                        <div className="w-full max-w-5xl mb-4 flex justify-start">
+                            <a href="./index.html" className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-lg font-bold text-[#6b4c3a] shadow-lg">
+                                <span>←</span> Kembali ke Beranda
+                            </a>
+                        </div>
+                        <div className="bg-[#6b4c3a] text-white p-12 rounded-[3rem] shadow-2xl max-w-5xl w-full pop-in border-8 border-[#8b6b55]">
+                            <div className="flex justify-center mb-8 text-[#f4ebd0] transform scale-150">
+                                <TentIcon />
+                            </div>
+                            <h1 className="text-6xl md:text-7xl font-black mb-6 tracking-wide drop-shadow-lg">PETUALANGAN<br/>SANDI A-Z</h1>
+                            <p className="text-2xl text-[#f4ebd0] mb-10">Pecahkan kode rahasia bersama-sama satu kelas!</p>
+                            
+                            <button 
+                                onClick={showMateri}
+                                className="bg-yellow-500 hover:bg-yellow-400 text-[#4a3b32] font-black text-4xl py-6 px-16 rounded-full shadow-[0_10px_0_0_#b7791f] hover:shadow-[0_5px_0_0_#b7791f] transition-all transform hover:translate-y-1 active:translate-y-3 w-full max-w-3xl flex items-center justify-center gap-4 mx-auto"
+                            >
+                                <VideoIcon /> MULAI BELAJAR
+                            </button>
+                        </div>
+                    </div>
+                );
+            }
+
+            // Tampilan 2: Materi YouTube
+            if (gameState === 'materi') {
+                return (
+                    <div className="flex flex-col items-center justify-center min-h-screen p-6 text-center">
+                        <div className="w-full max-w-6xl mb-4 flex justify-start">
+                            <a href="./index.html" className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-lg font-bold text-[#6b4c3a] shadow-lg">
+                                <span>←</span> Kembali ke Beranda
+                            </a>
+                        </div>
+                        <div className="bg-[#6b4c3a] text-white p-8 md:p-12 rounded-[3rem] shadow-2xl w-full max-w-6xl pop-in border-8 border-[#8b6b55]">
+                            <h1 className="text-4xl md:text-6xl font-black mb-8 text-yellow-400 uppercase tracking-widest drop-shadow-lg">
+                                Materi Sandi A-Z
+                            </h1>
+                            
+                            {/* Wrapper Iframe YouTube Responsive */}
+                            <div className="relative w-full overflow-hidden pt-[56.25%] rounded-3xl border-8 border-[#8b6b55] mb-10 bg-black shadow-inner">
+                                <iframe 
+                                    className="absolute top-0 left-0 w-full h-full"
+                                    src="https://www.youtube.com/embed/1QYc6rjje40" 
+                                    title="Materi Sandi A-Z" 
+                                    frameBorder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowFullScreen>
+                                </iframe>
+                            </div>
+
+                            <button 
+                                onClick={startGame}
+                                className="bg-green-500 hover:bg-green-400 text-white font-black text-3xl md:text-4xl py-6 px-12 rounded-full shadow-[0_10px_0_0_#2f855a] transition-all transform active:translate-y-3 w-full max-w-4xl"
+                            >
+                                SUDAH PAHAM? MULAI LATIHAN SOAL ➔
+                            </button>
+                        </div>
+                    </div>
+                );
+            }
+
+            // Tampilan Akhir (Game Over)
+            if (gameState === 'gameover') {
+                return (
+                    <div className="flex flex-col items-center justify-center min-h-screen p-8 text-center">
+                        <div className="w-full max-w-5xl mb-4 flex justify-start">
+                            <a href="./index.html" className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-lg font-bold text-[#6b4c3a] shadow-lg">
+                                <span>←</span> Kembali ke Beranda
+                            </a>
+                        </div>
+                        <div className="bg-[#6b4c3a] text-white p-16 rounded-[3rem] shadow-2xl max-w-5xl w-full pop-in border-8 border-[#8b6b55]">
+                            <h1 className="text-6xl md:text-7xl font-black mb-6 text-yellow-400">PERMAINAN SELESAI!</h1>
+                            <p className="text-4xl mb-4">Skor Kelas Kalian:</p>
+                            <div className="text-[10rem] font-black text-yellow-400 mb-8 drop-shadow-2xl leading-none">
+                                {score}
+                            </div>
+                            <p className="text-3xl mb-12 text-[#f4ebd0] font-bold">
+                                {score >= 150 ? "LUAR BIASA! KELAS INI KOMPAK & CERDAS!" : 
+                                 score >= 100 ? "HEBAT! Kerjasama yang sangat bagus!" : 
+                                 "Tetap semangat! Ayo berlatih lagi bersama-sama!"}
+                            </p>
+                            <div className="flex flex-col md:flex-row gap-6 justify-center w-full">
+                                <button 
+                                    onClick={startGame}
+                                    className="bg-yellow-500 hover:bg-yellow-400 text-[#4a3b32] font-black text-3xl py-6 px-12 rounded-full shadow-[0_10px_0_0_#b7791f] transition-all transform active:translate-y-2 flex-1"
+                                >
+                                    MAIN LAGI
+                                </button>
+                                <button 
+                                    onClick={showMateri}
+                                    className="bg-[#8b6b55] hover:bg-[#a6866f] text-white font-black text-3xl py-6 px-12 rounded-full shadow-[0_10px_0_0_#5a3f2f] transition-all transform active:translate-y-2 flex-1"
+                                >
+                                    NONTON MATERI
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                );
+            }
+
+            // Tampilan Bermain - Dioptimalkan untuk proyektor (Layout Lebar & Teks Raksasa)
+            const currentQuestion = questions[currentIndex];
+
+            return (
+                <div className="flex flex-col min-h-screen p-6 max-w-[95%] mx-auto justify-center">
+                    {/* Header & Score */}
+                    <div className="w-full flex justify-between items-center bg-[#6b4c3a] text-white p-6 rounded-3xl shadow-lg mb-6 border-b-8 border-[#5a3f2f]">
+                        <div className="flex items-center gap-4 font-black text-3xl">
+                            <a href="./index.html" className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-lg font-bold text-white">
+                                <span>←</span> Beranda
+                            </a>
+                            <span className="transform scale-150 mr-2"><TentIcon /></span> SANDI A-Z
+                        </div>
+                        <div className="text-right flex items-center gap-8">
+                            <div className="text-2xl font-bold opacity-80 bg-black/20 px-6 py-2 rounded-full">Soal {currentIndex + 1} / {questions.length}</div>
+                            <div className="text-yellow-400 font-black text-4xl bg-black/30 px-6 py-2 rounded-full">SKOR: {score}</div>
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col lg:flex-row gap-6 mb-6">
+                        {/* Area Pertanyaan - Kiri/Atas */}
+                        <div className="flex-1 min-w-0 bg-[#8b6b55] p-6 md:p-10 rounded-[3rem] shadow-2xl relative overflow-hidden flex flex-col justify-center min-h-[40vh]">
+                            <div className="absolute top-0 right-0 opacity-10 transform translate-x-10 -translate-y-10 scale-[3]">
+                                <TentIcon />
+                            </div>
+                            
+                            <h2 className="text-center text-white/90 text-2xl md:text-3xl font-bold mb-6">Pecahkan kata sandi ini:</h2>
+                            <div className="text-center bg-white/10 p-4 md:p-8 rounded-[2rem] backdrop-blur-sm border-4 border-white/20 w-full">
+                                <h1 className="text-5xl md:text-6xl lg:text-[4rem] xl:text-[5.5rem] font-black text-white tracking-wider font-mono drop-shadow-2xl leading-tight break-all">
+                                    {currentQuestion.ciphertext}
+                                </h1>
+                            </div>
+                        </div>
+
+                        {/* Area Input - Kanan/Bawah */}
+                        <div className={`lg:w-[45%] shrink-0 min-w-0 bg-white p-6 md:p-8 rounded-[3rem] shadow-xl border-8 border-[#d0c0a0] flex flex-col justify-center ${isShaking ? 'shake' : ''}`}>
+                            <form onSubmit={handleSubmit} className="flex flex-col h-full justify-center w-full">
+                                <label className="block text-center font-black text-[#6b4c3a] mb-6 text-2xl md:text-3xl uppercase">Jawaban Kelas:</label>
+                                <input
+                                    ref={inputRef}
+                                    type="text"
+                                    value={userInput}
+                                    onChange={(e) => setUserInput(e.target.value.toUpperCase())}
+                                    disabled={showNext}
+                                    className="w-full text-center text-3xl lg:text-4xl p-4 border-8 border-[#e8dcc4] rounded-[2rem] mb-6 focus:outline-none focus:border-[#6b4c3a] font-black uppercase transition-all bg-[#fdfbf7]"
+                                    placeholder="..."
+                                    autoComplete="off"
+                                    spellCheck="false"
+                                />
+                                
+                                {/* Feedback Message */}
+                                {feedback && (
+                                    <div className={`p-6 rounded-2xl text-center font-black text-2xl mb-6 ${feedback.type === 'success' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'}`}>
+                                        {feedback.text}
+                                    </div>
+                                )}
+
+                                <div className="flex flex-col gap-4 mt-auto">
+                                    {!showNext ? (
+                                        <>
+                                            <button 
+                                                type="submit"
+                                                disabled={!userInput.trim()}
+                                                className={`w-full py-6 rounded-[2rem] font-black text-3xl text-white shadow-[0_8px_0_0_rgba(0,0,0,0.2)] transition-all ${
+                                                    !userInput.trim() 
+                                                    ? 'bg-gray-400 cursor-not-allowed shadow-none translate-y-2' 
+                                                    : 'bg-green-600 hover:bg-green-500 active:translate-y-2 active:shadow-none'
+                                                }`}
+                                            >
+                                                CEK JAWABAN
+                                            </button>
+                                            
+                                            <button 
+                                                type="button"
+                                                onClick={handleReveal}
+                                                className="w-full py-4 rounded-[2rem] font-bold text-xl text-[#6b4c3a] bg-[#e8dcc4] hover:bg-[#d0c0a0] transition-all"
+                                            >
+                                                Nyerah? Tampilkan Jawaban
+                                            </button>
+                                        </>
+                                    ) : (
+                                        <button 
+                                            type="button"
+                                            onClick={handleNextQuestion}
+                                            className="w-full py-6 rounded-[2rem] font-black text-3xl text-white bg-blue-600 hover:bg-blue-500 shadow-[0_8px_0_0_rgba(0,0,0,0.2)] transition-all active:translate-y-2 active:shadow-none animate-pulse"
+                                        >
+                                            LANJUT SOAL ➔
+                                        </button>
+                                    )}
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    {/* Kamus Sandi (Bantuan) - Memanjang di Bawah Khusus Proyektor */}
+                    <div className="w-full bg-white rounded-3xl p-6 shadow-xl border-4 border-[#d0c0a0]">
+                        <h3 className="font-black text-center text-[#6b4c3a] mb-4 text-2xl uppercase tracking-widest">KUNCI SANDI (KAMUS BANTUAN)</h3>
+                        <div className="flex flex-col items-center gap-2 font-mono bg-[#fdfbf7] p-6 rounded-2xl border-2 border-gray-100">
+                            {/* Baris Atas (A-M) */}
+                            <div className="flex w-full justify-between px-4 lg:px-12">
+                                {row1.map(char => (
+                                    <div key={char} className="text-3xl md:text-4xl lg:text-5xl font-black text-blue-700 w-12 text-center">{char}</div>
+                                ))}
+                            </div>
+                            {/* Garis Pemisah */}
+                            <div className="flex w-full justify-between px-4 lg:px-12 opacity-30 my-1">
+                                {row1.map((_, i) => (
+                                    <div key={i} className="text-2xl md:text-3xl font-bold text-gray-500 w-12 text-center">↕</div>
+                                ))}
+                            </div>
+                            {/* Baris Bawah (Z-N) */}
+                            <div className="flex w-full justify-between px-4 lg:px-12">
+                                {row2.map(char => (
+                                    <div key={char} className="text-3xl md:text-4xl lg:text-5xl font-black text-red-600 w-12 text-center">{char}</div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
