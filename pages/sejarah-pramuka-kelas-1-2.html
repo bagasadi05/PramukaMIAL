@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petualangan Sejarah Pramuka Kelas 1-2 SD (80 Menit)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Nunito', 'sans-serif'] },
+                    colors: {
+                        pramuka: {
+                            light: '#4ADE80', /* Hijau ceria (Green 400) */
+                            dark: '#14532D',  /* Hijau tua (Green 900) */
+                            accent: '#DCFCE7', /* Hijau sangat muda (Green 100) */
+                            red: '#E63946', 
+                            green: '#2A9D8F'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #F0FDF4; /* Latar belakang hijau paling muda */
+            background-image: radial-gradient(#86EFAC 1px, transparent 1px); /* Pola titik-titik hijau */
+            background-size: 20px 20px;
+        }
+        .float-anim { animation: floating 3s ease-in-out infinite; }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .flip-card {
+            background-color: transparent; width: 100%; height: 200px;
+            perspective: 1000px; cursor: pointer;
+        }
+        .flip-card-inner {
+            position: relative; width: 100%; height: 100%;
+            text-align: center; transition: transform 0.6s; transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back {
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden; border-radius: 1rem; display: flex;
+            flex-direction: column; align-items: center; justify-content: center;
+            padding: 1.5rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .flip-card-front { background-color: #4ADE80; color: #14532D; border: 4px dashed #14532D; }
+        .flip-card-back { background-color: #14532D; color: #DCFCE7; transform: rotateY(180deg); border: 4px solid #4ADE80; }
+        
+        .quiz-option { transition: all 0.2s; }
+        .quiz-option:hover { transform: scale(1.02); }
+        .quiz-option.correct { background-color: #2A9D8F; color: white; border-color: #2A9D8F; }
+        .quiz-option.wrong { background-color: #E63946; color: white; border-color: #E63946; }
+        
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .pop-in { animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        
+        /* Custom Scrollbar for Nav */
+        .nav-scroll::-webkit-scrollbar { height: 6px; }
+        .nav-scroll::-webkit-scrollbar-thumb { background: #4ADE80; border-radius: 10px; }
+    </style>
+</head>
+<body class="text-gray-800 min-h-screen pb-10">
+
+    <!-- Header -->
+    <header class="bg-pramuka-dark text-white pt-10 pb-16 px-4 rounded-b-[3rem] shadow-xl relative overflow-hidden">
+        <div class="max-w-4xl mx-auto mb-5 relative z-10">
+            <a href="../index.html" class="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm md:text-base font-bold text-white hover:bg-white/25 transition">
+                <i class="fas fa-arrow-left"></i>
+                Kembali ke Beranda
+            </a>
+        </div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-block bg-pramuka-accent text-pramuka-dark px-4 py-1 rounded-full font-bold text-xs md:text-sm mb-4 uppercase tracking-wider">
+                Modul Belajar Seru: 2 x 40 Menit
+            </div>
+            <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight">
+                Pramuka Itu <span class="text-yellow-400">Menyenangkan!</span> 🏕️
+            </h1>
+            <p class="text-lg md:text-xl font-semibold opacity-90 max-w-2xl mx-auto">
+                Halo adik-adik Kelas 1 dan 2 SD! Hari ini kita akan belajar dan bermain bersama tentang Pramuka. Kalian siap?
+            </p>
+        </div>
+        <i class="fas fa-campground absolute top-4 left-10 text-6xl opacity-10"></i>
+        <i class="fas fa-compass absolute bottom-4 right-10 text-8xl opacity-10"></i>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 -mt-8 relative z-20">
+        
+        <!-- Tab Navigasi (7 Tahap) -->
+        <div class="bg-white p-2 rounded-2xl md:rounded-full shadow-lg mb-8 overflow-hidden">
+            <div class="flex overflow-x-auto nav-scroll gap-2 pb-2 md:pb-0 md:justify-center">
+                <button onclick="switchTab('pemanasan')" id="tab-pemanasan" class="whitespace-nowrap flex-1 py-3 px-4 rounded-full font-bold text-sm transition-all bg-pramuka-dark text-white">
+                    <i class="fas fa-hand-paper mr-1"></i> Pengantar (10')
+                </button>
+                <button onclick="switchTab('dunia')" id="tab-dunia" class="whitespace-nowrap flex-1 py-3 px-4 rounded-full font-bold text-sm transition-all bg-transparent text-pramuka-dark hover:bg-pramuka-accent">
+                    <i class="fas fa-globe-americas mr-1"></i> Dunia (15')
+                </button>
+                <button onclick="switchTab('indonesia')" id="tab-indonesia" class="whitespace-nowrap flex-1 py-3 px-4 rounded-full font-bold text-sm transition-all bg-transparent text-pramuka-dark hover:bg-pramuka-accent">
+                    <i class="fas fa-flag mr-1"></i> Indonesia (15')
+                </button>
+                <button onclick="switchTab('video')" id="tab-video" class="whitespace-nowrap flex-1 py-3 px-4 rounded-full font-bold text-sm transition-all bg-transparent text-pramuka-dark hover:bg-pramuka-accent">
+                    <i class="fas fa-film mr-1"></i> Video (10')
+                </button>
+                <button onclick="switchTab('misi')" id="tab-misi" class="whitespace-nowrap flex-1 py-3 px-4 rounded-full font-bold text-sm transition-all bg-transparent text-pramuka-dark hover:bg-pramuka-accent">
+                    <i class="fas fa-paint-brush mr-1"></i> Aktivitas (10')
+                </button>
+                <button onclick="switchTab('icebreaking')" id="tab-icebreaking" class="whitespace-nowrap flex-1 py-3 px-4 rounded-full font-bold text-sm transition-all bg-transparent text-pramuka-dark hover:bg-pramuka-accent">
+                    <i class="fas fa-child mr-1"></i> Senam (10')
+                </button>
+                <button onclick="switchTab('kuis')" id="tab-kuis" class="whitespace-nowrap flex-1 py-3 px-4 rounded-full font-bold text-sm transition-all bg-transparent text-pramuka-dark hover:bg-pramuka-accent">
+                    <i class="fas fa-star mr-1"></i> Kuis (10')
+                </button>
+            </div>
+        </div>
+
+        <!-- TAHAP 1: PENGANTAR -->
+        <div id="content-pemanasan" class="space-y-8 block pop-in">
+            <div class="bg-white rounded-3xl p-8 shadow-xl border-4 border-pramuka-light text-center">
+                <i class="fas fa-handshake text-6xl text-pramuka-dark mb-4 float-anim"></i>
+                <h2 class="text-3xl font-black text-pramuka-dark mb-4">Salam Pramuka!</h2>
+                <p class="text-xl mb-6 max-w-2xl mx-auto font-semibold">
+                    Selamat datang adik-adik manis! Apakah kalian tahu apa itu Pramuka?
+                </p>
+                
+                <div class="mt-4 text-left max-w-2xl mx-auto bg-blue-50 p-6 rounded-2xl border-l-8 border-blue-400">
+                    <h4 class="font-bold text-2xl mb-2 text-blue-800">Pramuka Itu Hebat!</h4>
+                    <p class="text-xl">Pramuka singkatan dari <b>Praja Muda Karana</b>. Artinya adalah anak-anak yang suka berkarya dan berbuat baik. Anak Pramuka itu pintar, berani, dan selalu gembira! Hore!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAHAP 2: PRAMUKA DUNIA -->
+        <div id="content-dunia" class="space-y-8 hidden">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-b-8 border-pramuka-light flex flex-col md:flex-row items-center gap-6">
+                <div class="w-40 h-40 md:w-56 md:h-56 shrink-0 bg-pramuka-accent rounded-full border-8 border-pramuka-light float-anim overflow-hidden relative shadow-inner">
+                    <img src="../assets/images/baden-powell.jpg" alt="Baden-Powell" class="w-full h-full object-cover object-top" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="absolute inset-0 flex items-center justify-center bg-pramuka-accent" style="display:none;"><i class="fas fa-user-tie text-7xl text-pramuka-dark"></i></div>
+                </div>
+                <div>
+                    <div class="text-pramuka-light font-bold text-xl mb-1">Bapak Pramuka Sedunia</div>
+                    <h2 class="text-3xl font-black text-pramuka-dark mb-4">Bapak Baden-Powell</h2>
+                    <p class="text-xl leading-relaxed mb-4 font-semibold">
+                        Halo! Kenalkan, ini Bapak <b>Baden-Powell</b>. Beliau adalah orang pertama yang membuat Pramuka di seluruh dunia. Beliau sangat suka mengajak anak-anak bernyanyi dan berkemah di hutan!
+                    </p>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-2xl font-black text-center text-pramuka-dark mb-6">⛺ Klik Kartu untuk Belajar!</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front"><i class="fas fa-tent text-5xl mb-3"></i><h4 class="text-2xl font-bold">Suka Berkemah</h4><p class="text-sm mt-2 font-semibold">(Klik membalik)</p></div>
+                            <div class="flip-card-back"><h4 class="text-2xl font-bold mb-2">Pulau Brownsea</h4><p class="text-lg">Dulu Bapak Baden-Powell mengajak anak-anak kemah pertama kali di sebuah pulau!</p></div>
+                        </div>
+                    </div>
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front"><i class="fas fa-cake-candles text-5xl mb-3"></i><h4 class="text-2xl font-bold">Ulang Tahun</h4><p class="text-sm mt-2 font-semibold">(Klik membalik)</p></div>
+                            <div class="flip-card-back"><h4 class="text-2xl font-bold mb-2">22 Februari</h4><p class="text-lg">Hari lahir Bapak Baden-Powell dirayakan sebagai Hari Pramuka Sedunia.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAHAP 3: PRAMUKA INDONESIA -->
+        <div id="content-indonesia" class="space-y-8 hidden">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-b-8 border-red-500 flex flex-col md:flex-row items-center gap-6">
+                <div class="w-40 h-40 md:w-56 md:h-56 shrink-0 bg-red-100 rounded-full border-8 border-red-500 float-anim overflow-hidden relative shadow-inner">
+                    <img src="../assets/images/hamengkubuwono-ix.jpg" alt="Sri Sultan Hamengkubuwono IX" class="w-full h-full object-cover object-top" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="absolute inset-0 flex items-center justify-center bg-red-100" style="display:none;"><i class="fas fa-crown text-7xl text-red-600"></i></div>
+                </div>
+                <div>
+                    <div class="text-red-600 font-bold text-xl mb-1">Bapak Pramuka Indonesia</div>
+                    <h2 class="text-3xl font-black text-gray-800 mb-4">Bapak Sultan Hamengkubuwono IX</h2>
+                    <p class="text-xl leading-relaxed mb-4 font-semibold">
+                        Kalau di negara kita, Indonesia, Bapak Pramukanya adalah seorang Sultan yang sangat baik hati lho! Kita merayakan Hari Pramuka setiap tanggal <b>14 Agustus</b>.
+                    </p>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-2xl font-black text-center text-pramuka-dark mb-6">🇮🇩 Pramuka di Indonesia</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-color: white; border-color: #E63946; color: #E63946;"><i class="fas fa-seedling text-5xl mb-3"></i><h4 class="text-2xl font-bold">Lambang Pramuka</h4><p class="text-sm mt-2 font-semibold">(Klik membalik)</p></div>
+                            <div class="flip-card-back" style="background-color: #E63946; border-color: white;"><h4 class="text-2xl font-bold mb-2">Tunas Kelapa</h4><p class="text-lg">Artinya anak Pramuka itu harus kuat dan berguna seperti pohon kelapa!</p></div>
+                        </div>
+                    </div>
+                    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-color: white; border-color: #E63946; color: #E63946;"><i class="fas fa-tshirt text-5xl mb-3"></i><h4 class="text-2xl font-bold">Warna Baju</h4><p class="text-sm mt-2 font-semibold">(Klik membalik)</p></div>
+                            <div class="flip-card-back" style="background-color: #E63946; border-color: white;"><h4 class="text-2xl font-bold mb-2">Cokelat</h4><p class="text-lg">Baju seragam kita berwarna cokelat, seperti warna tanah di Indonesia.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAHAP SISIPAN: NONTON VIDEO BARENG -->
+        <div id="content-video" class="space-y-8 hidden">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-4 border-blue-500 text-center">
+                <i class="fas fa-tv text-6xl text-blue-500 mb-4 float-anim"></i>
+                <h2 class="text-3xl font-black text-pramuka-dark mb-4">Ayo Nonton Kartun Pramuka!</h2>
+                <p class="text-xl mb-6 max-w-2xl mx-auto font-semibold">
+                    Duduk yang rapi ya! Kita akan menonton cerita pendek tentang serunya Pramuka.
+                </p>
+                
+                <!-- Responsif Video Container -->
+                <div class="relative w-full max-w-3xl mx-auto overflow-hidden rounded-2xl shadow-lg border-4 border-pramuka-dark bg-gray-900" style="padding-top: 56.25%;">
+                    <iframe 
+                        class="absolute top-0 left-0 w-full h-full"
+                        src="https://www.youtube.com/embed/HYgh3DRHg7U?rel=0" 
+                        title="Sejarah Pramuka Dunia dan Indonesia" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAHAP 4: AKTIVITAS (Pengganti Misi Diskusi) -->
+        <div id="content-misi" class="space-y-8 hidden">
+            <div class="bg-white rounded-3xl p-8 shadow-xl border-4 border-green-500 text-center relative overflow-hidden">
+                <i class="fas fa-paint-brush text-6xl text-green-500 mb-4 float-anim relative z-10"></i>
+                <h2 class="text-3xl font-black text-pramuka-dark mb-4 relative z-10">Aktivitas Anak Ceria!</h2>
+                <p class="text-xl mb-6 max-w-xl mx-auto relative z-10 font-semibold">Ayo lakukan tugas seru ini bersama teman-teman di kelas!</p>
+                
+                <div class="bg-green-50 p-6 rounded-2xl border-l-8 border-green-400 text-left mb-8 relative z-10">
+                    <ol class="list-decimal list-inside text-xl space-y-4 text-gray-800 font-bold">
+                        <li class="bg-white p-3 rounded-xl shadow-sm">Berdiri bersama dan lakukan <b>Tepuk Pramuka 3 kali</b> dengan semangat! 👏</li>
+                        <li class="bg-white p-3 rounded-xl shadow-sm">Pegang baju temanmu. Sebutkan dengan lantang <b>warna seragam Pramuka</b>! 👕</li>
+                        <li class="bg-white p-3 rounded-xl shadow-sm">Ambil pensil dan bukumumu. Ayo kita <b>menggambar pohon kelapa</b> yang tinggi! 🌴</li>
+                    </ol>
+                </div>
+
+                <!-- Timer Interaktif -->
+                <div class="bg-gray-800 text-white p-6 rounded-3xl inline-block shadow-inner relative z-10">
+                    <div class="text-sm font-bold text-gray-400 mb-2 uppercase tracking-widest">Waktu Menggambar</div>
+                    <div id="timer-display" class="text-6xl font-black font-mono tracking-widest text-yellow-400">10:00</div>
+                    <div class="mt-4 flex justify-center gap-3">
+                        <button onclick="startTimer(10)" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg font-bold transition-colors"><i class="fas fa-play mr-2"></i>Mulai</button>
+                        <button onclick="stopTimer()" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg font-bold transition-colors"><i class="fas fa-stop mr-2"></i>Stop</button>
+                    </div>
+                </div>
+                
+                <i class="fas fa-star absolute -bottom-10 -right-10 text-[15rem] text-green-100 opacity-50"></i>
+            </div>
+        </div>
+
+        <!-- TAHAP 5: ICE BREAKING -->
+        <div id="content-icebreaking" class="space-y-8 hidden">
+            <div class="bg-white rounded-3xl p-8 shadow-xl border-4 border-yellow-500 text-center">
+                <i class="fas fa-child text-6xl text-yellow-500 mb-4 float-anim"></i>
+                <h2 class="text-3xl font-black text-pramuka-dark mb-4">Senam Ceria Kanan Kiri!</h2>
+                <p class="text-xl mb-6 max-w-2xl mx-auto font-semibold">
+                    Wah, gambar kalian bagus sekali! Ayo sekarang kita berdiri, ikuti gerakan di video ini. Berputar, jongkok, dan melompat bersama!
+                </p>
+                
+                <!-- Responsif Video Container -->
+                <div class="relative w-full max-w-3xl mx-auto overflow-hidden rounded-2xl shadow-lg border-4 border-pramuka-dark bg-gray-900" style="padding-top: 56.25%;">
+                    <iframe 
+                        class="absolute top-0 left-0 w-full h-full"
+                        src="https://www.youtube.com/embed/2x2lU7oVZ3s?rel=0" 
+                        title="ICE BREAKING SERU - KANAN KIRI" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAHAP 6: KUIS INTERAKTIF -->
+        <div id="content-kuis" class="mt-8 hidden">
+            <div class="bg-white rounded-3xl p-6 md:p-10 shadow-2xl border-4 border-pramuka-dark">
+                <div class="text-center mb-8">
+                    <i class="fas fa-star text-5xl text-yellow-500 mb-4 float-anim inline-block"></i>
+                    <h2 class="text-3xl font-black text-pramuka-dark">Kuis Bintang Pramuka!</h2>
+                    <p class="text-xl font-bold text-gray-600 mt-2">Pilih jawaban yang paling benar ya. Mudah sekali lho!</p>
+                </div>
+
+                <div id="quiz-container" class="max-w-xl mx-auto bg-pramuka-accent p-6 rounded-2xl">
+                    <!-- Pertanyaan 1 -->
+                    <div class="quiz-question mb-6" data-step="1">
+                        <h3 class="text-2xl font-bold mb-4 text-center">1. Siapa nama Bapak Pramuka Sedunia?</h3>
+                        <div class="space-y-4">
+                            <button class="quiz-option w-full text-center text-xl p-4 rounded-xl border-4 border-pramuka-light font-bold bg-white" onclick="checkAnswer(this, true, 1)">Bapak Baden-Powell</button>
+                            <button class="quiz-option w-full text-center text-xl p-4 rounded-xl border-4 border-pramuka-light font-bold bg-white" onclick="checkAnswer(this, false, 1)">Upin Ipin</button>
+                        </div>
+                    </div>
+                    <!-- Pertanyaan 2 -->
+                    <div class="quiz-question mb-6 hidden" data-step="2">
+                        <h3 class="text-2xl font-bold mb-4 text-center">2. Apa lambang Pramuka kita?</h3>
+                        <div class="space-y-4">
+                            <button class="quiz-option w-full text-center text-xl p-4 rounded-xl border-4 border-pramuka-light font-bold bg-white" onclick="checkAnswer(this, false, 2)">Bunga Mawar</button>
+                            <button class="quiz-option w-full text-center text-xl p-4 rounded-xl border-4 border-pramuka-light font-bold bg-white" onclick="checkAnswer(this, true, 2)">Tunas Kelapa</button>
+                        </div>
+                    </div>
+                    <!-- Pertanyaan 3 -->
+                    <div class="quiz-question mb-6 hidden" data-step="3">
+                        <h3 class="text-2xl font-bold mb-4 text-center">3. Apa warna baju seragam Pramuka?</h3>
+                        <div class="space-y-4">
+                            <button class="quiz-option w-full text-center text-xl p-4 rounded-xl border-4 border-pramuka-light font-bold bg-white" onclick="checkAnswer(this, true, 3)">Cokelat</button>
+                            <button class="quiz-option w-full text-center text-xl p-4 rounded-xl border-4 border-pramuka-light font-bold bg-white" onclick="checkAnswer(this, false, 3)">Merah Muda</button>
+                        </div>
+                    </div>
+
+                    <!-- Hasil Kuis -->
+                    <div id="quiz-result" class="hidden text-center py-6">
+                        <i class="fas fa-trophy text-8xl text-yellow-400 mb-4 float-anim"></i>
+                        <h3 class="text-4xl font-black text-pramuka-dark mb-2">HORE! Selesai!</h3>
+                        <p class="text-2xl font-bold text-gray-700 mt-4"></p>
+                        <button onclick="resetQuiz()" class="mt-8 bg-pramuka-dark text-white px-8 py-4 rounded-full font-bold text-xl hover:bg-pramuka-light transition-colors">
+                            <i class="fas fa-redo mr-2"></i> Main Lagi Yuk!
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Canvas Confetti -->
+    <canvas id="confetti-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-50 hidden"></canvas>
+
+    <script>
+        // Tab Navigation Logic (7 Tabs)
+        const tabs = ['pemanasan', 'dunia', 'indonesia', 'video', 'misi', 'icebreaking', 'kuis'];
+        
+        function switchTab(activeTab) {
+            tabs.forEach(tab => {
+                const btn = document.getElementById('tab-' + tab);
+                const content = document.getElementById('content-' + tab);
+                
+                if (tab === activeTab) {
+                    btn.classList.add('bg-pramuka-dark', 'text-white');
+                    btn.classList.remove('bg-transparent', 'text-pramuka-dark');
+                    content.classList.remove('hidden');
+                    content.classList.add('pop-in');
+                } else {
+                    btn.classList.remove('bg-pramuka-dark', 'text-white');
+                    btn.classList.add('bg-transparent', 'text-pramuka-dark');
+                    content.classList.add('hidden');
+                    content.classList.remove('pop-in');
+                }
+            });
+        }
+
+        // Timer Logic
+        let timerInterval;
+        let timeRemaining = 0;
+        
+        function startTimer(minutes) {
+            clearInterval(timerInterval);
+            timeRemaining = minutes * 60;
+            updateTimerDisplay();
+            
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    alert("WAKTU MENGGAMBAR HABIS! Mari kita lanjutkan.");
+                }
+            }, 1000);
+        }
+        
+        function stopTimer() {
+            clearInterval(timerInterval);
+            timeRemaining = 10 * 60; 
+            updateTimerDisplay();
+        }
+        
+        function updateTimerDisplay() {
+            const display = document.getElementById('timer-display');
+            let m = Math.floor(timeRemaining / 60);
+            let s = timeRemaining % 60;
+            display.innerText = `${m < 10 ? '0'+m : m}:${s < 10 ? '0'+s : s}`;
+        }
+
+        // Quiz Logic
+        let score = 0;
+        const totalQuestions = 3; // Diubah menjadi 3 soal untuk anak kelas 1-2
+        
+        function checkAnswer(button, isCorrect, step) {
+            const parent = button.parentElement;
+            const buttons = parent.querySelectorAll('button');
+            buttons.forEach(btn => btn.disabled = true);
+
+            if (isCorrect) {
+                button.classList.add('correct');
+                button.innerHTML += ' <i class="fas fa-check-circle float-right mt-1"></i>';
+                score++;
+            } else {
+                button.classList.add('wrong');
+                button.innerHTML += ' <i class="fas fa-times-circle float-right mt-1"></i>';
+                buttons.forEach(btn => {
+                    if (btn.getAttribute('onclick').includes('true')) btn.classList.add('correct');
+                });
+            }
+
+            setTimeout(() => {
+                document.querySelector(`[data-step="${step}"]`).classList.add('hidden');
+                if (step < totalQuestions) {
+                    const nextQ = document.querySelector(`[data-step="${step + 1}"]`);
+                    nextQ.classList.remove('hidden');
+                    nextQ.classList.add('pop-in');
+                } else {
+                    showResult();
+                }
+            }, 1500);
+        }
+
+        function showResult() {
+            const resultDiv = document.getElementById('quiz-result');
+            resultDiv.classList.remove('hidden');
+            resultDiv.classList.add('pop-in');
+            
+            const message = resultDiv.querySelector('p');
+            if (score === totalQuestions) {
+                message.innerHTML = `Wah, kamu pintar sekali! Betul semua (${score}/${totalQuestions}). Bintang lima untukmu! 🌟🌟🌟🌟🌟`;
+                startConfetti();
+            } else if (score >= 2) {
+                message.innerHTML = `Hebat! Kamu betul ${score} dari ${totalQuestions}. Sedikit lagi sempurna!`;
+            } else {
+                message.innerHTML = `Kamu betul ${score} dari ${totalQuestions}. Tidak apa-apa, kamu tetap anak yang hebat!`;
+            }
+        }
+
+        function resetQuiz() {
+            score = 0;
+            document.getElementById('quiz-result').classList.add('hidden');
+            stopConfetti();
+            
+            const buttons = document.querySelectorAll('.quiz-option');
+            buttons.forEach(btn => {
+                btn.disabled = false;
+                btn.className = 'quiz-option w-full text-center text-xl p-4 rounded-xl border-4 border-pramuka-light font-bold bg-white';
+                btn.innerHTML = btn.innerHTML.split(' <i')[0];
+            });
+
+            document.querySelector('[data-step="1"]').classList.remove('hidden');
+            document.querySelector('[data-step="1"]').classList.add('pop-in');
+        }
+
+        // Confetti Logic
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let animationId;
+
+        function startConfetti() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            canvas.classList.remove('hidden');
+            particles = [];
+            for (let i = 0; i < 100; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    size: Math.random() * 10 + 5,
+                    color: ['#E63946', '#2A9D8F', '#E9C46A', '#F4A261', '#D4A373'][Math.floor(Math.random() * 5)],
+                    speedY: Math.random() * 3 + 2,
+                    speedX: Math.random() * 2 - 1,
+                    rotation: Math.random() * 360,
+                    rotationSpeed: Math.random() * 10 - 5
+                });
+            }
+            animateConfetti();
+        }
+
+        function animateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.y += p.speedY; p.x += p.speedX; p.rotation += p.rotationSpeed;
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.rotation * Math.PI / 180);
+                ctx.fillStyle = p.color;
+                ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+                ctx.restore();
+                if (p.y > canvas.height) { p.y = -20; p.x = Math.random() * canvas.width; }
+            });
+            animationId = requestAnimationFrame(animateConfetti);
+        }
+
+        function stopConfetti() {
+            canvas.classList.add('hidden');
+            cancelAnimationFrame(animationId);
+        }
+
+        window.addEventListener('resize', () => {
+            if (!canvas.classList.contains('hidden')) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+        });
+    </script>
+</body>
+</html>

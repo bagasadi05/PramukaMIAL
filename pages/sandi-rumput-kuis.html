@@ -5,30 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kuis Sandi Rumput | Pramuka Kelas 5</title>
     <meta name="description" content="Kuis sandi rumput pramuka kelas 5 berisi 20 soal pilihan ganda.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         html { scroll-behavior: smooth; }
-        body { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+        body { font-family: "Manrope", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
         .quiz-radio:checked + label { background-color: #dcfce7; border-color: #22c55e; }
         .correct-answer { background-color: #bbf7d0 !important; border-color: #16a34a !important; }
         .wrong-answer { background-color: #fecaca !important; border-color: #dc2626 !important; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased pb-12">
-    <header class="bg-blue-700 text-white shadow-md sticky top-0 z-50">
+<body class="bg-[#e8fff2] text-slate-800 antialiased pb-12">
+    <header class="bg-[#0b3d2e] text-white shadow-md sticky top-0 z-50">
         <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
             <h1 class="text-2xl font-bold">Kuis Sandi Rumput</h1>
             <nav class="flex flex-wrap justify-center gap-3 text-sm font-bold">
-                <a href="./sandi-rumput.html" class="hover:text-blue-200 transition">Awal</a>
-                <a href="./sandi-rumput-materi.html" class="hover:text-blue-200 transition">Materi</a>
-                <a href="./index.html" class="bg-blue-800 px-3 py-1 rounded-full hover:bg-blue-900 transition">Beranda Portal</a>
+                <a href="./sandi-rumput.html" class="hover:text-emerald-200 transition">Awal</a>
+                <a href="./sandi-rumput-materi.html" class="hover:text-emerald-200 transition">Materi</a>
+                <a href="./kelas-6.html" class="hover:text-emerald-200 transition">Kelas 6</a>
+                <a href="../index.html" class="bg-[#fff0bf] px-3 py-1 rounded-lg text-[#0b3d2e] hover:bg-amber-200 transition">Beranda Portal</a>
             </nav>
         </div>
     </header>
 
     <main class="max-w-5xl mx-auto px-4 mt-8">
-        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-            <div class="bg-blue-600 px-6 py-4 flex justify-between items-center">
+        <section class="bg-white rounded-lg shadow-lg border border-emerald-950/10 overflow-hidden">
+            <div class="bg-[#0b3d2e] px-6 py-4 flex justify-between items-center">
                 <h2 class="text-xl font-bold text-white">Kuis Uji Pemahaman</h2>
                 <span class="bg-white text-blue-600 text-xs font-bold px-2 py-1 rounded">20 Soal</span>
             </div>
@@ -36,7 +40,7 @@
             <div class="p-6">
                 <div id="quiz-container" class="space-y-8"></div>
                 <div class="mt-8 pt-6 border-t border-slate-200 text-center">
-                    <button id="submitQuizBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:-translate-y-1">Cek Hasil Kuis</button>
+                    <button id="submitQuizBtn" class="bg-[#0b3d2e] hover:bg-[#0a2119] text-white font-bold py-3 px-8 rounded-lg shadow-lg transition transform hover:-translate-y-1">Cek Hasil Kuis</button>
                 </div>
 
                 <div id="quiz-result" class="hidden mt-6 p-6 rounded-xl border-2 text-center">

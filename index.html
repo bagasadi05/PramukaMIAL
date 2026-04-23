@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Materi Pramuka MI Al Irsyad Al Islamiyyah Kota Madiun</title>
-    <meta name="description" content="Portal materi pramuka digital MI Al Irsyad Al Islamiyyah Kota Madiun untuk pembelajaran sandi angka, sandi A-Z, dan sandi rumput.">
+    <meta name="description" content="Portal materi pramuka digital MI Al Irsyad Al Islamiyyah Kota Madiun dengan pilihan kelas 1-2, 3, 4, dan 5-6.">
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -16,69 +16,26 @@
             theme: {
                 extend: {
                     colors: {
-                        "on-secondary-container": "#745400",
-                        "background": "#e7fff3",
-                        "on-surface-variant": "#414845",
-                        "on-secondary-fixed": "#261900",
-                        "error": "#ba1a1a",
-                        "primary": "#00281e",
-                        "on-tertiary-fixed-variant": "#12503e",
-                        "on-tertiary": "#ffffff",
-                        "on-background": "#002117",
-                        "surface-container-high": "#c5f2df",
-                        "surface-container-highest": "#c0ecd9",
-                        "secondary-container": "#ffca5b",
-                        "on-surface": "#002117",
-                        "secondary-fixed": "#ffdea3",
-                        "secondary-fixed-dim": "#f2bf52",
-                        "secondary": "#7a5900",
-                        "inverse-primary": "#a4d0be",
-                        "outline": "#717974",
-                        "inverse-on-surface": "#cefbe7",
-                        "tertiary-fixed": "#b3efd6",
-                        "surface": "#e7fff3",
-                        "tertiary-fixed-dim": "#98d3ba",
-                        "error-container": "#ffdad6",
-                        "inverse-surface": "#0b372b",
-                        "surface-dim": "#b7e4d1",
-                        "on-error": "#ffffff",
-                        "on-tertiary-container": "#74ae97",
-                        "on-secondary": "#ffffff",
-                        "outline-variant": "#c0c8c3",
-                        "surface-bright": "#e7fff3",
-                        "surface-container-lowest": "#ffffff",
-                        "on-primary-fixed-variant": "#254e40",
-                        "on-primary-container": "#80aa99",
-                        "on-primary": "#ffffff",
-                        "on-secondary-fixed-variant": "#5d4200",
-                        "on-tertiary-fixed": "#002117",
-                        "tertiary-container": "#004130",
-                        "on-error-container": "#93000a",
-                        "tertiary": "#00291d",
-                        "primary-fixed-dim": "#a4d0be",
-                        "on-primary-fixed": "#002117",
-                        "primary-fixed": "#c0ecd9",
-                        "surface-variant": "#c0ecd9",
-                        "surface-tint": "#3e6657",
-                        "surface-container": "#cbf8e5",
-                        "primary-container": "#153f32",
-                        "surface-container-low": "#d0feea"
-                    },
-                    borderRadius: {
-                        DEFAULT: "0.25rem",
-                        lg: "0.5rem",
-                        xl: "0.75rem",
-                        "2xl": "1.5rem",
-                        full: "9999px"
+                        "ink": "#0a2119",
+                        "forest": "#0b3d2e",
+                        "leaf": "#1f7a57",
+                        "mint": "#e8fff2",
+                        "mist": "#d7f5e7",
+                        "gold": "#d8a73c",
+                        "gold-soft": "#fff0bf",
+                        "sky": "#dff1ff",
+                        "clay": "#f6eadc",
+                        "paper": "#fffdf7",
+                        "sage": "#c8dfcc",
+                        "terra": "#a76536"
                     },
                     fontFamily: {
-                        headline: ["Noto Serif"],
-                        body: ["Manrope"],
-                        label: ["Manrope"]
+                        headline: ["Noto Serif", "serif"],
+                        body: ["Manrope", "sans-serif"]
                     },
                     boxShadow: {
-                        ambient: "0 24px 48px rgba(0, 33, 23, 0.08)",
-                        float: "0 24px 60px rgba(0, 40, 30, 0.14)"
+                        lift: "0 24px 60px rgba(10, 33, 25, 0.14)",
+                        soft: "0 18px 44px rgba(10, 33, 25, 0.08)"
                     }
                 }
             }
@@ -86,264 +43,455 @@
     </script>
     <style>
         .material-symbols-outlined {
-            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
             display: inline-block;
             vertical-align: middle;
+            font-variation-settings: "FILL" 0, "wght" 500, "GRAD" 0, "opsz" 24;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
+            background: #edf6ec;
+            color: #0a2119;
             font-family: "Manrope", sans-serif;
-            background-color: #e7fff3;
-            color: #002117;
         }
 
         .font-serif {
             font-family: "Noto Serif", serif;
         }
 
-        .glass-panel {
-            background: rgba(231, 255, 243, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+        .site-header {
+            background: rgba(255, 253, 247, 0.94);
+            border-bottom: 1px solid rgba(11, 61, 46, 0.1);
+            color: #0b3d2e;
+            box-shadow: 0 16px 40px rgba(10, 33, 25, 0.08);
         }
 
-        .hero-grid {
-            background-image:
-                radial-gradient(circle at top right, rgba(255, 202, 91, 0.18), transparent 28%),
-                radial-gradient(circle at left bottom, rgba(164, 208, 190, 0.2), transparent 24%);
+        .site-nav-link {
+            color: rgba(11, 61, 46, 0.68);
+        }
+
+        .site-nav-link:hover,
+        .site-nav-link.active {
+            color: #a76536;
+        }
+
+        .hero-surface {
+            background:
+                linear-gradient(112deg, rgba(255, 253, 247, 0.96) 0%, rgba(237, 246, 236, 0.94) 42%, rgba(200, 223, 204, 0.82) 100%),
+                url("https://images.unsplash.com/photo-1517167685281-0f1e5b4d1f7f?auto=format&fit=crop&w=1800&q=85");
+            background-position: center;
+            background-size: cover;
+        }
+
+        .class-panel {
+            background:
+                linear-gradient(145deg, rgba(7, 49, 38, 0.98) 0%, rgba(11, 61, 46, 0.98) 56%, rgba(31, 122, 87, 0.9) 100%);
+            border: 1px solid rgba(255, 240, 191, 0.18);
+            box-shadow: 0 34px 90px rgba(10, 33, 25, 0.24);
+        }
+
+        .grade-card {
+            background: #fffdf7;
+            border: 1px solid rgba(11, 61, 46, 0.12);
+            min-height: 184px;
+            transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+        }
+
+        .grade-card:hover,
+        .grade-card:focus-visible,
+        .grade-card.active {
+            transform: translateY(-4px);
+            border-color: #d8a73c;
+            box-shadow: 0 24px 56px rgba(10, 33, 25, 0.2);
+        }
+
+        .grade-card.active {
+            background: linear-gradient(135deg, #fff0bf, #f8d66d);
+        }
+
+        .lesson-card {
+            transition: transform 180ms ease, opacity 180ms ease, box-shadow 180ms ease;
+        }
+
+        .lesson-card.is-hidden {
+            display: none;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-4px);
         }
     </style>
 </head>
-<body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col">
-    <header class="bg-emerald-950/70 backdrop-blur-xl shadow-sm shadow-emerald-950/20 sticky top-0 z-50">
-        <div class="flex justify-between items-center w-full px-6 py-4 max-w-screen-2xl mx-auto lg:px-8">
-            <div class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-2xl bg-secondary-container text-on-secondary-container flex items-center justify-center shadow-lg shadow-primary/10">
+<body class="min-h-screen bg-[#edf6ec] text-ink antialiased">
+    <header class="site-header sticky top-0 z-50 backdrop-blur-xl">
+        <div class="mx-auto flex w-full max-w-screen-2xl items-center justify-between gap-5 px-5 py-4 lg:px-8">
+            <a class="flex items-center gap-3" href="#beranda" aria-label="Kembali ke beranda">
+                <span class="flex h-11 w-11 items-center justify-center rounded-lg bg-forest text-gold-soft shadow-soft">
                     <span class="material-symbols-outlined">park</span>
-                </div>
-                <div>
-                    <div class="text-lg font-bold tracking-tight text-emerald-50 font-serif">MI Al Irsyad Scout Portal</div>
-                    <p class="text-xs text-emerald-100/70 tracking-[0.24em] uppercase font-semibold">Heritage Explorer</p>
-                </div>
-            </div>
-            <nav class="hidden md:flex items-center gap-8">
-                <a class="text-amber-400 border-b-2 border-amber-400 pb-1 text-sm font-medium" href="#beranda">Beranda</a>
-                <a class="text-emerald-100/80 hover:text-white transition-colors text-sm font-medium" href="#materi">Materi</a>
-                <a class="text-emerald-100/80 hover:text-white transition-colors text-sm font-medium" href="#panduan">Panduan</a>
+                </span>
+                <span>
+                    <span class="block font-serif text-lg font-bold leading-tight text-forest">MI Al Irsyad Scout Portal</span>
+                    <span class="block text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Kota Madiun</span>
+                </span>
+            </a>
+
+            <nav class="hidden items-center gap-7 text-sm font-bold md:flex">
+                <a class="site-nav-link active" href="#kelas">Kelas</a>
+                <a class="site-nav-link" href="#materi">Materi</a>
+                <a class="site-nav-link" href="#ringkasan">Ringkasan</a>
             </nav>
-            <div class="hidden sm:flex items-center gap-3 text-emerald-50">
-                <div class="px-4 py-2 rounded-full bg-white/10 text-xs uppercase tracking-[0.18em] font-bold">MI Al Irsyad Al Islamiyyah</div>
-            </div>
+
+            <a class="hidden rounded-lg bg-forest px-4 py-2 text-sm font-bold text-white shadow-soft transition hover:bg-ink sm:inline-flex" href="#materi">
+                Buka Modul
+            </a>
         </div>
     </header>
 
-    <main class="flex-grow">
-        <section class="relative overflow-hidden pt-16 pb-24 px-6 lg:px-16 hero-grid" id="beranda">
-            <div class="max-w-screen-2xl mx-auto flex flex-col lg:flex-row items-center gap-16">
-                <div class="flex-1 space-y-8">
-                    <div class="space-y-4">
-                        <span class="inline-block px-4 py-1 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold tracking-widest uppercase">Portal Resmi MI Al Irsyad</span>
-                        <h1 class="text-5xl lg:text-7xl font-serif font-bold text-primary leading-[1.08] max-w-5xl">
-                            Materi Pramuka <span class="text-secondary italic">MI Al Irsyad Al Islamiyyah</span> Kota Madiun
+    <main>
+        <section class="hero-surface relative overflow-hidden px-5 pb-16 pt-12 lg:px-8 lg:pb-24" id="beranda">
+            <div class="mx-auto grid max-w-screen-2xl items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+                <div class="space-y-8">
+                    <span class="inline-flex rounded-lg bg-white/90 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.18em] text-terra shadow-soft">Portal Materi Pramuka</span>
+                    <div class="space-y-6">
+                        <h1 class="max-w-4xl font-serif text-5xl font-bold leading-[1.03] text-forest md:text-6xl lg:text-7xl">
+                            Belajar sandi pramuka sesuai kelas
                         </h1>
-                        <p class="text-lg text-on-surface-variant max-w-2xl leading-relaxed">
-                            Beranda ini menjadi pusat materi kepramukaan digital yang lebih rapi, hangat, dan siap dipakai mengajar. Setiap modul disusun sebagai halaman mandiri agar pembina dapat langsung membuka materi yang dibutuhkan lewat browser, baik untuk proyektor kelas maupun latihan mandiri siswa.
+                        <p class="max-w-2xl text-xl leading-9 text-slate-700">
+                            Materi dibuat bertahap untuk kelas 1-2, 3, 4, dan 5-6 agar pembina dapat langsung membuka modul yang paling pas untuk kegiatan belajar.
                         </p>
                     </div>
 
-                    <div class="flex flex-wrap gap-4">
-                        <a class="px-8 py-4 rounded-xl bg-primary text-on-primary font-bold shadow-lg shadow-primary/10 hover:-translate-y-0.5 transition-all inline-flex items-center gap-2" href="#materi">
-                            Buka Materi
-                            <span class="material-symbols-outlined text-base">arrow_forward</span>
+                    <div class="flex flex-wrap gap-3">
+                        <a class="inline-flex items-center gap-2 rounded-lg bg-forest px-7 py-4 font-extrabold text-white shadow-lift transition hover:-translate-y-0.5 hover:bg-ink" href="#kelas">
+                            Pilih Kelas
+                            <span class="material-symbols-outlined text-lg">arrow_downward</span>
                         </a>
-                        <a class="px-8 py-4 rounded-xl bg-surface-container-high text-primary font-bold hover:bg-surface-container-highest transition-all inline-flex items-center gap-2" href="#panduan">
-                            Lihat Panduan
-                            <span class="material-symbols-outlined text-base">menu_book</span>
+                        <a class="inline-flex items-center gap-2 rounded-lg bg-white px-7 py-4 font-extrabold text-forest shadow-soft transition hover:-translate-y-0.5 hover:bg-gold-soft" href="#materi">
+                            Lihat Semua Materi
+                            <span class="material-symbols-outlined text-lg">auto_stories</span>
                         </a>
-                    </div>
-
-                    <div class="flex flex-wrap gap-4 pt-6">
-                        <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-surface-container-lowest shadow-ambient">
-                            <span class="material-symbols-outlined text-secondary" style="font-variation-settings:'FILL' 1">auto_stories</span>
-                            <div class="flex flex-col">
-                                <span class="text-xl font-bold text-primary">3</span>
-                                <span class="text-xs uppercase tracking-wider font-semibold text-on-surface-variant">Materi Aktif</span>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-surface-container-lowest shadow-ambient">
-                            <span class="material-symbols-outlined text-secondary" style="font-variation-settings:'FILL' 1">quiz</span>
-                            <div class="flex flex-col">
-                                <span class="text-xl font-bold text-primary">10</span>
-                                <span class="text-xs uppercase tracking-wider font-semibold text-on-surface-variant">Soal per Jenjang</span>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-surface-container-lowest shadow-ambient">
-                            <span class="material-symbols-outlined text-secondary" style="font-variation-settings:'FILL' 1">devices</span>
-                            <div class="flex flex-col">
-                                <span class="text-xl font-bold text-primary">100%</span>
-                                <span class="text-xs uppercase tracking-wider font-semibold text-on-surface-variant">Berbasis Browser</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
-                <div class="flex-1 relative w-full aspect-square max-w-[520px]">
-                    <div class="absolute inset-0 bg-primary-container rounded-[2.5rem] rotate-3 opacity-10"></div>
-                    <div class="absolute inset-0 overflow-hidden rounded-[2.5rem] shadow-float shadow-primary/20">
-                        <img alt="Kegiatan pramuka" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1517167685281-0f1e5b4d1f7f?auto=format&fit=crop&w=1200&q=80">
+                <div class="class-panel rounded-lg p-6 text-white md:p-8" id="kelas">
+                    <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                        <div>
+                            <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-gold">Halaman Awal</p>
+                            <h2 class="mt-2 font-serif text-3xl font-bold">Pilih kelas belajar</h2>
+                        </div>
+                        <p class="max-w-xs text-sm leading-6 text-emerald-50/75" id="selected-class-copy">
+                            Kelas 1-2 dipilih sebagai tampilan awal.
+                        </p>
                     </div>
-                    <div class="absolute -bottom-6 -left-6 glass-panel p-6 rounded-2xl shadow-float border border-white/40 max-w-[220px]">
-                        <span class="material-symbols-outlined text-secondary text-4xl mb-2" style="font-variation-settings:'FILL' 1">verified</span>
-                        <p class="text-sm font-bold text-primary">Ruang belajar yang siap dipakai untuk kelas, proyektor, dan hosting Netlify.</p>
+
+                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        <button class="grade-card active rounded-lg p-5 text-left text-ink" type="button" data-grade="1-2" aria-pressed="true">
+                            <span class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-sky text-forest">
+                                <span class="material-symbols-outlined">looks_one</span>
+                            </span>
+                            <span class="block text-2xl font-extrabold text-forest">Kelas 1-2</span>
+                            <span class="mt-2 block text-sm leading-6 text-slate-600">Sejarah Pramuka, Dwisatya, Dwidarma, dan pengenalan sandi angka sederhana.</span>
+                        </button>
+
+                        <button class="grade-card rounded-lg p-5 text-left text-ink" type="button" data-grade="3" aria-pressed="false">
+                            <span class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-gold-soft text-forest">
+                                <span class="material-symbols-outlined">looks_3</span>
+                            </span>
+                            <span class="block text-2xl font-extrabold text-forest">Kelas 3</span>
+                            <span class="mt-2 block text-sm leading-6 text-slate-600">Sejarah Pramuka, Dwisatya, Dwidarma, dan latihan sandi angka yang lebih menantang.</span>
+                        </button>
+
+                        <button class="grade-card rounded-lg p-5 text-left text-ink" type="button" data-grade="4" aria-pressed="false">
+                            <span class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-clay text-forest">
+                                <span class="material-symbols-outlined">looks_4</span>
+                            </span>
+                            <span class="block text-2xl font-extrabold text-forest">Kelas 4</span>
+                            <span class="mt-2 block text-sm leading-6 text-slate-600">Sejarah Pramuka, tokoh pendiri, dan pengenalan sandi A-Z.</span>
+                        </button>
+
+                        <button class="grade-card rounded-lg p-5 text-left text-ink" type="button" data-grade="5-6" aria-pressed="false">
+                            <span class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-mist text-forest">
+                                <span class="material-symbols-outlined">groups</span>
+                            </span>
+                            <span class="block text-2xl font-extrabold text-forest">Kelas 5-6</span>
+                            <span class="mt-2 block text-sm leading-6 text-slate-600">Sejarah Pramuka, sandi rumput, dan misi gabungan untuk latihan regu.</span>
+                        </button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="py-24 px-6 bg-surface-container-low lg:px-8" id="materi">
-            <div class="max-w-screen-2xl mx-auto">
-                <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-16">
-                    <div class="space-y-4">
-                        <h2 class="text-4xl font-serif font-bold text-primary">Pilih Materi</h2>
-                        <p class="text-on-surface-variant max-w-2xl">Akses modul pembelajaran teknik kepramukaan yang dirancang khusus untuk berbagai tingkatan usia. Masing-masing materi dibuka sebagai halaman mandiri agar mudah dikelola dan langsung siap diajarkan.</p>
+        <section class="bg-paper px-5 py-16 lg:px-8 lg:py-24" id="materi">
+            <div class="mx-auto max-w-screen-2xl">
+                <div class="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+                    <div>
+                        <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-leaf">Materi Terpilih</p>
+                        <h2 class="mt-3 font-serif text-4xl font-bold text-forest md:text-5xl" id="lesson-title">Rekomendasi untuk Kelas 1-2</h2>
+                        <p class="mt-4 max-w-2xl leading-7 text-slate-600" id="lesson-copy">
+                            Mulai dari sejarah Pramuka, Dwisatya, Dwidarma, sandi angka dasar, dan latihan singkat.
+                        </p>
                     </div>
-                    <div class="hidden md:flex gap-2">
-                        <div class="p-3 rounded-full bg-surface-container-lowest text-primary shadow-ambient">
-                            <span class="material-symbols-outlined">explore</span>
-                        </div>
-                        <div class="p-3 rounded-full bg-surface-container-lowest text-primary shadow-ambient">
-                            <span class="material-symbols-outlined">school</span>
-                        </div>
-                    </div>
+                    <button class="inline-flex w-fit items-center gap-2 rounded-lg bg-mist px-5 py-3 text-sm font-extrabold text-forest transition hover:bg-gold-soft" type="button" id="show-all-lessons">
+                        <span class="material-symbols-outlined text-lg">grid_view</span>
+                        Tampilkan Semua
+                    </button>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <article class="group bg-surface-container-lowest p-8 rounded-2xl shadow-ambient hover:shadow-float transition-all duration-300">
-                        <div class="w-16 h-16 rounded-2xl bg-primary-container flex items-center justify-center mb-6 text-on-primary group-hover:scale-110 transition-transform">
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+                    <article class="lesson-card rounded-lg bg-sky p-6 shadow-soft" data-levels="1-2" data-title="Sejarah Pramuka Kelas 1-2">
+                        <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-forest text-white">
+                            <span class="material-symbols-outlined text-3xl">history_edu</span>
+                        </div>
+                        <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-leaf">Kelas 1-2</p>
+                        <h3 class="mt-3 font-serif text-2xl font-bold text-forest">Sejarah Pramuka</h3>
+                        <p class="mt-4 min-h-24 text-sm leading-7 text-slate-600">Pengenalan sejarah Pramuka dengan foto Bapak Pramuka Dunia dan Bapak Pramuka Indonesia.</p>
+                        <a class="mt-7 inline-flex items-center gap-2 font-extrabold text-forest transition hover:gap-3" href="./pages/sejarah-pramuka-kelas-1-2.html">
+                            Buka Materi
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                        </a>
+                    </article>
+
+                    <article class="lesson-card rounded-lg bg-gold-soft p-6 shadow-soft" data-levels="1-2" data-title="Dwisatya dan Dwidarma">
+                        <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-forest text-white">
+                            <span class="material-symbols-outlined text-3xl">volunteer_activism</span>
+                        </div>
+                        <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-leaf">Kelas 1-2</p>
+                        <h3 class="mt-3 font-serif text-2xl font-bold text-forest">Dwisatya & Dwidarma</h3>
+                        <p class="mt-4 min-h-24 text-sm leading-7 text-slate-600">Materi kode kehormatan Pramuka Siaga dengan kartu interaktif, suara bacaan, dan kuis ringan.</p>
+                        <a class="mt-7 inline-flex items-center gap-2 font-extrabold text-forest transition hover:gap-3" href="./pages/dwi-satya-dwi-darma-kelas-1-2.html">
+                            Buka Materi
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                        </a>
+                    </article>
+
+                    <article class="lesson-card rounded-lg bg-mint p-6 shadow-soft" data-levels="1-2 3" data-title="Sandi Angka Dasar">
+                        <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-forest text-white">
                             <span class="material-symbols-outlined text-3xl">pin_invoke</span>
                         </div>
-                        <div class="space-y-3 mb-8">
-                            <h3 class="text-2xl font-serif font-bold text-primary">Sandi Angka</h3>
-                            <div class="flex items-center gap-2 text-on-surface-variant">
-                                <span class="material-symbols-outlined text-sm">video_library</span>
-                                <span class="text-sm font-medium">Video, petunjuk, dan latihan bertahap</span>
-                            </div>
-                            <p class="text-sm leading-7 text-on-surface-variant">Materi dasar sandi angka dengan pembagian soal berdasarkan Kelas 1, 2, dan 3 SD. Cocok untuk pengenalan awal dan pembiasaan membaca kode angka ke huruf.</p>
-                        </div>
-                        <div class="flex items-center justify-between pt-6">
-                            <div class="flex flex-col">
-                                <span class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Target</span>
-                                <span class="text-sm font-bold text-primary">Kelas 1-3 SD</span>
-                            </div>
-                            <a class="flex items-center gap-2 text-secondary font-bold hover:gap-3 transition-all" href="./sandi-angka.html">
-                                Buka Materi <span class="material-symbols-outlined">arrow_forward</span>
-                            </a>
-                        </div>
+                        <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-leaf">Kelas 1-3</p>
+                        <h3 class="mt-3 font-serif text-2xl font-bold text-forest">Sandi Angka</h3>
+                        <p class="mt-4 min-h-24 text-sm leading-7 text-slate-600">Modul interaktif untuk mengenal perubahan huruf menjadi angka, lengkap dengan pilihan latihan kelas 1, 2, dan 3.</p>
+                        <a class="mt-7 inline-flex items-center gap-2 font-extrabold text-forest transition hover:gap-3" href="./pages/sandi-angka.html">
+                            Buka Materi
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                        </a>
                     </article>
 
-                    <article class="group bg-surface-container-lowest p-8 rounded-2xl shadow-ambient hover:shadow-float transition-all duration-300">
-                        <div class="w-16 h-16 rounded-2xl bg-secondary-container flex items-center justify-center mb-6 text-on-secondary-container group-hover:scale-110 transition-transform">
+                    <article class="lesson-card rounded-lg bg-sky p-6 shadow-soft" data-levels="3" data-title="Sejarah Pramuka Kelas 3">
+                        <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-forest text-white">
+                            <span class="material-symbols-outlined text-3xl">travel_explore</span>
+                        </div>
+                        <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-leaf">Kelas 3</p>
+                        <h3 class="mt-3 font-serif text-2xl font-bold text-forest">Sejarah Pramuka</h3>
+                        <p class="mt-4 min-h-24 text-sm leading-7 text-slate-600">Petualangan sejarah Pramuka kelas 3 dengan tokoh dunia, tokoh Indonesia, dan kuis.</p>
+                        <a class="mt-7 inline-flex items-center gap-2 font-extrabold text-forest transition hover:gap-3" href="./pages/sejarah-pramuka-kelas-3.html">
+                            Buka Materi
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                        </a>
+                    </article>
+
+                    <article class="lesson-card rounded-lg bg-gold-soft p-6 shadow-soft" data-levels="3" data-title="Dwisatya dan Dwidarma Kelas 3">
+                        <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-forest text-white">
+                            <span class="material-symbols-outlined text-3xl">workspace_premium</span>
+                        </div>
+                        <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-leaf">Kelas 3</p>
+                        <h3 class="mt-3 font-serif text-2xl font-bold text-forest">Dwisatya & Dwidarma</h3>
+                        <p class="mt-4 min-h-24 text-sm leading-7 text-slate-600">Materi kode kehormatan Pramuka Siaga untuk kelas 3 dengan kartu hafalan, audio, dan kuis pemahaman.</p>
+                        <a class="mt-7 inline-flex items-center gap-2 font-extrabold text-forest transition hover:gap-3" href="./pages/dwi-satya-dwi-darma-kelas-3.html">
+                            Buka Materi
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                        </a>
+                    </article>
+
+                    <article class="lesson-card rounded-lg bg-sky p-6 shadow-soft" data-levels="4" data-title="Sandi A-Z Kelas 4">
+                        <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-gold text-forest">
                             <span class="material-symbols-outlined text-3xl">sort_by_alpha</span>
                         </div>
-                        <div class="space-y-3 mb-8">
-                            <h3 class="text-2xl font-serif font-bold text-primary">Sandi A-Z</h3>
-                            <div class="flex items-center gap-2 text-on-surface-variant">
-                                <span class="material-symbols-outlined text-sm">assignment</span>
-                                <span class="text-sm font-medium">Modul interaktif dan latihan respons kelas</span>
-                            </div>
-                            <p class="text-sm leading-7 text-on-surface-variant">Materi sandi huruf terbalik untuk melatih kejelian siswa mengenali pasangan alfabet. Sangat cocok untuk variasi setelah siswa memahami konsep sandi dasar.</p>
-                        </div>
-                        <div class="flex items-center justify-between pt-6">
-                            <div class="flex flex-col">
-                                <span class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Target</span>
-                                <span class="text-sm font-bold text-primary">Kelas 4-6 SD</span>
-                            </div>
-                            <a class="flex items-center gap-2 text-secondary font-bold hover:gap-3 transition-all" href="./sandi-a-z.html">
-                                Buka Materi <span class="material-symbols-outlined">arrow_forward</span>
-                            </a>
-                        </div>
+                        <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-leaf">Kelas 4</p>
+                        <h3 class="mt-3 font-serif text-2xl font-bold text-forest">Sandi A-Z</h3>
+                        <p class="mt-4 min-h-24 text-sm leading-7 text-slate-600">Materi khusus kelas 4 untuk mengenal pasangan alfabet A-Z sebelum masuk ke latihan interaktif.</p>
+                        <a class="mt-7 inline-flex items-center gap-2 font-extrabold text-forest transition hover:gap-3" href="./pages/kelas-4.html">
+                            Buka Materi
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                        </a>
                     </article>
 
-                    <article class="group bg-surface-container-lowest p-8 rounded-2xl shadow-ambient hover:shadow-float transition-all duration-300">
-                        <div class="w-16 h-16 rounded-2xl bg-tertiary-fixed flex items-center justify-center mb-6 text-on-tertiary-fixed group-hover:scale-110 transition-transform">
+                    <article class="lesson-card rounded-lg bg-gold-soft p-6 shadow-soft" data-levels="4" data-title="Sejarah Pramuka Kelas 4">
+                        <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-forest text-white">
+                            <span class="material-symbols-outlined text-3xl">history_edu</span>
+                        </div>
+                        <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-leaf">Kelas 4</p>
+                        <h3 class="mt-3 font-serif text-2xl font-bold text-forest">Sejarah Pramuka</h3>
+                        <p class="mt-4 min-h-24 text-sm leading-7 text-slate-600">Materi sejarah Pramuka dengan foto Bapak Pramuka Dunia dan Bapak Pramuka Indonesia.</p>
+                        <a class="mt-7 inline-flex items-center gap-2 font-extrabold text-forest transition hover:gap-3" href="./pages/sejarah-pramuka-kelas-4.html">
+                            Buka Materi
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                        </a>
+                    </article>
+
+                    <article class="lesson-card rounded-lg bg-sky p-6 shadow-soft" data-levels="5-6" data-title="Sejarah Pramuka Kelas 5-6">
+                        <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-forest text-white">
+                            <span class="material-symbols-outlined text-3xl">history_edu</span>
+                        </div>
+                        <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-leaf">Kelas 5-6</p>
+                        <h3 class="mt-3 font-serif text-2xl font-bold text-forest">Sejarah Pramuka</h3>
+                        <p class="mt-4 min-h-24 text-sm leading-7 text-slate-600">Materi sejarah Pramuka tingkat lanjut dengan timeline, diskusi regu, dan kuis pemahaman.</p>
+                        <a class="mt-7 inline-flex items-center gap-2 font-extrabold text-forest transition hover:gap-3" href="./pages/sejarah-pramuka-kelas-5-6.html">
+                            Buka Materi
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                        </a>
+                    </article>
+
+                    <article class="lesson-card rounded-lg bg-mist p-6 shadow-soft" data-levels="5-6" data-title="Misi Sandi Gabungan">
+                        <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-forest text-white">
+                            <span class="material-symbols-outlined text-3xl">hub</span>
+                        </div>
+                        <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-leaf">Kelas 6</p>
+                        <h3 class="mt-3 font-serif text-2xl font-bold text-forest">Misi Gabungan</h3>
+                        <p class="mt-4 min-h-24 text-sm leading-7 text-slate-600">Materi kelas 6 untuk menggabungkan sandi A-Z, morse, dan sandi rumput dalam tantangan regu.</p>
+                        <a class="mt-7 inline-flex items-center gap-2 font-extrabold text-forest transition hover:gap-3" href="./pages/kelas-6.html">
+                            Buka Materi
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                        </a>
+                    </article>
+
+                    <article class="lesson-card rounded-lg bg-clay p-6 shadow-soft" data-levels="5-6" data-title="Sandi Rumput">
+                        <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-leaf text-white">
                             <span class="material-symbols-outlined text-3xl">grass</span>
                         </div>
-                        <div class="space-y-3 mb-8">
-                            <h3 class="text-2xl font-serif font-bold text-primary">Sandi Rumput</h3>
-                            <div class="flex items-center gap-2 text-on-surface-variant">
-                                <span class="material-symbols-outlined text-sm">play_circle</span>
-                                <span class="text-sm font-medium">Video, tabel referensi, dan kuis 10 soal</span>
-                            </div>
-                            <p class="text-sm leading-7 text-on-surface-variant">Materi sandi rumput untuk kelas 5 yang mengenalkan bentuk morse sebagai rumput pendek dan rumput tinggi. Siswa dapat menonton video, mencatat tabel, lalu mengerjakan kuis.</p>
-                        </div>
-                        <div class="flex items-center justify-between pt-6">
-                            <div class="flex flex-col">
-                                <span class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Target</span>
-                                <span class="text-sm font-bold text-primary">Kelas 5 SD</span>
-                            </div>
-                            <a class="flex items-center gap-2 text-secondary font-bold hover:gap-3 transition-all" href="./sandi-rumput.html">
-                                Buka Materi <span class="material-symbols-outlined">arrow_forward</span>
-                            </a>
-                        </div>
+                        <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-leaf">Kelas 5-6</p>
+                        <h3 class="mt-3 font-serif text-2xl font-bold text-forest">Sandi Rumput</h3>
+                        <p class="mt-4 min-h-24 text-sm leading-7 text-slate-600">Pengenalan bentuk sandi rumput dari morse, dilengkapi halaman materi, tabel referensi, dan kuis latihan.</p>
+                        <a class="mt-7 inline-flex items-center gap-2 font-extrabold text-forest transition hover:gap-3" href="./pages/sandi-rumput.html">
+                            Buka Materi
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                        </a>
                     </article>
+
                 </div>
             </div>
         </section>
 
-        <section class="py-24 px-6 lg:px-8 bg-surface" id="panduan">
-            <div class="max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-[1.25fr_0.75fr] gap-8">
-                <div class="bg-surface-container-lowest rounded-2xl p-8 shadow-ambient">
-                    <span class="inline-flex px-4 py-1 rounded-full bg-surface-container-high text-primary text-xs font-bold tracking-[0.22em] uppercase">Panduan Penggunaan</span>
-                    <h2 class="text-4xl font-serif font-bold text-primary mt-5">Siap dipakai mengajar dengan alur yang sederhana</h2>
-                    <div class="mt-8 grid gap-5">
-                        <div class="bg-surface-container-low rounded-2xl p-5">
-                            <h3 class="font-bold text-primary text-lg">1. Mulai dari beranda</h3>
-                            <p class="text-on-surface-variant mt-2 leading-7">Gunakan halaman ini sebagai pintu masuk utama. Pembina tinggal memilih materi yang dibutuhkan sesuai tingkat kelas dan tujuan pembelajaran.</p>
-                        </div>
-                        <div class="bg-surface-container-low rounded-2xl p-5">
-                            <h3 class="font-bold text-primary text-lg">2. Buka modul materi</h3>
-                            <p class="text-on-surface-variant mt-2 leading-7">Setiap modul dibangun sebagai halaman tersendiri agar lebih stabil saat dibuka lewat browser, diproyeksikan di kelas, atau diunggah ke Netlify.</p>
-                        </div>
-                        <div class="bg-surface-container-low rounded-2xl p-5">
-                            <h3 class="font-bold text-primary text-lg">3. Lanjutkan latihan siswa</h3>
-                            <p class="text-on-surface-variant mt-2 leading-7">Siswa dapat menonton pengantar, mencatat petunjuk bila diperlukan, lalu masuk ke permainan soal yang sudah disesuaikan dengan jenjang kesulitannya.</p>
-                        </div>
-                    </div>
+        <section class="bg-mist px-5 py-16 lg:px-8 lg:py-24" id="ringkasan">
+            <div class="mx-auto grid max-w-screen-2xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+                <div class="rounded-lg bg-forest p-8 text-white shadow-lift">
+                    <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-gold">Alur Belajar</p>
+                    <h2 class="mt-4 font-serif text-4xl font-bold leading-tight">Materi dibuat bertingkat dan mudah dibuka dari browser.</h2>
+                    <p class="mt-5 leading-8 text-emerald-50/80">Setiap modul tetap menjadi halaman mandiri, sehingga bisa dipakai di laptop pembina, proyektor kelas, atau hosting statis seperti Netlify.</p>
                 </div>
 
-                <aside class="bg-primary-container text-white rounded-2xl p-8 shadow-float">
-                    <span class="inline-flex px-4 py-1 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold tracking-[0.22em] uppercase">Catatan Teknis</span>
-                    <h2 class="text-3xl font-serif font-bold mt-5">Struktur upload tetap sederhana</h2>
-                    <p class="mt-4 text-emerald-50/80 leading-7">Unggah seluruh isi folder ini ke Netlify agar beranda dan modul tetap saling terhubung dengan benar.</p>
-                    <div class="mt-8 space-y-4">
-                        <div class="glass-panel rounded-2xl p-4 border border-white/15">
-                            <p class="text-sm uppercase tracking-[0.18em] font-bold text-amber-300">Halaman Awal</p>
-                            <p class="mt-2 text-sm text-emerald-50/85">`index.html` sebagai beranda portal materi pramuka.</p>
-                        </div>
-                        <div class="glass-panel rounded-2xl p-4 border border-white/15">
-                            <p class="text-sm uppercase tracking-[0.18em] font-bold text-amber-300">Modul Inti</p>
-                            <p class="mt-2 text-sm text-emerald-50/85">`sandi-angka.html`, `sandi-a-z.html`, dan `sandi-rumput.html` sebagai halaman materi mandiri.</p>
-                        </div>
-                        <div class="glass-panel rounded-2xl p-4 border border-white/15">
-                            <p class="text-sm uppercase tracking-[0.18em] font-bold text-amber-300">Asset</p>
-                            <p class="mt-2 text-sm text-emerald-50/85">Folder `assets` tetap dipakai oleh modul Sandi Angka untuk style dan script.</p>
-                        </div>
+                <div class="grid gap-4 sm:grid-cols-2">
+                    <div class="rounded-lg bg-paper p-6 shadow-soft">
+                        <span class="material-symbols-outlined text-3xl text-leaf">looks_one</span>
+                        <h3 class="mt-4 text-xl font-extrabold text-forest">Kelas 1-2</h3>
+                        <p class="mt-2 text-sm leading-7 text-slate-600">Sejarah Pramuka, Dwisatya, Dwidarma, dan sandi angka dasar.</p>
                     </div>
-                </aside>
+                    <div class="rounded-lg bg-paper p-6 shadow-soft">
+                        <span class="material-symbols-outlined text-3xl text-leaf">looks_3</span>
+                        <h3 class="mt-4 text-xl font-extrabold text-forest">Kelas 3</h3>
+                        <p class="mt-2 text-sm leading-7 text-slate-600">Sejarah Pramuka, Dwisatya, Dwidarma, dan sandi angka dengan frasa pramuka.</p>
+                    </div>
+                    <div class="rounded-lg bg-paper p-6 shadow-soft">
+                        <span class="material-symbols-outlined text-3xl text-leaf">looks_4</span>
+                        <h3 class="mt-4 text-xl font-extrabold text-forest">Kelas 4</h3>
+                        <p class="mt-2 text-sm leading-7 text-slate-600">Sejarah Pramuka dan sandi A-Z untuk latihan alfabet.</p>
+                    </div>
+                    <div class="rounded-lg bg-paper p-6 shadow-soft">
+                        <span class="material-symbols-outlined text-3xl text-leaf">groups</span>
+                        <h3 class="mt-4 text-xl font-extrabold text-forest">Kelas 5-6</h3>
+                        <p class="mt-2 text-sm leading-7 text-slate-600">Sejarah Pramuka, sandi A-Z, dan sandi rumput lanjutan.</p>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
-    <footer class="bg-emerald-950 text-emerald-100 w-full py-12 px-6 flex flex-col items-center gap-6 border-t border-emerald-900/30">
-        <div class="text-lg font-serif text-amber-500">MI Al Irsyad Scout Portal</div>
-        <div class="flex flex-wrap justify-center gap-8 text-xs font-semibold uppercase tracking-wider">
-            <a class="text-emerald-300/60 hover:text-amber-300 transition-colors" href="#beranda">Beranda</a>
-            <a class="text-emerald-300/60 hover:text-amber-300 transition-colors" href="#materi">Materi</a>
-            <a class="text-emerald-300/60 hover:text-amber-300 transition-colors" href="#panduan">Panduan</a>
-        </div>
-        <div class="max-w-xl text-center opacity-80 hover:opacity-100 transition-opacity">
-            <p class="text-sm font-medium uppercase tracking-tighter">Materi Pramuka MI Al Irsyad Al Islamiyyah Kota Madiun. Memandu dengan tradisi, belajar dengan inovasi.</p>
+    <footer class="bg-forest px-5 py-10 text-center text-emerald-50 lg:px-8">
+        <div class="mx-auto flex max-w-screen-2xl flex-col items-center gap-5">
+            <p class="font-serif text-xl font-bold text-gold">MI Al Irsyad Scout Portal</p>
+            <div class="flex flex-wrap justify-center gap-6 text-xs font-bold uppercase tracking-[0.18em]">
+                <a class="text-emerald-100/70 hover:text-white" href="#beranda">Beranda</a>
+                <a class="text-emerald-100/70 hover:text-white" href="#kelas">Kelas</a>
+                <a class="text-emerald-100/70 hover:text-white" href="#materi">Materi</a>
+                <a class="text-emerald-100/70 hover:text-white" href="#ringkasan">Ringkasan</a>
+            </div>
+            <p class="max-w-2xl text-sm leading-7 text-emerald-50/75">Materi Pramuka MI Al Irsyad Al Islamiyyah Kota Madiun.</p>
         </div>
     </footer>
+
+    <script>
+        const gradeProfiles = {
+            "1-2": {
+                title: "Rekomendasi untuk Kelas 1-2",
+                copy: "Mulai dari sejarah Pramuka, Dwisatya, Dwidarma, sandi angka dasar, dan latihan singkat.",
+                selected: "Kelas 1-2 dipilih sebagai tampilan awal."
+            },
+            "3": {
+                title: "Rekomendasi untuk Kelas 3",
+                copy: "Pelajari sejarah Pramuka, Dwisatya, Dwidarma, lalu lanjutkan sandi angka dengan frasa yang lebih panjang.",
+                selected: "Kelas 3 siap dengan sejarah Pramuka, kode kehormatan, dan latihan sandi angka lanjutan."
+            },
+            "4": {
+                title: "Rekomendasi untuk Kelas 4",
+                copy: "Mulai dari sejarah Pramuka dan tokoh pendiri, lalu masuk ke sandi A-Z.",
+                selected: "Kelas 4 diarahkan ke sejarah Pramuka dan materi sandi A-Z."
+            },
+            "5-6": {
+                title: "Rekomendasi untuk Kelas 5-6",
+                copy: "Pakai materi sejarah Pramuka, sandi rumput, dan misi gabungan untuk latihan regu.",
+                selected: "Kelas 5-6 mendapatkan materi sejarah dan latihan lanjutan."
+            }
+        };
+
+        const gradeButtons = document.querySelectorAll(".grade-card");
+        const lessonCards = document.querySelectorAll(".lesson-card");
+        const lessonTitle = document.getElementById("lesson-title");
+        const lessonCopy = document.getElementById("lesson-copy");
+        const selectedClassCopy = document.getElementById("selected-class-copy");
+        const showAllLessons = document.getElementById("show-all-lessons");
+
+        function setActiveGrade(grade) {
+            const profile = gradeProfiles[grade];
+
+            gradeButtons.forEach((button) => {
+                const isActive = button.dataset.grade === grade;
+                button.classList.toggle("active", isActive);
+                button.setAttribute("aria-pressed", String(isActive));
+            });
+
+            lessonCards.forEach((card) => {
+                const levels = card.dataset.levels.split(" ");
+                card.classList.toggle("is-hidden", !levels.includes(grade));
+            });
+
+            lessonTitle.textContent = profile.title;
+            lessonCopy.textContent = profile.copy;
+            selectedClassCopy.textContent = profile.selected;
+        }
+
+        gradeButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                setActiveGrade(button.dataset.grade);
+                document.getElementById("materi").scrollIntoView({ behavior: "smooth", block: "start" });
+            });
+        });
+
+        showAllLessons.addEventListener("click", () => {
+            gradeButtons.forEach((button) => {
+                button.classList.remove("active");
+                button.setAttribute("aria-pressed", "false");
+            });
+
+            lessonCards.forEach((card) => card.classList.remove("is-hidden"));
+            lessonTitle.textContent = "Semua Materi Pramuka";
+            lessonCopy.textContent = "Seluruh modul ditampilkan agar pembina bebas memilih urutan kegiatan.";
+            selectedClassCopy.textContent = "Semua materi sedang ditampilkan.";
+        });
+
+        setActiveGrade("1-2");
+    </script>
 </body>
 </html>

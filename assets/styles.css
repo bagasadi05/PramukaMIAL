@@ -1,8 +1,9 @@
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #e2e8f0;
-    background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+    font-family: 'Manrope', 'Poppins', sans-serif;
+    background-color: #e8fff2;
+    background-image: radial-gradient(rgba(31, 122, 87, 0.16) 1px, transparent 1px);
     background-size: 20px 20px;
+    color: #0a2119;
 }
 
 .flip-card {

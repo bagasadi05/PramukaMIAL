@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi Pramuka Siaga - Kode Kehormatan</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        siaga: {
+                            light: '#a7f3d0', // Emerald 200
+                            DEFAULT: '#10b981', // Emerald 500
+                            dark: '#047857', // Emerald 700
+                        },
+                        pramuka: {
+                            light: '#d97706', // Amber 600
+                            DEFAULT: '#92400e', // Amber 900
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Fredoka', 'sans-serif'],
+                        body: ['Nunito', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #f0fdf4;
+            background-image: radial-gradient(#10b981 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-attachment: fixed;
+        }
+
+        /* 3D Flip Card CSS */
+        .perspective {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+        .flip-card.flipped .transform-style-3d {
+            transform: rotateY(180deg);
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Confetti Animation */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #fcd34d;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); }
+        }
+    </style>
+</head>
+<body class="font-body text-gray-800 antialiased min-h-screen flex flex-col relative overflow-x-hidden">
+
+    <!-- Header -->
+    <header class="bg-siaga-dark text-white py-6 shadow-lg relative z-10 rounded-b-3xl border-b-8 border-pramuka">
+        <div class="container mx-auto px-4 mb-5">
+            <a href="../index.html" class="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm md:text-base font-bold text-white hover:bg-white/25 transition">
+                <i class="fa-solid fa-arrow-left"></i>
+                Kembali ke Beranda
+            </a>
+        </div>
+        <div class="container mx-auto px-4 flex items-center justify-center gap-4">
+            <div class="bg-white p-2 rounded-full shadow-md animate-float">
+                <i class="fa-solid fa-campground text-3xl text-siaga-dark"></i>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-heading font-bold text-center tracking-wide text-white drop-shadow-md">
+                Pramuka Siaga
+            </h1>
+            <div class="bg-white p-2 rounded-full shadow-md animate-float" style="animation-delay: 1.5s;">
+                <i class="fa-solid fa-leaf text-3xl text-siaga-dark"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 flex-grow max-w-5xl z-10">
+        
+        <!-- Intro Section -->
+        <div class="bg-white rounded-3xl shadow-xl p-6 md:p-10 mb-10 text-center border-t-4 border-siaga border-b-4 relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-4 opacity-10"><i class="fa-solid fa-sun text-9xl"></i></div>
+            <h2 class="text-3xl md:text-4xl font-heading font-bold text-pramuka mb-4 relative z-10">Kode Kehormatan</h2>
+            <p class="text-lg md:text-xl text-gray-600 font-medium max-w-3xl mx-auto relative z-10">
+                Ini adalah fondasi utama yang wajib dihafal dan diamalkan oleh setiap anggota Siaga. Klik kartu di bawah ini untuk melihat selengkapnya!
+            </p>
+        </div>
+
+        <!-- Flip Cards Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            
+            <!-- Card 1: Dwisatya -->
+            <div class="flip-card perspective w-full h-[450px] md:h-[400px] cursor-pointer group" onclick="toggleFlip(this)">
+                <div class="transform-style-3d relative w-full h-full shadow-2xl rounded-3xl">
+                    
+                    <!-- Front Side -->
+                    <div class="backface-hidden absolute w-full h-full bg-gradient-to-br from-siaga to-siaga-dark rounded-3xl flex flex-col items-center justify-center p-6 text-white border-4 border-white">
+                        <i class="fa-solid fa-hand-sparkles text-7xl mb-6 animate-pulse"></i>
+                        <h3 class="text-4xl font-heading font-bold tracking-widest mb-2">Dwisatya</h3>
+                        <p class="text-lg text-siaga-light font-bold bg-black/20 px-4 py-2 rounded-full">Janji Pramuka Siaga</p>
+                        <p class="mt-8 text-sm opacity-80 animate-bounce"><i class="fa-solid fa-hand-pointer mr-2"></i>Klik untuk membuka</p>
+                    </div>
+
+                    <!-- Back Side -->
+                    <div class="backface-hidden rotate-y-180 absolute w-full h-full bg-white rounded-3xl flex flex-col p-6 md:p-8 border-4 border-siaga overflow-y-auto">
+                        <div class="flex justify-between items-center mb-4 border-b-2 border-siaga-light pb-2">
+                            <h3 class="text-3xl font-heading font-bold text-siaga-dark">Dwisatya</h3>
+                            <button onclick="speakText('Demi kehormatanku aku berjanji akan bersungguh-sungguh: satu, Menjalankan kewajibanku terhadap Tuhan Yang Maha Esa, Negara Kesatuan Republik Indonesia dan menurut aturan keluarga. dua, Setiap hari berbuat kebaikan.', event)" class="bg-yellow-400 hover:bg-yellow-500 text-pramuka-dark w-10 h-10 rounded-full flex items-center justify-center shadow transition-transform transform hover:scale-110" title="Bacakan">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </button>
+                        </div>
+                        <div class="text-gray-700 text-base md:text-lg space-y-3 font-medium flex-grow">
+                            <p class="italic text-pramuka font-bold">"Demi kehormatanku aku berjanji akan bersungguh-sungguh:"</p>
+                            <ol class="list-decimal pl-5 space-y-2">
+                                <li>Menjalankan kewajibanku terhadap Tuhan Yang Maha Esa, Negara Kesatuan Republik Indonesia dan menurut aturan keluarga.</li>
+                                <li>Setiap hari berbuat kebaikan.</li>
+                            </ol>
+                        </div>
+                        <div class="mt-4 bg-siaga-light/30 p-3 rounded-xl border border-siaga-light">
+                            <p class="text-sm md:text-base font-bold text-siaga-dark">
+                                <i class="fa-solid fa-lightbulb text-yellow-500 mr-2"></i>Makna:
+                            </p>
+                            <p class="text-sm text-gray-700">Selalu berbakti pada orang tua, agama, dan negara.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Dwidarma -->
+            <div class="flip-card perspective w-full h-[450px] md:h-[400px] cursor-pointer group" onclick="toggleFlip(this)">
+                <div class="transform-style-3d relative w-full h-full shadow-2xl rounded-3xl">
+                    
+                    <!-- Front Side -->
+                    <div class="backface-hidden absolute w-full h-full bg-gradient-to-br from-pramuka-light to-pramuka rounded-3xl flex flex-col items-center justify-center p-6 text-white border-4 border-white">
+                        <i class="fa-solid fa-shield-heart text-7xl mb-6 animate-pulse"></i>
+                        <h3 class="text-4xl font-heading font-bold tracking-widest mb-2">Dwidarma</h3>
+                        <p class="text-lg text-yellow-200 font-bold bg-black/20 px-4 py-2 rounded-full">Ketentuan Moral Siaga</p>
+                        <p class="mt-8 text-sm opacity-80 animate-bounce"><i class="fa-solid fa-hand-pointer mr-2"></i>Klik untuk membuka</p>
+                    </div>
+
+                    <!-- Back Side -->
+                    <div class="backface-hidden rotate-y-180 absolute w-full h-full bg-white rounded-3xl flex flex-col p-6 md:p-8 border-4 border-pramuka overflow-y-auto">
+                        <div class="flex justify-between items-center mb-4 border-b-2 border-orange-200 pb-2">
+                            <h3 class="text-3xl font-heading font-bold text-pramuka">Dwidarma</h3>
+                            <button onclick="speakText('Satu, Siaga berbakti pada ayah dan ibundanya. Dua, Siaga berani dan tidak putus asa.', event)" class="bg-yellow-400 hover:bg-yellow-500 text-pramuka-dark w-10 h-10 rounded-full flex items-center justify-center shadow transition-transform transform hover:scale-110" title="Bacakan">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </button>
+                        </div>
+                        <div class="text-gray-700 text-base md:text-lg space-y-4 font-medium flex-grow pt-2">
+                            <ol class="list-decimal pl-5 space-y-4">
+                                <li class="pl-2">Siaga berbakti pada ayah dan ibundanya.</li>
+                                <li class="pl-2">Siaga berani dan tidak putus asa.</li>
+                            </ol>
+                        </div>
+                        <div class="mt-4 bg-orange-50 p-3 rounded-xl border border-orange-200">
+                            <p class="text-sm md:text-base font-bold text-pramuka">
+                                <i class="fa-solid fa-heart text-red-500 mr-2"></i>Inti Sikap Siaga:
+                            </p>
+                            <p class="text-sm text-gray-700">Berbakti, tangguh, berani, dan selalu semangat dalam menghadapi tantangan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Ice Breaking Section -->
+        <section class="bg-white rounded-3xl shadow-xl p-6 md:p-10 mb-10 border-t-8 border-yellow-400 relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-5 opacity-10">
+                <i class="fa-solid fa-music text-9xl text-pramuka"></i>
+            </div>
+            <div class="relative z-10 text-center">
+                <div class="inline-flex items-center gap-2 bg-yellow-400 text-pramuka font-heading font-bold text-xl py-2 px-6 rounded-full shadow-lg border-4 border-white mb-6">
+                    <i class="fa-solid fa-face-laugh-beam"></i>
+                    Ice Breaking
+                </div>
+                <h3 class="text-3xl md:text-4xl font-heading font-bold text-siaga-dark mb-4">Ayo bergerak sebentar!</h3>
+                <p class="text-lg text-gray-600 font-medium max-w-3xl mx-auto mb-6">
+                    Setelah membaca Dwisatya dan Dwidarma, ajak adik-adik bergerak mengikuti video ini agar suasana belajar kembali segar.
+                </p>
+                <div class="relative w-full overflow-hidden rounded-3xl bg-gray-900 shadow-2xl border-4 border-siaga-light" style="padding-top: 56.25%;">
+                    <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/mWpFwlH3338" title="Ice Breaking Kelas 1-2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <div id="quiz-section" class="bg-white rounded-3xl shadow-xl p-6 md:p-10 border-t-8 border-siaga relative">
+            <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-pramuka font-heading font-bold text-xl py-2 px-6 rounded-full shadow-lg border-4 border-white z-20 whitespace-nowrap">
+                <i class="fa-solid fa-gamepad mr-2"></i> Mari Berlatih!
+            </div>
+            
+            <div id="quiz-container" class="mt-4 text-center">
+                <h3 id="question-text" class="text-2xl md:text-3xl font-heading font-bold text-gray-800 mb-8 min-h-[80px] flex items-center justify-center">
+                    Pertanyaan akan muncul di sini...
+                </h3>
+                
+                <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
+                    <!-- Buttons will be injected via JS -->
+                </div>
+
+                <div id="quiz-progress" class="mt-8 flex justify-center gap-2">
+                    <!-- Progress dots -->
+                </div>
+            </div>
+
+            <!-- Quiz Result -->
+            <div id="quiz-result" class="hidden text-center mt-4">
+                <i class="fa-solid fa-star text-8xl text-yellow-400 mb-4 animate-bounce"></i>
+                <h3 class="text-3xl md:text-4xl font-heading font-bold text-siaga-dark mb-2">Pintar Sekali!</h3>
+                <p class="text-lg text-gray-600 mb-6">Adik-adik sudah hafal Kode Kehormatan Pramuka Siaga. Terus jadi anak baik, ya!</p>
+                <button onclick="resetQuiz()" class="bg-siaga hover:bg-siaga-dark text-white font-bold py-3 px-8 rounded-full shadow-lg transition-transform hover:scale-105">
+                    <i class="fa-solid fa-rotate-right mr-2"></i>Main Lagi Yuk!
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Custom Modal/Alert -->
+    <div id="custom-alert" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl transform scale-90 transition-transform duration-300" id="alert-box">
+            <div id="alert-icon" class="text-6xl mb-4"></div>
+            <h3 id="alert-title" class="text-2xl font-heading font-bold mb-2">Title</h3>
+            <p id="alert-message" class="text-gray-600 mb-6 font-body">Message</p>
+            <button onclick="closeAlert()" class="bg-siaga hover:bg-siaga-dark text-white font-bold py-2 px-6 rounded-full w-full">
+                Lanjut
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-400 text-center py-4 mt-8">
+        <p class="font-body text-sm">Satyaku Kudarmakan, Darmaku Kubaktikan - Pramuka Siaga</p>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- FLIP CARD LOGIC ---
+        function toggleFlip(element) {
+            element.classList.toggle('flipped');
+        }
+
+        // --- TEXT TO SPEECH ---
+        function speakText(text, event) {
+            // Prevent flipping the card when clicking the audio button
+            event.stopPropagation();
+            
+            if ('speechSynthesis' in window) {
+                // Cancel any ongoing speech
+                window.speechSynthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'id-ID'; // Indonesian
+                utterance.rate = 0.9; // Slightly slower for clarity
+                utterance.pitch = 1.1; // Slightly higher pitch for friendly tone
+                
+                window.speechSynthesis.speak(utterance);
+            } else {
+                showAlert('Maaf', 'Browser kamu tidak mendukung fitur suara.', 'error');
+            }
+        }
+
+        // Stop speech when leaving page
+        window.onbeforeunload = function() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+        };
+
+        // --- QUIZ LOGIC ---
+        const questions = [
+            {
+                question: "Pramuka Siaga yang baik selalu sayang dan berbakti kepada...",
+                options: ["Mainannya", "Ayah dan Ibu", "Televisi", "Kasur"],
+                answer: 1
+            },
+            {
+                question: "Sesuai Dwisatya, setiap hari Pramuka Siaga berjanji untuk selalu berbuat...",
+                options: ["Nakal", "Menangis", "Kebaikan", "Malas"],
+                answer: 2
+            },
+            {
+                question: "Kalau sedang diberi tugas oleh guru atau pembina, Pramuka Siaga harus berani dan tidak boleh...",
+                options: ["Putus asa (menyerah)", "Semangat", "Rajin", "Gembira"],
+                answer: 0
+            },
+            {
+                question: "Pramuka Siaga juga harus patuh pada aturan yang ada di...",
+                options: ["Tempat bermain game", "Keluarga", "Tempat tidur", "Layar HP"],
+                answer: 1
+            },
+            {
+                question: "Kata 'Dwi' pada 'Dwisatya' dan 'Dwidarma' artinya adalah angka...",
+                options: ["Satu", "Dua", "Tiga", "Empat"],
+                answer: 1
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+
+        const questionEl = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const progressContainer = document.getElementById('quiz-progress');
+        const quizContainer = document.getElementById('quiz-container');
+        const resultContainer = document.getElementById('quiz-result');
+
+        function loadQuestion() {
+            const q = questions[currentQuestionIndex];
+            questionEl.textContent = q.question;
+            optionsContainer.innerHTML = '';
+            
+            q.options.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'bg-gray-100 hover:bg-siaga-light hover:text-siaga-dark text-gray-700 font-bold py-4 px-6 rounded-2xl border-2 border-gray-200 hover:border-siaga transition-all duration-200 transform hover:-translate-y-1 text-left md:text-center text-lg';
+                btn.textContent = opt;
+                btn.onclick = () => checkAnswer(index);
+                optionsContainer.appendChild(btn);
+            });
+
+            updateProgress();
+        }
+
+        function updateProgress() {
+            progressContainer.innerHTML = '';
+            questions.forEach((_, idx) => {
+                const dot = document.createElement('div');
+                dot.className = `w-3 h-3 rounded-full ${idx === currentQuestionIndex ? 'bg-siaga scale-125' : (idx < currentQuestionIndex ? 'bg-siaga-light' : 'bg-gray-200')}`;
+                progressContainer.appendChild(dot);
+            });
+        }
+
+        function checkAnswer(selectedIndex) {
+            const correctIndex = questions[currentQuestionIndex].answer;
+            if (selectedIndex === correctIndex) {
+                showAlert('Hore Benar!', 'Wah, adik pintar sekali!', 'success');
+                currentQuestionIndex++;
+            } else {
+                showAlert('Yah..', 'Jawabannya belum tepat. Coba ingat-ingat lagi ya!', 'error');
+            }
+        }
+
+        function createConfetti() {
+            const colors = ['#fcd34d', '#10b981', '#3b82f6', '#ef4444'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                confetti.style.animationDelay = (Math.random() * 1) + 's';
+                document.body.appendChild(confetti);
+                
+                // remove after animation
+                setTimeout(() => confetti.remove(), 4000);
+            }
+        }
+
+        // --- CUSTOM ALERT LOGIC ---
+        const alertOverlay = document.getElementById('custom-alert');
+        const alertBox = document.getElementById('alert-box');
+        const alertIcon = document.getElementById('alert-icon');
+        const alertTitle = document.getElementById('alert-title');
+        const alertMessage = document.getElementById('alert-message');
+
+        function showAlert(title, message, type) {
+            alertTitle.textContent = title;
+            alertMessage.textContent = message;
+            
+            if (type === 'success') {
+                alertIcon.innerHTML = '<i class="fa-solid fa-circle-check text-green-500"></i>';
+            } else {
+                alertIcon.innerHTML = '<i class="fa-solid fa-circle-xmark text-red-500"></i>';
+            }
+
+            alertOverlay.classList.remove('hidden');
+            alertOverlay.classList.add('flex');
+            // Small delay to trigger animation
+            setTimeout(() => {
+                alertOverlay.classList.remove('opacity-0');
+                alertBox.classList.remove('scale-90');
+                alertBox.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeAlert() {
+            alertOverlay.classList.add('opacity-0');
+            alertBox.classList.remove('scale-100');
+            alertBox.classList.add('scale-90');
+            
+            setTimeout(() => {
+                alertOverlay.classList.add('hidden');
+                alertOverlay.classList.remove('flex');
+                
+                // After closing alert, check if quiz is finished
+                if (currentQuestionIndex >= questions.length) {
+                    showResult();
+                } else if (currentQuestionIndex > 0 && alertTitle.textContent === 'Benar!') {
+                    loadQuestion();
+                }
+            }, 300);
+        }
+
+        function showResult() {
+            quizContainer.classList.add('hidden');
+            resultContainer.classList.remove('hidden');
+            createConfetti();
+            
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance("Pintar sekali! Adik-adik sudah hafal Kode Kehormatan Pramuka Siaga.");
+                utterance.lang = 'id-ID';
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function resetQuiz() {
+            currentQuestionIndex = 0;
+            quizContainer.classList.remove('hidden');
+            resultContainer.classList.add('hidden');
+            loadQuestion();
+        }
+
+        // Initialize quiz on page load
+        window.onload = loadQuestion;
+
+    </script>
+</body>
+</html>
