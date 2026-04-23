@@ -481,7 +481,7 @@
                     <div class="md:text-left">
                         <span class="text-gray-500 font-semibold uppercase tracking-wider text-xs block">Misi Adik-adik:</span>
                         <div class="text-xl font-bold text-blue-700 mt-1" id="target-text">Cari Arah: TIMUR (90°)</div>
-                        <button onclick="readCompassHelp()" type="button" class="mt-3 inline-flex items-center gap-2 rounded-xl bg-blue-100 px-4 py-2 text-sm font-black text-blue-700 border-2 border-blue-200 hover:bg-blue-200 active:translate-y-1">
+                        <button onclick="bacakanSuara('Bantuan robot. Geser tombol merah ke kiri atau ke kanan. Cari arah yang diminta. Setelah arahnya cocok, tekan tombol kunci arah.')" type="button" class="mt-3 inline-flex items-center gap-2 rounded-xl bg-blue-100 px-4 py-2 text-sm font-black text-blue-700 border-2 border-blue-200 hover:bg-blue-200 active:translate-y-1">
                             <i class="fa-solid fa-robot"></i> Bantuan Suara
                         </button>
                     </div>
@@ -563,7 +563,12 @@
             <div id="quiz-container" class="max-w-xl mx-auto relative">
                 <!-- Question 1 -->
                 <div class="quiz-card" id="q1">
-                    <p class="font-bold text-lg mb-4">1. Ujung jarum kompas yang berwarna merah selalu menunjuk ke arah mana?</p>
+                    <div class="flex justify-between items-start gap-4 mb-4">
+                        <p class="font-bold text-lg">1. Ujung jarum kompas yang berwarna merah selalu menunjuk ke arah mana?</p>
+                        <button onclick="bacakanSuara('Ujung jarum kompas yang berwarna merah selalu menunjuk ke arah mana? A. Timur, B. Selatan, C. Utara, D. Barat.')" class="bg-blue-100 text-blue-600 hover:bg-blue-200 p-3 rounded-2xl border-2 border-blue-300 shadow-sm active:translate-y-1">
+                            <i class="fa-solid fa-volume-high text-xl"></i>
+                        </button>
+                    </div>
                     <div class="space-y-3">
                         <button class="quiz-option w-full text-left p-4 rounded-xl border-2 border-gray-200 font-semibold transition" onclick="selectOption(1, this, false)">A. Timur</button>
                         <button class="quiz-option w-full text-left p-4 rounded-xl border-2 border-gray-200 font-semibold transition" onclick="selectOption(1, this, false)">B. Selatan</button>
@@ -574,7 +579,12 @@
 
                 <!-- Question 2 -->
                 <div class="quiz-card hidden" id="q2">
-                    <p class="font-bold text-lg mb-4">2. Matahari pagi selalu terbit dari arah mana?</p>
+                    <div class="flex justify-between items-start gap-4 mb-4">
+                        <p class="font-bold text-lg">2. Matahari pagi selalu terbit dari arah mana?</p>
+                        <button onclick="bacakanSuara('Matahari pagi selalu terbit dari arah mana? A. Utara, B. Timur, C. Barat Daya, D. Barat.')" class="bg-blue-100 text-blue-600 hover:bg-blue-200 p-3 rounded-2xl border-2 border-blue-300 shadow-sm active:translate-y-1">
+                            <i class="fa-solid fa-volume-high text-xl"></i>
+                        </button>
+                    </div>
                     <div class="space-y-3">
                         <button class="quiz-option w-full text-left p-4 rounded-xl border-2 border-gray-200 font-semibold transition" onclick="selectOption(2, this, false)">A. Utara</button>
                         <button class="quiz-option w-full text-left p-4 rounded-xl border-2 border-gray-200 font-semibold transition" onclick="selectOption(2, this, true)">B. Timur</button>
@@ -585,7 +595,12 @@
 
                 <!-- Question 3 -->
                 <div class="quiz-card hidden" id="q3">
-                    <p class="font-bold text-lg mb-4">3. Bagaimana cara memegang kompas yang paling benar?</p>
+                    <div class="flex justify-between items-start gap-4 mb-4">
+                        <p class="font-bold text-lg">3. Bagaimana cara memegang kompas yang paling benar?</p>
+                        <button onclick="bacakanSuara('Bagaimana cara memegang kompas yang paling benar? A. Ditempel ke wajah, B. Ditempel di jam tangan besi, C. Diletakkan di telapak tangan yang datar, D. Digoyang-goyang dengan keras.')" class="bg-blue-100 text-blue-600 hover:bg-blue-200 p-3 rounded-2xl border-2 border-blue-300 shadow-sm active:translate-y-1">
+                            <i class="fa-solid fa-volume-high text-xl"></i>
+                        </button>
+                    </div>
                     <div class="space-y-3">
                         <button class="quiz-option w-full text-left p-4 rounded-xl border-2 border-gray-200 font-semibold transition" onclick="selectOption(3, this, false)">A. Ditempel ke wajah</button>
                         <button class="quiz-option w-full text-left p-4 rounded-xl border-2 border-gray-200 font-semibold transition" onclick="selectOption(3, this, false)">B. Ditempel di jam tangan besi</button>
@@ -596,7 +611,12 @@
 
                 <!-- Question 4 -->
                 <div class="quiz-card hidden" id="q4">
-                    <p class="font-bold text-lg mb-4">4. Piringan bulat yang ada angka-angkanya pada kompas disebut apa?</p>
+                    <div class="flex justify-between items-start gap-4 mb-4">
+                        <p class="font-bold text-lg">4. Piringan bulat yang ada angka-angkanya pada kompas disebut apa?</p>
+                        <button onclick="bacakanSuara('Piringan bulat yang ada angka-angkanya pada kompas disebut apa? A. Dial atau piringan angka, B. Visir atau garis bidik, C. Jarum merah, D. Tali kompas.')" class="bg-blue-100 text-blue-600 hover:bg-blue-200 p-3 rounded-2xl border-2 border-blue-300 shadow-sm active:translate-y-1">
+                            <i class="fa-solid fa-volume-high text-xl"></i>
+                        </button>
+                    </div>
                     <div class="space-y-3">
                         <button class="quiz-option w-full text-left p-4 rounded-xl border-2 border-gray-200 font-semibold transition" onclick="selectOption(4, this, true)">A. Dial (Piringan Angka)</button>
                         <button class="quiz-option w-full text-left p-4 rounded-xl border-2 border-gray-200 font-semibold transition" onclick="selectOption(4, this, false)">B. Visir (Garis Bidik)</button>
@@ -607,7 +627,12 @@
 
                 <!-- Question 5 -->
                 <div class="quiz-card hidden" id="q5">
-                    <p class="font-bold text-lg mb-4">5. Warna hijau adalah warna untuk golongan pramuka...</p>
+                    <div class="flex justify-between items-start gap-4 mb-4">
+                        <p class="font-bold text-lg">5. Warna hijau adalah warna untuk golongan pramuka...</p>
+                        <button onclick="bacakanSuara('Warna hijau adalah warna untuk golongan pramuka apa? A. Penggalang, B. Penegak, C. Siaga, D. Pembina.')" class="bg-blue-100 text-blue-600 hover:bg-blue-200 p-3 rounded-2xl border-2 border-blue-300 shadow-sm active:translate-y-1">
+                            <i class="fa-solid fa-volume-high text-xl"></i>
+                        </button>
+                    </div>
                     <div class="space-y-3">
                         <button class="quiz-option w-full text-left p-4 rounded-xl border-2 border-gray-200 font-semibold transition" onclick="selectOption(5, this, false)">A. Penggalang</button>
                         <button class="quiz-option w-full text-left p-4 rounded-xl border-2 border-gray-200 font-semibold transition" onclick="selectOption(5, this, false)">B. Penegak</button>
@@ -679,25 +704,24 @@
             setTimeout(() => {
                 overlay.style.visibility = 'hidden';
             }, 500);
+
+            setTimeout(() => bacakanSuara('Halo adik-adik! Selamat datang di Petualangan Kompas!'), 600);
         }
 
-        function speakText(text) {
-            if (!('speechSynthesis' in window)) {
-                alert('Maaf, browser ini belum mendukung bantuan suara.');
-                return;
+        function bacakanSuara(teks) {
+            if ('speechSynthesis' in window) {
+                // Hentikan suara yang sedang jalan
+                window.speechSynthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(teks);
+                utterance.lang = 'id-ID';
+                utterance.rate = 0.8; // Diperlambat sedikit untuk anak kelas 1-2
+                utterance.pitch = 1.2; // Sedikit dinaikkan agar terdengar lebih ceria
+                
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("Maaf, browser adik tidak mendukung fitur suara ini.");
             }
-
-            window.speechSynthesis.cancel();
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'id-ID';
-            utterance.rate = 0.9;
-            utterance.pitch = 1;
-            window.speechSynthesis.speak(utterance);
-        }
-
-        function readCompassHelp() {
-            const target = targets[currentTargetIndex] ? targets[currentTargetIndex].name : 'arah yang diminta';
-            speakText('Bantuan robot. Geser tombol merah ke kiri atau ke kanan. Cari arah ' + target + '. Setelah arahnya cocok, tekan tombol kunci arah.');
         }
 
         let isNightMode = false;
@@ -826,6 +850,9 @@
             targetText.innerHTML = `Cari Arah:<br><span class="text-2xl">${t.name}</span>`;
             document.getElementById('streak-display').innerText = streak;
             gameFeedback.classList.add('hidden');
+            
+            // Baca instruksi target baru
+            setTimeout(() => bacakanSuara("Misi: Cari arah " + t.name), 500);
         }
 
         function updateCompass() {
@@ -880,6 +907,7 @@
 
                 gameFeedback.className = "mt-4 text-center font-bold text-xl px-6 py-3 rounded-xl w-full max-w-md bg-green-100 text-green-700 border-2 border-green-400 animate-pulse shadow-md";
                 gameFeedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> Hebat! Jawaban benar!<br><span class="text-sm font-bold text-green-700 mt-1 block">+1 Skor 🔥</span>`;
+                bacakanSuara("Hore! Hebat sekali!");
                 
                 // Next target after 2 seconds
                 setTimeout(() => {
@@ -915,6 +943,7 @@
                 }
 
                 gameFeedback.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Belum pas. Coba lagi! <br><span class="text-sm font-normal">${hint}</span>`;
+                bacakanSuara("O ow! Belum pas, ayo geser lagi!");
             }
         }
 
@@ -931,6 +960,9 @@
             // Prevent changing answer if already answered
             if(answeredQuestions[qNum]) return;
 
+            // Matikan suara baca soal jika sedang berbunyi
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+
             const options = document.getElementById(`q${qNum}`).getElementsByClassName('quiz-option');
             for (let opt of options) {
                 opt.classList.remove('bg-pramuka-coklatmuda', 'text-pramuka-coklattua', 'border-pramuka-coklattua');
@@ -943,12 +975,14 @@
             // Visual feedback on the selected option
             if(isCorrect) {
                 playCorrectSound();
+                bacakanSuara("Benar!");
                 element.classList.replace('bg-pramuka-coklatmuda', 'bg-green-200');
                 element.classList.replace('border-pramuka-coklattua', 'border-green-500');
                 element.innerHTML += ' <i class="fa-solid fa-check text-green-700 float-right mt-1"></i>';
                 score++;
             } else {
                 playWrongSound();
+                bacakanSuara("Tet tot! Salah.");
                 element.classList.replace('bg-pramuka-coklatmuda', 'bg-red-200');
                 element.classList.replace('border-pramuka-coklattua', 'border-red-500');
                 element.innerHTML += ' <i class="fa-solid fa-xmark text-red-700 float-right mt-1"></i>';
