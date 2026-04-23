@@ -1,0 +1,880 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi Kompas Kelas 1-2 | Pramuka MI Al Irsyad</title>
+    <meta name="description" content="Materi kompas kelas 1-2 dengan pengenalan arah utama, kompas sederhana, simulasi, dan kuis ringan.">
+    <meta name="theme-color" content="#4A3525">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pramuka: {
+                            coklattua: '#4A3525',
+                            coklatmuda: '#C8A97E',
+                            kuning: '#FBBF24',
+                            merah: '#DC2626'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap');
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #FDF8F5;
+            background-image: radial-gradient(#C8A97E 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+        }
+        
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .compass-container {
+            position: relative;
+            width: 240px;
+            height: 240px;
+            margin: 0 auto;
+            border-radius: 50%;
+            background: #fff;
+            border: 8px solid #4A3525;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), inset 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        .compass-dial {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            transition: transform 0.3s ease-out;
+            background-image: 
+                linear-gradient(to bottom, transparent 49.5%, #e5e7eb 49.5%, #e5e7eb 50.5%, transparent 50.5%),
+                linear-gradient(to right, transparent 49.5%, #e5e7eb 49.5%, #e5e7eb 50.5%, transparent 50.5%);
+        }
+
+        .direction-mark {
+            position: absolute;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #4A3525;
+            font-family: 'Fredoka', sans-serif;
+        }
+        
+        .mark-u { top: 5px; left: 50%; transform: translateX(-50%); color: #DC2626; }
+        .mark-t { top: 50%; right: 10px; transform: translateY(-50%); }
+        .mark-s { bottom: 5px; left: 50%; transform: translateX(-50%); }
+        .mark-b { top: 50%; left: 10px; transform: translateY(-50%); }
+
+        .compass-needle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 180px;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .needle-red {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 90px solid #DC2626;
+        }
+
+        .needle-white {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 90px solid #9CA3AF;
+        }
+
+        .needle-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 16px;
+            height: 16px;
+            background: #FBBF24;
+            border: 3px solid #4A3525;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 20;
+        }
+
+        /* Input Range Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 44px;
+            width: 44px;
+            border-radius: 50%;
+            background: #DC2626;
+            cursor: pointer;
+            margin-top: -18px;
+            box-shadow: 0 6px 8px rgba(0,0,0,0.4);
+            border: 6px solid white;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 12px;
+            cursor: pointer;
+            background: #C8A97E;
+            border-radius: 6px;
+        }
+
+        .quiz-option:hover, .quiz-option.selected {
+            background-color: #C8A97E;
+            color: #4A3525;
+            border-color: #4A3525;
+            transform: scale(1.02);
+        }
+
+        .animate-bounce-short {
+            animation: bounce-short 1s infinite;
+        }
+        @keyframes bounce-short {
+            0%, 100% { transform: translateY(-5%); }
+            50% { transform: translateY(0); }
+        }
+
+        /* Swipe Animation for Kids Hint */
+        @keyframes swipe-hint {
+            0% { transform: translateX(-30px) rotate(-10deg); opacity: 0; }
+            30% { opacity: 1; }
+            70% { opacity: 1; }
+            100% { transform: translateX(30px) rotate(10deg); opacity: 0; }
+        }
+        .animate-swipe-hint {
+            animation: swipe-hint 2.5s infinite;
+        }
+
+        /* Tambahan efek hover dan penanda bagian kompas */
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px -5px rgba(200, 169, 126, 0.5);
+            border-color: #C8A97E;
+        }
+        .kompas-part-badge {
+            position: absolute;
+            background: #FBBF24;
+            color: #4A3525;
+            font-weight: bold;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #4A3525;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            z-index: 30;
+        }
+
+        /* Animasi Confetti */
+        .confetti {
+            position: fixed;
+            top: -10px;
+            width: 15px;
+            height: 15px;
+            z-index: 9999;
+            animation: fall linear forwards;
+            pointer-events: none;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); }
+        }
+
+        /* Kacu Ribbon */
+        .kacu-border {
+            height: 16px;
+            width: 100%;
+            display: flex;
+        }
+        .kacu-red { width: 50%; background-color: #DC2626; border-bottom: 2px solid #991b1b; }
+        .kacu-white { width: 50%; background-color: #ffffff; border-bottom: 2px solid #e2e8f0; }
+
+        /* Overlay Mulai */
+        #start-overlay {
+            backdrop-filter: blur(8px);
+            transition: opacity 0.5s ease, visibility 0.5s;
+        }
+
+        /* Mode Kemah Malam (Night Mode) */
+        body.kemah-malam {
+            background-color: #0f172a;
+            background-image: radial-gradient(#334155 0.5px, transparent 0.5px);
+            color: #cbd5e1;
+        }
+        body.kemah-malam .bg-white { background-color: #1e293b; border-color: #475569; color: #f1f5f9; }
+        body.kemah-malam .text-gray-800 { color: #f1f5f9; }
+        body.kemah-malam .text-gray-700 { color: #cbd5e1; }
+        body.kemah-malam .text-gray-600 { color: #94a3b8; }
+        body.kemah-malam .text-pramuka-coklattua { color: #FBBF24; }
+        body.kemah-malam .bg-yellow-50, body.kemah-malam .bg-yellow-100 { background-color: #332a0b; border-color: #715e12; color: #fde047; }
+        body.kemah-malam .text-yellow-800, body.kemah-malam .text-yellow-900 { color: #fde047; }
+        body.kemah-malam .bg-red-50, body.kemah-malam .bg-red-100 { background-color: #3f1a1a; border-color: #7f1d1d; }
+        body.kemah-malam .bg-blue-50, body.kemah-malam .bg-blue-100 { background-color: #172554; border-color: #1e3a8a; }
+        body.kemah-malam .bg-green-50, body.kemah-malam .bg-green-100 { background-color: #064e3b; border-color: #065f46; color: #d1fae5; }
+        body.kemah-malam .compass-container { box-shadow: 0 0 40px rgba(251, 191, 36, 0.5); border-color: #FBBF24; background-color: #e2e8f0; }
+
+        .portal-back-link {
+            position: fixed;
+            left: 16px;
+            top: 20px;
+            z-index: 90;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.94);
+            color: #4A3525;
+            padding: 10px 14px;
+            font-weight: 800;
+            box-shadow: 0 12px 30px rgba(74, 53, 37, 0.18);
+            border: 1px solid rgba(74, 53, 37, 0.14);
+            backdrop-filter: blur(8px);
+        }
+
+        .portal-back-link:hover {
+            background: #FBBF24;
+        }
+    </style>
+</head>
+<body class="text-gray-800 pb-20 relative">
+
+    <!-- Layar Mulai / Start Overlay -->
+    <div id="start-overlay" class="fixed inset-0 z-[100] bg-pramuka-coklattua flex flex-col items-center justify-center text-white">
+        <div class="relative">
+            <i class="fa-solid fa-campground text-8xl mb-6 text-green-400 animate-bounce"></i>
+            <i class="fa-solid fa-star absolute top-0 -right-4 text-yellow-300 text-2xl animate-pulse"></i>
+            <i class="fa-solid fa-star absolute bottom-8 -left-6 text-yellow-300 text-3xl animate-pulse" style="animation-delay: 0.5s;"></i>
+        </div>
+        <h1 class="text-5xl md:text-6xl font-black font-heading mb-3 text-center px-4 drop-shadow-lg">Kompas Ajaib!</h1>
+        <p class="text-2xl mb-10 text-green-300 font-bold text-center px-4 drop-shadow">Halo Adik-adik Kelas 1 & 2!</p>
+        <button onclick="startApp()" class="bg-pramuka-kuning hover:bg-yellow-300 text-pramuka-coklattua font-black text-3xl py-5 px-12 rounded-full shadow-[0_8px_0_#b45309] hover:shadow-[0_4px_0_#b45309] hover:translate-y-1 active:shadow-none active:translate-y-2 transition-all">
+            MAIN YUK! <i class="fa-solid fa-play ml-2"></i>
+        </button>
+    </div>
+
+    <!-- Pita Kacu Pramuka -->
+    <div class="kacu-border absolute top-0 left-0 z-50">
+        <div class="kacu-red"></div>
+        <div class="kacu-white"></div>
+    </div>
+
+    <a class="portal-back-link" href="../index.html#materi" aria-label="Kembali ke daftar materi">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Beranda</span>
+    </a>
+
+    <!-- Header -->
+    <header class="bg-pramuka-coklattua text-white pt-16 pb-20 px-6 text-center rounded-b-[50px] shadow-2xl relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" style="background-image: radial-gradient(circle, #fff 3px, transparent 3px); background-size: 24px 24px;"></div>
+        
+        <!-- Tombol Kemah Malam -->
+        <button onclick="toggleNightMode()" class="absolute top-8 right-4 md:right-8 z-20 bg-black/40 hover:bg-black/60 text-white px-5 py-3 rounded-2xl text-lg font-black backdrop-blur-sm transition border-2 border-white/20 shadow-lg">
+            <i class="fa-solid fa-moon mr-2" id="night-icon"></i> <span id="night-text">Kemah Malam</span>
+        </button>
+
+        <div class="relative z-10 max-w-2xl mx-auto">
+            <!-- Label Siaga berwarna Hijau -->
+            <div class="inline-block bg-green-500 text-white px-6 py-2 rounded-full font-black mb-6 shadow-[0_4px_0_#15803d] text-lg border-2 border-green-300">
+                <i class="fa-solid fa-leaf mr-2"></i> Siaga Kelas 1 - 2 SD
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black mb-4 drop-shadow-xl text-pramuka-kuning">Kompas Ajaib!</h1>
+            <p class="text-2xl text-green-100 font-bold">Ayo belajar arah bersama-sama!</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 -mt-10 relative z-20 space-y-10">
+        
+        <!-- Section: Intro -->
+        <section class="bg-white rounded-[40px] p-8 md:p-10 shadow-xl border-4 border-pramuka-coklatmuda">
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <div class="w-full md:w-1/3 flex justify-center">
+                    <div class="w-48 h-48 bg-blue-100 rounded-[2rem] flex items-center justify-center animate-bounce-short shadow-inner border-8 border-blue-200 relative rotate-3">
+                        <i class="fa-regular fa-compass text-8xl text-blue-500 relative z-10"></i>
+                        <i class="fa-solid fa-sparkles absolute top-4 right-4 text-yellow-400 text-4xl animate-pulse"></i>
+                    </div>
+                </div>
+                <div class="w-full md:w-2/3 text-center md:text-left">
+                    <h2 class="text-4xl font-black text-pramuka-coklattua mb-4">Salam Pramuka!</h2>
+                    <p class="mb-4 text-2xl leading-relaxed text-gray-700">Halo Adik-adik yang pintar! 🌟<br>Biar tidak tersesat saat bermain, kita harus pakai alat ajaib bernama <strong>Kompas</strong>!</p>
+                    <p class="text-2xl leading-relaxed text-gray-700">Jarum warna merah selalu menunjuk arah <strong>Utara</strong>. Hebat kan?</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Fakta Unik (BARU) -->
+        <section class="bg-yellow-100 rounded-[40px] p-8 md:p-10 shadow-lg border-4 border-yellow-400 relative overflow-hidden card-hover">
+            <i class="fa-solid fa-dove text-8xl text-yellow-300 absolute -right-6 -bottom-6 opacity-60 transform -scale-x-100"></i>
+            <h2 class="text-3xl font-black text-yellow-800 mb-4"><i class="fa-solid fa-lightbulb text-yellow-500 mr-3 animate-pulse text-4xl"></i> Tahukah Adik-adik?</h2>
+            <p class="text-2xl text-yellow-900 leading-relaxed font-medium relative z-10">Burung merpati dan penyu laut punya <strong>kompas alami</strong> di dalam tubuhnya lho! Makanya mereka bisa tahu arah jalan pulang ke rumah!</p>
+        </section>
+
+        <!-- Section: 4 Arah Mata Angin -->
+        <section class="bg-white rounded-[40px] p-8 md:p-10 shadow-xl border-4 border-pramuka-coklatmuda">
+            <h2 class="text-4xl font-black text-pramuka-coklattua mb-8 text-center">4 Arah Utama</h2>
+            <p class="text-center mb-10 text-2xl text-gray-600 font-bold">Yuk sebutkan keras-keras 4 arah ini!</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <!-- Utara -->
+                <div class="bg-red-50 p-6 rounded-[2rem] border-4 border-red-300 card-hover transform transition hover:scale-105 shadow-sm">
+                    <div class="text-5xl font-black text-red-500 mb-3 drop-shadow-sm">U</div>
+                    <div class="font-black text-2xl text-red-800">Utara</div>
+                    <div class="text-red-600 font-bold text-lg mt-1 bg-red-200 rounded-full py-1">(Atas)</div>
+                </div>
+                <!-- Timur -->
+                <div class="bg-yellow-50 p-6 rounded-[2rem] border-4 border-yellow-300 card-hover transform transition hover:scale-105 shadow-sm">
+                    <div class="text-5xl font-black text-yellow-500 mb-3 drop-shadow-sm">T</div>
+                    <div class="font-black text-2xl text-yellow-800">Timur</div>
+                    <div class="text-yellow-700 font-bold text-lg mt-1 bg-yellow-200 rounded-full py-1">(Kanan)</div>
+                </div>
+                <!-- Selatan -->
+                <div class="bg-blue-50 p-6 rounded-[2rem] border-4 border-blue-300 card-hover transform transition hover:scale-105 shadow-sm">
+                    <div class="text-5xl font-black text-blue-500 mb-3 drop-shadow-sm">S</div>
+                    <div class="font-black text-2xl text-blue-800">Selatan</div>
+                    <div class="text-blue-600 font-bold text-lg mt-1 bg-blue-200 rounded-full py-1">(Bawah)</div>
+                </div>
+                <!-- Barat -->
+                <div class="bg-green-50 p-6 rounded-[2rem] border-4 border-green-300 card-hover transform transition hover:scale-105 shadow-sm">
+                    <div class="text-5xl font-black text-green-500 mb-3 drop-shadow-sm">B</div>
+                    <div class="font-black text-2xl text-green-800">Barat</div>
+                    <div class="text-green-600 font-bold text-lg mt-1 bg-green-200 rounded-full py-1">(Kiri)</div>
+                </div>
+            </div>
+            <div class="mt-10 bg-green-100 p-6 rounded-3xl border-4 border-green-400 text-center text-xl md:text-2xl shadow-inner">
+                <i class="fa-solid fa-sun text-yellow-500 mr-2 text-4xl animate-spin" style="animation-duration: 10s;"></i>
+                <br><strong class="text-green-800">Ingat ya:</strong> Matahari terbit di pagi hari dari arah <strong>Timur</strong>!
+            </div>
+        </section>
+
+        <!-- Section: Bagian-Bagian Kompas -->
+        <section class="bg-white rounded-[40px] p-8 md:p-10 shadow-xl border-4 border-pramuka-coklatmuda">
+            <h2 class="text-4xl font-black text-pramuka-coklattua mb-8 text-center"><i class="fa-solid fa-magnifying-glass-location mr-3"></i> Bentuk Kompas</h2>
+            <div class="flex flex-col md:flex-row gap-10 items-center">
+                <div class="w-full md:w-1/2 relative flex justify-center py-8">
+                    <!-- Ilustrasi Kompas dengan Penanda -->
+                    <div class="compass-container relative" style="transform: scale(1.15);">
+                        <div class="kompas-part-badge text-2xl w-12 h-12" style="top: -15px; left: 50%; transform: translateX(-50%);">1</div>
+                        <div class="kompas-part-badge text-2xl w-12 h-12" style="top: 50%; left: 15px;">2</div>
+                        <div class="compass-dial" style="transform: rotate(0deg);">
+                            <div class="direction-mark mark-u">U</div>
+                            <div class="direction-mark mark-t">T</div>
+                            <div class="direction-mark mark-s">S</div>
+                            <div class="direction-mark mark-b">B</div>
+                        </div>
+                        <div class="compass-needle">
+                            <div class="needle-red"></div>
+                            <div class="needle-white"></div>
+                        </div>
+                        <div class="needle-center" style="width: 24px; height: 24px;"></div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 space-y-6">
+                    <div class="p-6 bg-red-50 rounded-3xl border-4 border-red-200 card-hover">
+                        <h3 class="font-black text-red-700 mb-2 flex items-center text-3xl"><span class="bg-red-500 text-white w-10 h-10 inline-flex justify-center items-center rounded-full text-xl mr-3 shadow-md border-2 border-red-700">1</span> Jarum Merah</h3>
+                        <p class="text-xl text-gray-800 font-medium mt-2">Ini jarum ajaibnya! Ujung merah selalu mencari arah <strong>Utara</strong>.</p>
+                    </div>
+                    <div class="p-6 bg-yellow-50 rounded-3xl border-4 border-yellow-300 card-hover">
+                        <h3 class="font-black text-yellow-700 mb-2 flex items-center text-3xl"><span class="bg-yellow-500 text-white w-10 h-10 inline-flex justify-center items-center rounded-full text-xl mr-3 shadow-md border-2 border-yellow-700">2</span> Piringan Huruf</h3>
+                        <p class="text-xl text-gray-800 font-medium mt-2">Ada huruf <strong>U, S, T, B</strong> supaya kita gampang tahu arah jalan.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Interactive Game -->
+        <section class="bg-white rounded-[40px] p-6 md:p-10 shadow-xl border-4 border-pramuka-coklatmuda" id="game-section">
+            <h2 class="text-4xl font-black text-pramuka-coklattua mb-3 text-center"><i class="fa-solid fa-gamepad mr-3 text-green-500"></i> Main Kompas!</h2>
+            <p class="text-center mb-10 text-2xl text-gray-600 font-bold">Ikuti misi di bawah ini ya!</p>
+
+            <div class="bg-blue-50 rounded-[2.5rem] p-6 md:p-10 border-4 border-blue-300 flex flex-col items-center shadow-inner relative overflow-hidden">
+                <!-- Awan Animasi -->
+                <i class="fa-solid fa-cloud text-white text-6xl absolute top-10 left-10 opacity-60 animate-bounce" style="animation-duration: 4s;"></i>
+                <i class="fa-solid fa-cloud text-white text-5xl absolute top-32 right-12 opacity-60 animate-bounce" style="animation-duration: 3s;"></i>
+
+                <!-- Target Instruction -->
+                <div class="mb-10 text-center w-full flex flex-col items-center bg-white p-6 rounded-3xl shadow-md border-4 border-blue-400 gap-4 relative z-10">
+                    <span class="text-blue-500 font-black uppercase tracking-widest text-lg block bg-blue-100 px-4 py-1 rounded-full border-2 border-blue-200">Misi Adik-adik:</span>
+                    <div class="text-4xl md:text-5xl font-black text-blue-800 mt-2" id="target-text">Cari Arah:<br><span class="text-yellow-500 stroke-text">TIMUR</span></div>
+                    
+                    <div class="bg-green-500 px-8 py-3 rounded-2xl text-center shadow-[0_6px_0_#15803d] mt-4 border-2 border-green-300">
+                        <span class="text-green-100 font-black uppercase tracking-wider text-sm block">Bintang ⭐️</span>
+                        <div class="text-4xl font-black text-yellow-300 drop-shadow-md mt-1" id="streak-display">0</div>
+                    </div>
+                </div>
+
+                <!-- Compass Element -->
+                <div class="compass-container mb-12 relative transform scale-125 z-10">
+                    <div class="compass-dial" id="compass-dial">
+                        <div class="direction-mark mark-u">U</div>
+                        <div class="direction-mark mark-t">T</div>
+                        <div class="direction-mark mark-s">S</div>
+                        <div class="direction-mark mark-b">B</div>
+                    </div>
+                    <div class="compass-needle">
+                        <div class="needle-red"></div>
+                        <div class="needle-white"></div>
+                    </div>
+                    <div class="needle-center" style="width: 24px; height: 24px;"></div>
+                </div>
+
+                <!-- Controls -->
+                <div class="w-full max-w-md bg-white p-8 rounded-[2rem] shadow-xl border-4 border-gray-200 relative z-10">
+                    <label class="block text-center text-xl font-bold text-gray-600 mb-2">Arahmu Sekarang:</label>
+                    <div class="text-center mb-6">
+                        <span id="degree-display" class="text-pramuka-coklattua font-black text-3xl bg-yellow-300 px-6 py-2 rounded-2xl inline-block shadow-sm border-2 border-yellow-500">UTARA</span>
+                    </div>
+
+                    <!-- Animasi Jari Panduan -->
+                    <div class="text-center text-gray-400 text-4xl mb-2 h-10 flex justify-center">
+                        <i class="fa-solid fa-hand-pointer animate-swipe-hint text-red-400 drop-shadow-md" id="swipe-hint"></i>
+                    </div>
+
+                    <input type="range" min="0" max="360" step="90" value="0" id="compass-slider" class="w-full">
+                    
+                    <button onclick="checkDirection()" class="w-full mt-10 bg-green-500 hover:bg-green-400 text-white font-black text-3xl py-5 px-4 rounded-2xl transition duration-200 flex items-center justify-center gap-3 shadow-[0_8px_0_#15803d] active:shadow-none active:translate-y-2 border-2 border-green-300">
+                        <i class="fa-solid fa-circle-check"></i> KLIK BENAR!
+                    </button>
+                </div>
+
+                <!-- Feedback Message -->
+                <div id="game-feedback" class="hidden mt-8 text-center font-black text-3xl px-8 py-6 rounded-3xl w-full max-w-md transition-all z-10 border-4">
+                    <!-- Feedback content injected via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Quiz -->
+        <section class="bg-white rounded-[40px] p-8 md:p-10 shadow-xl border-4 border-pramuka-coklatmuda mb-10">
+            <h2 class="text-4xl font-black text-pramuka-coklattua mb-10 text-center"><i class="fa-solid fa-star mr-3 text-yellow-400"></i> Kuis Pramuka Pintar</h2>
+            
+            <div id="quiz-container" class="max-w-xl mx-auto relative">
+                <!-- Question 1 -->
+                <div class="quiz-card" id="q1">
+                    <div class="flex justify-between items-start mb-6">
+                        <p class="font-black text-3xl text-gray-800 leading-tight w-4/5" id="text-q1">1. Jarum merah kompas selalu menunjuk ke arah mana?</p>
+                        <button onclick="bacakanSuara('Jarum merah kompas selalu menunjuk ke arah mana? A. Timur, B. Utara, C. Barat.')" class="bg-blue-100 text-blue-600 hover:bg-blue-200 p-3 rounded-2xl border-2 border-blue-300 shadow-sm active:translate-y-1">
+                            <i class="fa-solid fa-volume-high text-2xl"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <button class="quiz-option w-full text-center p-6 rounded-2xl border-4 border-gray-200 font-black text-2xl transition bg-gray-50" onclick="selectOption(1, this, false)">Timur</button>
+                        <button class="quiz-option w-full text-center p-6 rounded-2xl border-4 border-gray-200 font-black text-2xl transition bg-gray-50" onclick="selectOption(1, this, true)">Utara</button>
+                        <button class="quiz-option w-full text-center p-6 rounded-2xl border-4 border-gray-200 font-black text-2xl transition bg-gray-50" onclick="selectOption(1, this, false)">Barat</button>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="quiz-card hidden" id="q2">
+                    <div class="flex justify-between items-start mb-6">
+                        <p class="font-black text-3xl text-gray-800 leading-tight w-4/5" id="text-q2">2. Di pagi hari, matahari bersinar dari arah mana?</p>
+                        <button onclick="bacakanSuara('Di pagi hari, matahari bersinar dari arah mana? A. Timur, B. Selatan, C. Utara.')" class="bg-blue-100 text-blue-600 hover:bg-blue-200 p-3 rounded-2xl border-2 border-blue-300 shadow-sm active:translate-y-1">
+                            <i class="fa-solid fa-volume-high text-2xl"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <button class="quiz-option w-full text-center p-6 rounded-2xl border-4 border-gray-200 font-black text-2xl transition bg-gray-50" onclick="selectOption(2, this, true)">Timur</button>
+                        <button class="quiz-option w-full text-center p-6 rounded-2xl border-4 border-gray-200 font-black text-2xl transition bg-gray-50" onclick="selectOption(2, this, false)">Selatan</button>
+                        <button class="quiz-option w-full text-center p-6 rounded-2xl border-4 border-gray-200 font-black text-2xl transition bg-gray-50" onclick="selectOption(2, this, false)">Utara</button>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="quiz-card hidden" id="q3">
+                    <div class="flex justify-between items-start mb-6">
+                        <p class="font-black text-3xl text-gray-800 leading-tight w-4/5" id="text-q3">3. Warna hijau adalah warna kebanggaan untuk Pramuka...</p>
+                        <button onclick="bacakanSuara('Warna hijau adalah warna kebanggaan untuk Pramuka... A. Penggalang, B. Siaga, C. Pembina.')" class="bg-blue-100 text-blue-600 hover:bg-blue-200 p-3 rounded-2xl border-2 border-blue-300 shadow-sm active:translate-y-1">
+                            <i class="fa-solid fa-volume-high text-2xl"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <button class="quiz-option w-full text-center p-6 rounded-2xl border-4 border-gray-200 font-black text-2xl transition bg-gray-50" onclick="selectOption(3, this, false)">Penggalang</button>
+                        <button class="quiz-option w-full text-center p-6 rounded-2xl border-4 border-gray-200 font-black text-2xl transition bg-gray-50" onclick="selectOption(3, this, true)">Siaga</button>
+                        <button class="quiz-option w-full text-center p-6 rounded-2xl border-4 border-gray-200 font-black text-2xl transition bg-gray-50" onclick="selectOption(3, this, false)">Pembina</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Result -->
+                <div class="quiz-card hidden text-center py-10" id="quiz-result">
+                    <i class="fa-solid fa-face-smile-beam text-9xl text-yellow-400 mb-8 animate-bounce drop-shadow-lg"></i>
+                    <h3 class="text-5xl font-black text-pramuka-coklattua mb-4">HOREEE!</h3>
+                    <p class="text-2xl text-gray-600 mb-8 font-bold">Adik sudah selesai menjawab!</p>
+                    <div class="text-3xl font-black bg-green-100 py-6 rounded-3xl mb-8 border-4 border-green-400 shadow-inner">Bintang Adik: <br><span id="score-display" class="text-green-600 text-6xl mt-2 block">0</span></div>
+                    
+                    <button onclick="resetQuiz()" class="bg-blue-500 hover:bg-blue-400 text-white font-black py-5 px-10 rounded-full transition duration-200 shadow-[0_8px_0_#1d4ed8] active:shadow-none active:translate-y-2 border-2 border-blue-300 text-2xl w-full">
+                        <i class="fa-solid fa-rotate-right mr-3"></i> MAIN LAGI!
+                    </button>
+                </div>
+                
+                <div class="mt-10 flex justify-center items-center" id="quiz-controls">
+                    <button onclick="nextQuestion()" id="btn-next" class="bg-green-500 hover:bg-green-400 text-white font-black text-3xl py-5 px-10 rounded-full transition duration-200 hidden shadow-[0_8px_0_#15803d] active:shadow-none active:translate-y-2 border-2 border-green-300 w-full animate-pulse">
+                        LANJUT <i class="fa-solid fa-arrow-right ml-3"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-green-600 text-green-100 text-center py-10 border-t-[10px] border-yellow-400 rounded-t-[40px] mt-10">
+        <p class="font-black text-3xl drop-shadow-md"><i class="fa-solid fa-leaf mr-3 text-yellow-300"></i> Siap Sedia, Siaga!</p>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-8 right-8 bg-yellow-400 hover:bg-yellow-300 text-pramuka-coklattua w-20 h-20 rounded-full shadow-[0_6px_0_#b45309] flex items-center justify-center transition-all duration-300 transform translate-y-32 z-50 border-4 border-white active:translate-y-2 active:shadow-none">
+        <i class="fa-solid fa-arrow-up text-4xl font-black"></i>
+    </button>
+
+    <!-- Interactive Logic & Sound Engine -->
+    <script>
+        // --- TEXT TO SPEECH (BACA OTOMATIS) ---
+        function bacakanSuara(teks) {
+            if ('speechSynthesis' in window) {
+                // Hentikan suara yang sedang jalan
+                window.speechSynthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(teks);
+                utterance.lang = 'id-ID';
+                utterance.rate = 0.8; // Diperlambat sedikit untuk anak kelas 1-2
+                utterance.pitch = 1.2; // Sedikit dinaikkan agar terdengar lebih ceria
+                
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("Maaf, browser adik tidak mendukung fitur suara ini.");
+            }
+        }
+
+        // --- SISTEM SUARA (WEB AUDIO API) ---
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx;
+
+        function initAudio() {
+            if (!audioCtx) audioCtx = new AudioContext();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+        }
+
+        function startApp() {
+            initAudio();
+            playTone(800, 'sine', 0.2, 0.2);
+            const overlay = document.getElementById('start-overlay');
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.visibility = 'hidden';
+            }, 500);
+            
+            // Sapaan otomatis saat mulai
+            setTimeout(() => bacakanSuara('Halo adik-adik! Selamat datang di Kompas Ajaib!'), 600);
+        }
+
+        let isNightMode = false;
+        function toggleNightMode() {
+            initAudio();
+            isNightMode = !isNightMode;
+            const body = document.body;
+            const icon = document.getElementById('night-icon');
+            const text = document.getElementById('night-text');
+            
+            if(isNightMode) {
+                body.classList.add('kemah-malam');
+                icon.className = "fa-solid fa-sun mr-2 text-yellow-300";
+                text.innerText = "Mode Siang";
+                playTone(400, 'square', 0.1, 0.1); 
+            } else {
+                body.classList.remove('kemah-malam');
+                icon.className = "fa-solid fa-moon mr-2";
+                text.innerText = "Kemah Malam";
+                playTone(600, 'sine', 0.1, 0.1); 
+            }
+        }
+
+        function playTone(freq, type, duration, vol = 0.1) {
+            if(!audioCtx) return;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration);
+        }
+
+        function playCorrectSound() {
+            playTone(800, 'sine', 0.1, 0.2);
+            setTimeout(() => playTone(1200, 'sine', 0.15, 0.2), 100);
+        }
+
+        function playWrongSound() {
+            playTone(300, 'square', 0.2, 0.05);
+            setTimeout(() => playTone(250, 'square', 0.3, 0.05), 150);
+        }
+
+        function playTadaSound() {
+            playTone(400, 'sine', 0.1, 0.2);
+            setTimeout(() => playTone(500, 'sine', 0.1, 0.2), 100);
+            setTimeout(() => playTone(600, 'sine', 0.2, 0.2), 200);
+            setTimeout(() => playTone(800, 'sine', 0.5, 0.3), 300);
+        }
+
+        function fireConfetti() {
+            const colors = ['#DC2626', '#FBBF24', '#4A3525', '#2563EB', '#16A34A'];
+            for(let i=0; i<100; i++) {
+                let conf = document.createElement('div');
+                conf.className = 'confetti';
+                conf.style.left = Math.random() * 100 + 'vw';
+                conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                conf.style.animationDuration = (Math.random() * 3 + 2) + 's'; 
+                if(Math.random() > 0.5) conf.style.borderRadius = '50%';
+                document.body.appendChild(conf);
+                setTimeout(() => conf.remove(), 5000);
+            }
+        }
+
+        const scrollBtn = document.getElementById('scrollToTopBtn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                scrollBtn.classList.remove('translate-y-32', 'opacity-0');
+            } else {
+                scrollBtn.classList.add('translate-y-32', 'opacity-0');
+            }
+        });
+
+        // --- GAME SIMULATOR KOMPAS (DISEDERHANAKAN 4 ARAH) ---
+        const slider = document.getElementById('compass-slider');
+        const dial = document.getElementById('compass-dial');
+        const degreeDisplay = document.getElementById('degree-display');
+        const targetText = document.getElementById('target-text');
+        const gameFeedback = document.getElementById('game-feedback');
+        const swipeHint = document.getElementById('swipe-hint');
+
+        // Target HANYA 4 Arah Utama (step 90 derajat)
+        const targets = [
+            { name: "TIMUR", deg: 90 },
+            { name: "SELATAN", deg: 180 },
+            { name: "BARAT", deg: 270 },
+            { name: "UTARA", deg: 0 }
+        ];
+
+        const allDirections = {
+            0: "UTARA", 90: "TIMUR", 180: "SELATAN", 270: "BARAT", 360: "UTARA"
+        };
+        
+        let currentTargetIndex = 0;
+        let streak = 0;
+
+        function initGame() {
+            setTarget(currentTargetIndex);
+            updateCompass();
+        }
+
+        function setTarget(index) {
+            let t = targets[index];
+            targetText.innerHTML = `Cari Arah:<br><span class="text-5xl text-yellow-500 drop-shadow-md stroke-black">${t.name}</span>`;
+            document.getElementById('streak-display').innerText = streak;
+            gameFeedback.classList.add('hidden');
+            
+            // Baca instruksi target baru
+            setTimeout(() => bacakanSuara("Misi: Cari arah " + t.name), 500);
+        }
+
+        function updateCompass() {
+            initAudio(); 
+            // Sembunyikan hint jari saat anak sudah mencoba menggeser
+            if (swipeHint) swipeHint.style.display = 'none';
+
+            let degree = parseInt(slider.value);
+            let dirName = allDirections[degree] || "";
+            degreeDisplay.innerText = `${dirName}`;
+            
+            dial.style.transform = `rotate(${-degree}deg)`;
+            
+            if(audioCtx && audioCtx.state === 'running') {
+                playTone(1000, 'sine', 0.05, 0.05);
+            }
+        }
+
+        slider.addEventListener('touchstart', initAudio, {once: true});
+        slider.addEventListener('mousedown', initAudio, {once: true});
+        slider.addEventListener('input', updateCompass);
+
+        function checkDirection() {
+            initAudio(); 
+            let userDeg = parseInt(slider.value);
+            if (userDeg === 360) userDeg = 0; 
+            
+            let targetDeg = targets[currentTargetIndex].deg;
+            
+            gameFeedback.classList.remove('hidden');
+            
+            if (userDeg === targetDeg) {
+                streak++;
+                
+                if(streak > 0 && streak % 3 === 0) {
+                    playTadaSound();
+                    fireConfetti();
+                } else {
+                    playCorrectSound();
+                }
+
+                gameFeedback.className = "mt-8 text-center font-black text-3xl px-8 py-6 rounded-3xl w-full max-w-md bg-green-100 text-green-700 border-4 border-green-400 shadow-md animate-bounce z-10 relative";
+                gameFeedback.innerHTML = `<i class="fa-solid fa-face-laugh-beam text-6xl mb-3 block text-yellow-500 drop-shadow"></i> HORE! Hebat!<br><span class="text-2xl font-black text-green-700 mt-2 block bg-green-200 py-2 rounded-full">+1 Bintang ⭐️</span>`;
+                
+                bacakanSuara("Hore! Hebat sekali!");
+
+                setTimeout(() => {
+                    let nextIndex;
+                    do {
+                        nextIndex = Math.floor(Math.random() * targets.length);
+                    } while (nextIndex === currentTargetIndex);
+                    currentTargetIndex = nextIndex;
+                    
+                    slider.value = 0;
+                    updateCompass();
+                    setTarget(currentTargetIndex);
+                }, 3000);
+            } else {
+                streak = 0;
+                playWrongSound();
+                document.getElementById('streak-display').innerText = streak;
+                gameFeedback.className = "mt-8 text-center font-black text-3xl px-8 py-6 rounded-3xl w-full max-w-md bg-red-100 text-red-700 border-4 border-red-300 shadow-md z-10 relative";
+                
+                gameFeedback.innerHTML = `<i class="fa-solid fa-face-frown text-6xl mb-3 block text-red-400"></i> O-ow!<br><span class="text-2xl font-black bg-red-200 py-2 px-4 rounded-full mt-2 inline-block">Ayo geser lagi!</span>`;
+                bacakanSuara("O ow! Belum pas, ayo geser lagi!");
+            }
+        }
+
+        initGame();
+
+        // --- KUIS PRAMUKA ---
+        let currentQuestion = 1;
+        let score = 0;
+        let answeredQuestions = { 1: false, 2: false, 3: false };
+
+        function selectOption(qNum, element, isCorrect) {
+            initAudio(); 
+            if(answeredQuestions[qNum]) return;
+
+            // Matikan suara baca soal jika sedang berbunyi
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+
+            const options = document.getElementById(`q${qNum}`).getElementsByClassName('quiz-option');
+            for (let opt of options) {
+                opt.classList.remove('bg-yellow-200', 'text-pramuka-coklattua', 'border-yellow-400', 'shadow-[0_6px_0_#ca8a04]');
+            }
+            
+            element.classList.add('bg-yellow-200', 'text-pramuka-coklattua', 'border-yellow-400', 'shadow-[0_6px_0_#ca8a04]');
+            answeredQuestions[qNum] = true;
+
+            if(isCorrect) {
+                playCorrectSound();
+                bacakanSuara("Benar!");
+                element.classList.replace('bg-yellow-200', 'bg-green-200');
+                element.classList.replace('border-yellow-400', 'border-green-500');
+                element.classList.replace('shadow-[0_6px_0_#ca8a04]', 'shadow-[0_6px_0_#16a34a]');
+                element.innerHTML += ' <i class="fa-solid fa-check-circle text-green-600 float-right mt-1 text-3xl"></i>';
+                score++;
+            } else {
+                playWrongSound();
+                bacakanSuara("Tet tot! Salah.");
+                element.classList.replace('bg-yellow-200', 'bg-red-200');
+                element.classList.replace('border-yellow-400', 'border-red-500');
+                element.classList.replace('shadow-[0_6px_0_#ca8a04]', 'shadow-[0_6px_0_#dc2626]');
+                element.innerHTML += ' <i class="fa-solid fa-circle-xmark text-red-600 float-right mt-1 text-3xl"></i>';
+                
+                for (let opt of options) {
+                    if(opt.getAttribute('onclick').includes('true')) {
+                        opt.classList.add('bg-green-100', 'border-green-400');
+                        opt.innerHTML += ' <span class="text-lg text-green-700 float-right mt-1 font-bold bg-green-200 px-3 rounded-full">(Ini yang Benar)</span>';
+                    }
+                }
+            }
+
+            document.getElementById('btn-next').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            document.getElementById(`q${currentQuestion}`).classList.add('hidden');
+            currentQuestion++;
+            
+            if (currentQuestion <= 3) {
+                document.getElementById(`q${currentQuestion}`).classList.remove('hidden');
+                document.getElementById('btn-next').classList.add('hidden');
+            } else {
+                document.getElementById('quiz-result').classList.remove('hidden');
+                document.getElementById('quiz-controls').classList.add('hidden');
+                document.getElementById('score-display').innerText = score;
+                
+                if(score === 3) {
+                    playTadaSound();
+                    bacakanSuara("Hore! Hebat sekali! Adik dapat tiga bintang!");
+                    fireConfetti();
+                    setTimeout(fireConfetti, 1000);
+                } else {
+                    bacakanSuara("Selesai! Bintang adik ada " + score);
+                    if(score >= 2) playCorrectSound();
+                    else playWrongSound();
+                }
+            }
+        }
+
+        function resetQuiz() {
+            score = 0;
+            currentQuestion = 1;
+            answeredQuestions = { 1: false, 2: false, 3: false };
+            
+            document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('quiz-controls').classList.remove('hidden');
+            document.getElementById('btn-next').classList.add('hidden');
+            
+            for(let i=1; i<=3; i++) {
+                let card = document.getElementById(`q${i}`);
+                if(i === 1) card.classList.remove('hidden');
+                else card.classList.add('hidden');
+
+                let options = card.getElementsByClassName('quiz-option');
+                let texts = [
+                    ['Timur', 'Utara', 'Barat'],
+                    ['Timur', 'Selatan', 'Utara'],
+                    ['Penggalang', 'Siaga', 'Pembina']
+                ];
+
+                for(let j=0; j<options.length; j++) {
+                    options[j].className = "quiz-option w-full text-center p-6 rounded-2xl border-4 border-gray-200 font-black text-2xl transition bg-gray-50";
+                    options[j].innerHTML = texts[i-1][j];
+                }
+            }
+        }
+    </script>
+</body>
+</html>

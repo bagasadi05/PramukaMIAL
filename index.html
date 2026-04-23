@@ -5,6 +5,11 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Materi Pramuka MI Al Irsyad Al Islamiyyah Kota Madiun</title>
     <meta name="description" content="Portal materi pramuka digital MI Al Irsyad Al Islamiyyah Kota Madiun dengan pilihan kelas 1-2, 3, 4, dan 5-6.">
+    <meta name="theme-color" content="#0b3d2e">
+    <meta property="og:title" content="Materi Pramuka MI Al Irsyad Al Islamiyyah Kota Madiun">
+    <meta property="og:description" content="Portal materi pramuka digital dengan pilihan kelas, materi sejarah, kode kehormatan, sandi, dan kompas.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="./assets/images/screen.png">
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -123,6 +128,21 @@
         .lesson-card:hover {
             transform: translateY(-4px);
         }
+
+        .lesson-search {
+            background: rgba(255, 253, 247, 0.92);
+            border: 1px solid rgba(11, 61, 46, 0.14);
+            box-shadow: 0 18px 44px rgba(10, 33, 25, 0.08);
+        }
+
+        .lesson-search input::placeholder {
+            color: rgba(71, 85, 105, 0.72);
+        }
+
+        .empty-state {
+            border: 1px dashed rgba(11, 61, 46, 0.22);
+            background: rgba(232, 255, 242, 0.72);
+        }
     </style>
 </head>
 <body class="min-h-screen bg-[#edf6ec] text-ink antialiased">
@@ -193,7 +213,7 @@
                                 <span class="material-symbols-outlined">looks_one</span>
                             </span>
                             <span class="block text-2xl font-extrabold text-forest">Kelas 1-2</span>
-                            <span class="mt-2 block text-sm leading-6 text-slate-600">Sejarah Pramuka, Dwisatya, Dwidarma, dan pengenalan sandi angka sederhana.</span>
+                            <span class="mt-2 block text-sm leading-6 text-slate-600">Sejarah Pramuka, Dwisatya, Dwidarma, kompas dasar, dan pengenalan sandi angka sederhana.</span>
                         </button>
 
                         <button class="grade-card rounded-lg p-5 text-left text-ink" type="button" data-grade="3" aria-pressed="false">
@@ -201,7 +221,7 @@
                                 <span class="material-symbols-outlined">looks_3</span>
                             </span>
                             <span class="block text-2xl font-extrabold text-forest">Kelas 3</span>
-                            <span class="mt-2 block text-sm leading-6 text-slate-600">Sejarah Pramuka, Dwisatya, Dwidarma, dan latihan sandi angka yang lebih menantang.</span>
+                            <span class="mt-2 block text-sm leading-6 text-slate-600">Sejarah Pramuka, Dwisatya, Dwidarma, latihan sandi angka, dan pengenalan kompas.</span>
                         </button>
 
                         <button class="grade-card rounded-lg p-5 text-left text-ink" type="button" data-grade="4" aria-pressed="false">
@@ -209,7 +229,7 @@
                                 <span class="material-symbols-outlined">looks_4</span>
                             </span>
                             <span class="block text-2xl font-extrabold text-forest">Kelas 4</span>
-                            <span class="mt-2 block text-sm leading-6 text-slate-600">Sejarah Pramuka, tokoh pendiri, dan pengenalan sandi A-Z.</span>
+                            <span class="mt-2 block text-sm leading-6 text-slate-600">Sejarah Pramuka, tokoh pendiri, kompas, dan pengenalan sandi A-Z.</span>
                         </button>
 
                         <button class="grade-card rounded-lg p-5 text-left text-ink" type="button" data-grade="5-6" aria-pressed="false">
@@ -240,7 +260,15 @@
                     </button>
                 </div>
 
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+                <div class="lesson-search mb-8 grid gap-4 rounded-lg p-4 md:grid-cols-[1fr_auto] md:items-center">
+                    <label class="flex items-center gap-3 rounded-lg bg-white px-4 py-3" for="lesson-search">
+                        <span class="material-symbols-outlined text-leaf">search</span>
+                        <input class="w-full border-0 bg-transparent p-0 text-base font-semibold text-forest outline-none focus:ring-0" id="lesson-search" type="search" placeholder="Cari materi: sejarah, sandi, kompas..." autocomplete="off">
+                    </label>
+                    <span class="rounded-lg bg-forest px-4 py-3 text-center text-sm font-extrabold text-white" id="lesson-count">0 materi ditampilkan</span>
+                </div>
+
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4" id="lesson-grid">
                     <article class="lesson-card rounded-lg bg-sky p-6 shadow-soft" data-levels="1-2" data-title="Sejarah Pramuka Kelas 1-2">
                         <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-forest text-white">
                             <span class="material-symbols-outlined text-3xl">history_edu</span>
@@ -262,6 +290,19 @@
                         <h3 class="mt-3 font-serif text-2xl font-bold text-forest">Dwisatya & Dwidarma</h3>
                         <p class="mt-4 min-h-24 text-sm leading-7 text-slate-600">Materi kode kehormatan Pramuka Siaga dengan kartu interaktif, suara bacaan, dan kuis ringan.</p>
                         <a class="mt-7 inline-flex items-center gap-2 font-extrabold text-forest transition hover:gap-3" href="./pages/dwi-satya-dwi-darma-kelas-1-2.html">
+                            Buka Materi
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                        </a>
+                    </article>
+
+                    <article class="lesson-card rounded-lg bg-clay p-6 shadow-soft" data-levels="1-2" data-title="Materi Kompas Kelas 1-2">
+                        <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-forest text-white">
+                            <span class="material-symbols-outlined text-3xl">explore</span>
+                        </div>
+                        <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-leaf">Kelas 1-2</p>
+                        <h3 class="mt-3 font-serif text-2xl font-bold text-forest">Materi Kompas</h3>
+                        <p class="mt-4 min-h-24 text-sm leading-7 text-slate-600">Pengenalan arah utama dan kompas sederhana dengan tampilan bermain untuk kelas awal.</p>
+                        <a class="mt-7 inline-flex items-center gap-2 font-extrabold text-forest transition hover:gap-3" href="./pages/materi-kompas-kelas-1-2.html">
                             Buka Materi
                             <span class="material-symbols-outlined text-lg">arrow_forward</span>
                         </a>
@@ -306,6 +347,19 @@
                         </a>
                     </article>
 
+                    <article class="lesson-card rounded-lg bg-clay p-6 shadow-soft" data-levels="3 4" data-title="Materi Kompas Kelas 3-4">
+                        <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-forest text-white">
+                            <span class="material-symbols-outlined text-3xl">explore</span>
+                        </div>
+                        <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-leaf">Kelas 3-4</p>
+                        <h3 class="mt-3 font-serif text-2xl font-bold text-forest">Materi Kompas</h3>
+                        <p class="mt-4 min-h-24 text-sm leading-7 text-slate-600">Pengenalan arah mata angin, bagian kompas, simulasi putaran, dan kuis yang sesuai untuk kelas 3-4.</p>
+                        <a class="mt-7 inline-flex items-center gap-2 font-extrabold text-forest transition hover:gap-3" href="./pages/materi-kompas-kelas-3-4.html">
+                            Buka Materi
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                        </a>
+                    </article>
+
                     <article class="lesson-card rounded-lg bg-sky p-6 shadow-soft" data-levels="4" data-title="Sandi A-Z Kelas 4">
                         <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-gold text-forest">
                             <span class="material-symbols-outlined text-3xl">sort_by_alpha</span>
@@ -345,6 +399,19 @@
                         </a>
                     </article>
 
+                    <article class="lesson-card rounded-lg bg-gold-soft p-6 shadow-soft" data-levels="5-6" data-title="Materi Kompas Kelas 5-6">
+                        <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-forest text-white">
+                            <span class="material-symbols-outlined text-3xl">explore</span>
+                        </div>
+                        <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-leaf">Kelas 5-6</p>
+                        <h3 class="mt-3 font-serif text-2xl font-bold text-forest">Materi Kompas</h3>
+                        <p class="mt-4 min-h-24 text-sm leading-7 text-slate-600">Belajar arah mata angin, bagian kompas, simulasi derajat, dan kuis petualangan untuk Penggalang.</p>
+                        <a class="mt-7 inline-flex items-center gap-2 font-extrabold text-forest transition hover:gap-3" href="./pages/materi-kompas-kelas-5-6.html">
+                            Buka Materi
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                        </a>
+                    </article>
+
                     <article class="lesson-card rounded-lg bg-mist p-6 shadow-soft" data-levels="5-6" data-title="Misi Sandi Gabungan">
                         <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-forest text-white">
                             <span class="material-symbols-outlined text-3xl">hub</span>
@@ -372,6 +439,12 @@
                     </article>
 
                 </div>
+
+                <div class="empty-state mt-8 hidden rounded-lg p-8 text-center" id="empty-lessons">
+                    <span class="material-symbols-outlined text-4xl text-leaf">manage_search</span>
+                    <h3 class="mt-3 text-2xl font-extrabold text-forest">Materi tidak ditemukan</h3>
+                    <p class="mt-2 text-slate-600">Coba kata kunci lain atau tampilkan semua materi.</p>
+                </div>
             </div>
         </section>
 
@@ -380,7 +453,7 @@
                 <div class="rounded-lg bg-forest p-8 text-white shadow-lift">
                     <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-gold">Alur Belajar</p>
                     <h2 class="mt-4 font-serif text-4xl font-bold leading-tight">Materi dibuat bertingkat dan mudah dibuka dari browser.</h2>
-                    <p class="mt-5 leading-8 text-emerald-50/80">Setiap modul tetap menjadi halaman mandiri, sehingga bisa dipakai di laptop pembina, proyektor kelas, atau hosting statis seperti Netlify.</p>
+                    <p class="mt-5 leading-8 text-emerald-50/80">Setiap modul tetap menjadi halaman mandiri, sehingga bisa dipakai di laptop pembina, proyektor kelas, atau hosting statis biasa.</p>
                 </div>
 
                 <div class="grid gap-4 sm:grid-cols-2">
@@ -426,18 +499,18 @@
         const gradeProfiles = {
             "1-2": {
                 title: "Rekomendasi untuk Kelas 1-2",
-                copy: "Mulai dari sejarah Pramuka, Dwisatya, Dwidarma, sandi angka dasar, dan latihan singkat.",
-                selected: "Kelas 1-2 dipilih sebagai tampilan awal."
+                copy: "Mulai dari sejarah Pramuka, Dwisatya, Dwidarma, kompas dasar, sandi angka, dan latihan singkat.",
+                selected: "Kelas 1-2 dipilih sebagai tampilan awal dengan materi dasar yang ramah anak."
             },
             "3": {
                 title: "Rekomendasi untuk Kelas 3",
-                copy: "Pelajari sejarah Pramuka, Dwisatya, Dwidarma, lalu lanjutkan sandi angka dengan frasa yang lebih panjang.",
-                selected: "Kelas 3 siap dengan sejarah Pramuka, kode kehormatan, dan latihan sandi angka lanjutan."
+                copy: "Pelajari sejarah Pramuka, Dwisatya, Dwidarma, sandi angka, lalu kenali arah mata angin lewat materi kompas.",
+                selected: "Kelas 3 siap dengan sejarah Pramuka, kode kehormatan, sandi angka, dan kompas."
             },
             "4": {
                 title: "Rekomendasi untuk Kelas 4",
-                copy: "Mulai dari sejarah Pramuka dan tokoh pendiri, lalu masuk ke sandi A-Z.",
-                selected: "Kelas 4 diarahkan ke sejarah Pramuka dan materi sandi A-Z."
+                copy: "Mulai dari sejarah Pramuka dan tokoh pendiri, lanjutkan kompas, lalu masuk ke sandi A-Z.",
+                selected: "Kelas 4 diarahkan ke sejarah Pramuka, kompas, dan materi sandi A-Z."
             },
             "5-6": {
                 title: "Rekomendasi untuk Kelas 5-6",
@@ -452,9 +525,41 @@
         const lessonCopy = document.getElementById("lesson-copy");
         const selectedClassCopy = document.getElementById("selected-class-copy");
         const showAllLessons = document.getElementById("show-all-lessons");
+        const lessonSearch = document.getElementById("lesson-search");
+        const lessonCount = document.getElementById("lesson-count");
+        const emptyLessons = document.getElementById("empty-lessons");
+        let activeGrade = "1-2";
+        let showAllMode = false;
+
+        function normalizeText(value) {
+            return value.toLowerCase().trim();
+        }
+
+        function updateVisibleLessons() {
+            const query = normalizeText(lessonSearch.value);
+            let visibleCount = 0;
+
+            lessonCards.forEach((card) => {
+                const levels = card.dataset.levels.split(" ");
+                const matchesGrade = showAllMode || levels.includes(activeGrade);
+                const searchableText = normalizeText(card.dataset.title + " " + card.textContent);
+                const matchesSearch = query === "" || searchableText.includes(query);
+                const shouldShow = matchesGrade && matchesSearch;
+
+                card.classList.toggle("is-hidden", !shouldShow);
+                if (shouldShow) {
+                    visibleCount += 1;
+                }
+            });
+
+            lessonCount.textContent = visibleCount + " materi ditampilkan";
+            emptyLessons.classList.toggle("hidden", visibleCount > 0);
+        }
 
         function setActiveGrade(grade) {
             const profile = gradeProfiles[grade];
+            activeGrade = grade;
+            showAllMode = false;
 
             gradeButtons.forEach((button) => {
                 const isActive = button.dataset.grade === grade;
@@ -462,14 +567,10 @@
                 button.setAttribute("aria-pressed", String(isActive));
             });
 
-            lessonCards.forEach((card) => {
-                const levels = card.dataset.levels.split(" ");
-                card.classList.toggle("is-hidden", !levels.includes(grade));
-            });
-
             lessonTitle.textContent = profile.title;
             lessonCopy.textContent = profile.copy;
             selectedClassCopy.textContent = profile.selected;
+            updateVisibleLessons();
         }
 
         gradeButtons.forEach((button) => {
@@ -480,17 +581,19 @@
         });
 
         showAllLessons.addEventListener("click", () => {
+            showAllMode = true;
             gradeButtons.forEach((button) => {
                 button.classList.remove("active");
                 button.setAttribute("aria-pressed", "false");
             });
 
-            lessonCards.forEach((card) => card.classList.remove("is-hidden"));
             lessonTitle.textContent = "Semua Materi Pramuka";
             lessonCopy.textContent = "Seluruh modul ditampilkan agar pembina bebas memilih urutan kegiatan.";
             selectedClassCopy.textContent = "Semua materi sedang ditampilkan.";
+            updateVisibleLessons();
         });
 
+        lessonSearch.addEventListener("input", updateVisibleLessons);
         setActiveGrade("1-2");
     </script>
 </body>
